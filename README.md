@@ -1,6 +1,6 @@
 # Realm-Rest
 
-[![CI Status](http://img.shields.io/travis/Tobias Sundstrand/Realm-Rest.svg?style=flat)](https://travis-ci.org/Tobias Sundstrand/Realm-Rest)
+[![Build Status](https://travis-ci.org/laptobbe/Realm-Rest.svg?branch=master)](https://travis-ci.org/laptobbe/Realm-Rest)
 [![Version](https://img.shields.io/cocoapods/v/Realm-Rest.svg?style=flat)](http://cocoadocs.org/docsets/Realm-Rest)
 [![License](https://img.shields.io/cocoapods/l/Realm-Rest.svg?style=flat)](http://cocoadocs.org/docsets/Realm-Rest)
 [![Platform](https://img.shields.io/cocoapods/p/Realm-Rest.svg?style=flat)](http://cocoadocs.org/docsets/Realm-Rest)
