@@ -11,5 +11,9 @@
 
 @optional
 + (NSString *)restPathToResources;
-
++ (NSString *)restPathToResource;
++ (NSString *)restPathToResourceGET;
++ (NSString *)restPathToResourcePOST;
++ (NSString *)restPathToResourcePUT;
++ (NSString *)restPathToResourceDELETE;
 @end

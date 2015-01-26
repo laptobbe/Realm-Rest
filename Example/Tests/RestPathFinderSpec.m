@@ -47,6 +47,25 @@ SpecBegin(RestPathFinder)
             expect(path).to.equal(@"rest/mouses");
         });
 
+        it(@"finds custom path", ^{
+            NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeGet];
+            expect(path).to.equal(@"rest/mouse/jerry");
+        });
+
+        it(@"finds custom path POST", ^{
+            NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePost];
+            expect(path).to.equal(@"rest/mouse/jerry/create");
+        });
+
+        it(@"finds custom path PUT", ^{
+            NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePut];
+            expect(path).to.equal(@"rest/mouse/jerry/update");
+        });
+
+        it(@"finds custom path DELETE", ^{
+            NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeDelete];
+            expect(path).to.equal(@"rest/mouse/jerry/remove");
+        });
     });
 
 SpecEnd
