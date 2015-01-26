@@ -1,6 +1,12 @@
 PODS:
   - Expecta (0.3.1)
-  - Realm-Rest (0.1.0)
+  - NSString-UrlEncode (2.0.0)
+  - Realm (0.90.2):
+    - Realm/Headers (= 0.90.2)
+  - Realm-Rest (0.1.0):
+    - NSString-UrlEncode (~> 2.0.0)
+    - Realm (~> 0.90.2)
+  - Realm/Headers (0.90.2)
   - Specta (0.3.0.beta1)
 
 DEPENDENCIES:
@@ -22,7 +28,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  Realm-Rest: 83b8c715d5be289357cf2ef4481d2f27fd6c6e3b
+  NSString-UrlEncode: 884ff989b77aeec0fe25474edc32ad7e31ffc5ff
+  Realm: e5e2a23e34e1f8c00a1484c130a9d00c1394a2af
+  Realm-Rest: 812641e85525e515e63b7dbc83ebeb93a576d755
   Specta: d2158a483ad179e5f8d3a29f75ff4fc0ff6fab16
 
 COCOAPODS: 0.36.0.beta.1

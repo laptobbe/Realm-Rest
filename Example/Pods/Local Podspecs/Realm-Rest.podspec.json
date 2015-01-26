@@ -21,5 +21,13 @@
     "Realm-Rest": [
       "Pod/Assets/*.png"
     ]
+  },
+  "dependencies": {
+    "Realm": [
+      "~> 0.90.2"
+    ],
+    "NSString-UrlEncode": [
+      "~> 2.0.0"
+    ]
   }
 }
