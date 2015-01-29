@@ -10,7 +10,9 @@ typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
     RestRequestQueuePeristanceInMemory
 };
 
-
+/**
+* Return YES to abandon the request
+*/
 typedef BOOL (^RestFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo);
 typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDictionary *userInfo);
 
@@ -26,6 +28,9 @@ typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDic
 
 + (instancetype)sharedInstance;
 
+/**
+* @param userInfo Needs to be JSON encodable (String key and basic types as values)
+*/
 - (void)enqueueRequestWithBaseURL:(NSString *)baseURL
                              path:(NSString *)path
                            method:(NSString *)method

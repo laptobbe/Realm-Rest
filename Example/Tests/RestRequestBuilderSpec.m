@@ -11,7 +11,7 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"cats/1312/adsg"
                                                                            method:@"GET"
                                                                        parameters:nil
-                                                                   parameterStyle:(RestRequestBuilderParameterStyleURL)
+                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cats/1312/adsg");
             });
@@ -21,7 +21,7 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cats/1312/adsg"
                                                                            method:@"GET"
                                                                        parameters:nil
-                                                                   parameterStyle:(RestRequestBuilderParameterStyleURL)
+                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cats/1312/adsg");
             });
@@ -31,7 +31,7 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cat"
                                                                            method:@"POST"
                                                                        parameters:nil
-                                                                   parameterStyle:(RestRequestBuilderParameterStyleURL)
+                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:nil];
                 expect(urlRequest.HTTPMethod).to.equal(@"POST");
             });
@@ -41,7 +41,7 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cat"
                                                                            method:@"GET"
                                                                        parameters:@{@"foo" : @"bar", @"cat" : @"dog"}
-                                                                   parameterStyle:(RestRequestBuilderParameterStyleURL)
+                                                                   parameterStyle:RestRequestBuilderParameterStyleURL
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat?cat=dog&foo=bar");
             });
@@ -52,7 +52,7 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cat"
                                                                            method:@"POST"
                                                                        parameters:params
-                                                                   parameterStyle:(RestRequestBuilderParameterStyleBodyJSON)
+                                                                   parameterStyle:RestRequestBuilderParameterStyleBodyJSON
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");
                 NSDictionary *decoded = [NSJSONSerialization JSONObjectWithData:urlRequest.HTTPBody
@@ -67,7 +67,7 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cat"
                                                                            method:@"POST"
                                                                        parameters:params
-                                                                   parameterStyle:(RestRequestBuilderParameterStyleBodyForm)
+                                                                   parameterStyle:RestRequestBuilderParameterStyleBodyForm
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");
                 NSString *decoded = [[NSString alloc] initWithData:urlRequest.HTTPBody
@@ -81,7 +81,7 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cat"
                                                                            method:@"POST"
                                                                        parameters:nil
-                                                                   parameterStyle:(RestRequestBuilderParameterStyleBodyForm)
+                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:headers];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");
                 expect(urlRequest.allHTTPHeaderFields).to.equal(headers);
@@ -94,8 +94,7 @@ SpecBegin(RestRequestBuilder)
                 NSURLRequest *urlRequest = [RestRequestBuilder requestWithDictionary:@{
                         RESTURL :@"http://api.example.com",
                         RESTPath :@"cats/1312/adsg",
-                        RESTMethod :@"GET",
-                        RESTParameterStyle :@(RestRequestBuilderParameterStyleURL)
+                        RESTMethod :@"GET"
                 }];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cats/1312/adsg");
             });
@@ -104,8 +103,7 @@ SpecBegin(RestRequestBuilder)
                 NSURLRequest *urlRequest = [RestRequestBuilder requestWithDictionary:@{
                         RESTURL :@"http://api.example.com",
                         RESTPath :@"cats/1312/adsg",
-                        RESTMethod :@"GET",
-                        RESTParameterStyle :@(RestRequestBuilderParameterStyleURL)
+                        RESTMethod :@"GET"
                 }];
 
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cats/1312/adsg");
@@ -117,7 +115,6 @@ SpecBegin(RestRequestBuilder)
                         RESTURL :@"http://api.example.com",
                         RESTPath :@"/cat",
                         RESTMethod :@"POST",
-                        RESTParameterStyle :@(RestRequestBuilderParameterStyleURL)
                 }];
 
                 expect(urlRequest.HTTPMethod).to.equal(@"POST");
@@ -178,7 +175,6 @@ SpecBegin(RestRequestBuilder)
                         RESTURL :@"http://api.example.com",
                         RESTPath :@"/cat",
                         RESTMethod :@"POST",
-                        RESTParameterStyle :@(RestRequestBuilderParameterStyleBodyForm),
                         RESTHeaders : headers
                 }];
 

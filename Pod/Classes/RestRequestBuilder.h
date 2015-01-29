@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger , RestRequestBuilderParameterStyle) {
+    RestRequestBuilderParameterStyleNone = 0,
     RestRequestBuilderParameterStyleURL,
     RestRequestBuilderParameterStyleBodyJSON,
     RestRequestBuilderParameterStyleBodyForm
