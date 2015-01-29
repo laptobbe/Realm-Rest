@@ -12,7 +12,8 @@
 #import "RestPathFinder.h"
 #import "RestModelObjectProtocol.h"
 
-static NSString *const DefaultFormat = @"%@/%%@";
+static NSString *const DefaultFormat        = @"%@/%%@";
+static NSString *const DefaultPostFormat    = @"%@";
 
 @implementation RestPathFinder
 
@@ -52,14 +53,14 @@ static NSString *const DefaultFormat = @"%@/%%@";
         return [self pathForPrimaryKey:key format:[[object class] restPathToResourceDELETE]];
     }
 
-    return [self defaultPathForObject:object name:name key:key];
+    return [self defaultPathForName:name key:key];
 }
 
 + (NSString *)putPathForObject:(RLMObject *)object withClassName:(NSString *)name primaryKey:(NSString *)key {
     if([[object class] respondsToSelector:@selector(restPathToResourcePUT)]) {
         return [self pathForPrimaryKey:key format:[[object class] restPathToResourcePUT]];
     }
-    return [self defaultPathForObject:object name:name key:key];
+    return [self defaultPathForName:name key:key];
 }
 
 + (NSString *)postPathForObject:(RLMObject *)object withClassName:(NSString *)name primaryKey:(NSString *)key {
@@ -67,7 +68,7 @@ static NSString *const DefaultFormat = @"%@/%%@";
         return [self pathForPrimaryKey:key format:[[object class] restPathToResourcePOST]];
     }
 
-    return [self defaultPathForObject:object name:name key:key];
+    return [self defaultPostPathForName:name];
 }
 
 + (NSString *)getPathForObject:(RLMObject *)object withClassName:(NSString *)name primaryKey:(NSString *)key {
@@ -75,21 +76,19 @@ static NSString *const DefaultFormat = @"%@/%%@";
         return [self pathForPrimaryKey:key format:[[object class] restPathToResourceGET]];
     }
 
-    return [self defaultPathForObject:object name:name key:key];
+    return [self defaultPathForName:name key:key];
 }
 
 + (NSString *)pathForPrimaryKey:(NSString *)key format:(NSString *)format {
     return [NSString stringWithFormat:format, key];
 }
 
-+ (NSString *)defaultPathForObject:(RLMObject *)object name:(NSString *)name key:(NSString *)key {
-    if([[object class] respondsToSelector:@selector(restPathToResource)]) {
-        return [self pathForPrimaryKey:key format:[[object class] restPathToResource]];
-    }
-
++ (NSString *)defaultPathForName:(NSString *)name key:(NSString *)key {
     return [self pathForPrimaryKey:key format:[NSString stringWithFormat:DefaultFormat, name]];
 }
 
-
++ (NSString *)defaultPostPathForName:(NSString *)name {
+    return [NSString stringWithFormat:DefaultPostFormat, name];
+}
 
 @end

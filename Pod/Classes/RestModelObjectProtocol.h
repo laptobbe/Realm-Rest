@@ -11,7 +11,6 @@
 
 @optional
 + (NSString *)restPathToResources;
-+ (NSString *)restPathToResource;
 + (NSString *)restPathToResourceGET;
 + (NSString *)restPathToResourcePOST;
 + (NSString *)restPathToResourcePUT;

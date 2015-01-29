@@ -12,7 +12,7 @@
     return @"rest/mouses";
 }
 
-+ (NSString *)restPathToResource {
++ (NSString *)restPathToResourceGET {
     return @"rest/mouse/%@";
 }
 

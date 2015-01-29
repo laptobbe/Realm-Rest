@@ -25,6 +25,11 @@ SpecBegin(RestPathFinder)
             expect(path).to.equal(@"cat/misse");
         });
 
+        it(@"finds basic post path", ^{
+            NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypePost];
+            expect(path).to.equal(@"cat");
+        });
+
         it(@"url encodes paths", ^{
             cat.name = @"Misse Miss";
             NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypeGet];
