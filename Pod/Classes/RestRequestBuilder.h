@@ -10,6 +10,13 @@ typedef NS_ENUM(NSInteger , RestRequestBuilderParameterStyle) {
     RestRequestBuilderParameterStyleBodyForm
 };
 
+extern NSString *const RESTURL;
+extern NSString *const RESTPath;
+extern NSString *const RESTMethod;
+extern NSString *const RESTParameters;
+extern NSString *const RESTParameterStyle;
+extern NSString *const RESTHeaders;
+
 @interface RestRequestBuilder : NSObject
 
 + (NSURLRequest *)requestWithBaseURL:(NSURL *)baseURL
@@ -18,5 +25,7 @@ typedef NS_ENUM(NSInteger , RestRequestBuilderParameterStyle) {
                           parameters:(NSDictionary *)params
                       parameterStyle:(RestRequestBuilderParameterStyle)paramStyle
                              headers:(NSDictionary *)headers;
+
++ (NSURLRequest *)requestWithDictionary:(NSDictionary *)dictionary;
 
 @end

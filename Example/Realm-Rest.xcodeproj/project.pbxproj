@@ -26,6 +26,7 @@
 		64D5E8D36C4A04FD8251F847 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB88CCA840C22542E1C6BDB /* libPods-Tests.a */; };
 		CC3C7090F3033A71110E862F /* Cat.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7E858C03A75D442E1622 /* Cat.m */; };
 		CC3C714909034B1A9A956F67 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7D1C5722B5A9B33FCE1A /* Dog.m */; };
+		CC3C7943D96A00FC2071C61B /* RestRequestQueueSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7A3F76D12C8CA545A57D /* RestRequestQueueSpec.m */; };
 		CC3C7F8A8A481358B0996067 /* Mouse.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C76A416D4EFF46E36794F /* Mouse.m */; };
 		F6F149AD1A7666CD00A24213 /* RestPathFinderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F149AC1A7666CD00A24213 /* RestPathFinderSpec.m */; };
 		F6F149B11A7A380A00A24213 /* RestRequestBuilderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7092701F23DD301DB536 /* RestRequestBuilderSpec.m */; };
@@ -74,6 +75,7 @@
 		CC3C730FF624D02191560761 /* Dog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dog.h; sourceTree = "<group>"; };
 		CC3C746A0A9F749B3A31F26D /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
 		CC3C76A416D4EFF46E36794F /* Mouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mouse.m; sourceTree = "<group>"; };
+		CC3C7A3F76D12C8CA545A57D /* RestRequestQueueSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestRequestQueueSpec.m; sourceTree = "<group>"; };
 		CC3C7D1C5722B5A9B33FCE1A /* Dog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dog.m; sourceTree = "<group>"; };
 		CC3C7E858C03A75D442E1622 /* Cat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cat.m; sourceTree = "<group>"; };
 		CC3C7FBE4C48AA37F92A1349 /* Cat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cat.h; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				CC3C76A416D4EFF46E36794F /* Mouse.m */,
 				CC3C746A0A9F749B3A31F26D /* Mouse.h */,
 				CC3C7092701F23DD301DB536 /* RestRequestBuilderSpec.m */,
+				CC3C7A3F76D12C8CA545A57D /* RestRequestQueueSpec.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
 				F6F149AD1A7666CD00A24213 /* RestPathFinderSpec.m in Sources */,
 				F6F149B11A7A380A00A24213 /* RestRequestBuilderSpec.m in Sources */,
+				CC3C7943D96A00FC2071C61B /* RestRequestQueueSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

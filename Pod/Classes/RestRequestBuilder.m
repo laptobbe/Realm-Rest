@@ -6,6 +6,12 @@
 #import "RestRequestBuilder.h"
 #import "NSURL+QueryDictionary.h"
 
+NSString *const RESTURL = @"url";
+NSString *const RESTPath = @"path";
+NSString *const RESTMethod = @"method";
+NSString *const RESTParameters = @"parameters";
+NSString *const RESTParameterStyle = @"parameterStyle";
+NSString *const RESTHeaders = @"headers";
 
 @implementation RestRequestBuilder
 
@@ -38,6 +44,16 @@
     [request setAllHTTPHeaderFields:headers];
 
     return request;
+}
+
++ (NSURLRequest *)requestWithDictionary:(NSDictionary *)dictionary {
+
+    return [RestRequestBuilder requestWithBaseURL:[NSURL URLWithString:dictionary[RESTURL]]
+                                             path:dictionary[RESTPath]
+                                           method:dictionary[RESTMethod]
+                                       parameters:dictionary[RESTParameters]
+                                   parameterStyle:(RestRequestBuilderParameterStyle) [dictionary[RESTParameterStyle] integerValue]
+                                          headers:dictionary[RESTHeaders]];
 }
 
 @end

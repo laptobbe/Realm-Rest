@@ -31,6 +31,12 @@
     ],
     "NSURL+QueryDictionary": [
       "~> 1.0.3"
+    ],
+    "KTBTaskQueue": [
+      "~> 1.0.1"
+    ],
+    "AFNetworking": [
+      "~> 2.5.0"
     ]
   }
 }

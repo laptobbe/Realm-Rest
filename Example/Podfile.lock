@@ -1,10 +1,43 @@
 PODS:
+  - AFNetworking (2.5.0):
+    - AFNetworking/NSURLConnection (= 2.5.0)
+    - AFNetworking/NSURLSession (= 2.5.0)
+    - AFNetworking/Reachability (= 2.5.0)
+    - AFNetworking/Security (= 2.5.0)
+    - AFNetworking/Serialization (= 2.5.0)
+    - AFNetworking/UIKit (= 2.5.0)
+  - AFNetworking/NSURLConnection (2.5.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.0)
+  - AFNetworking/Security (2.5.0)
+  - AFNetworking/Serialization (2.5.0)
+  - AFNetworking/UIKit (2.5.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - Expecta (0.3.1)
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - KTBTaskQueue (1.0.1):
+    - FMDB (~> 2.0)
   - NSString-UrlEncode (2.0.0)
   - NSURL+QueryDictionary (1.0.3)
+  - OHHTTPStubs (3.1.10):
+    - OHHTTPStubs/Core (= 3.1.10)
+  - OHHTTPStubs/Core (3.1.10)
   - Realm (0.90.2):
     - Realm/Headers (= 0.90.2)
   - Realm-Rest (0.1.0):
+    - AFNetworking (~> 2.5.0)
+    - KTBTaskQueue (~> 1.0.1)
     - NSString-UrlEncode (~> 2.0.0)
     - NSURL+QueryDictionary (~> 1.0.3)
     - Realm (~> 0.90.2)
@@ -13,6 +46,7 @@ PODS:
 
 DEPENDENCIES:
   - Expecta
+  - OHHTTPStubs
   - Realm-Rest (from `../`)
   - Specta (from `https://github.com/specta/specta.git`, tag `v0.3.0.beta1`)
 
@@ -29,11 +63,15 @@ CHECKOUT OPTIONS:
     :tag: v0.3.0.beta1
 
 SPEC CHECKSUMS:
+  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
+  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
+  KTBTaskQueue: 001a8dea87aae62abacfd9d964517d14b22293cc
   NSString-UrlEncode: 884ff989b77aeec0fe25474edc32ad7e31ffc5ff
   NSURL+QueryDictionary: 1ad81be60c10e3f4d80c5c4beb7125de96aaec5e
+  OHHTTPStubs: 2038e929b6abb94881000524c1cb4aba0a1bb4a2
   Realm: e5e2a23e34e1f8c00a1484c130a9d00c1394a2af
-  Realm-Rest: fe106d8bdd027077a51cba8da2e0205b2bd5278e
+  Realm-Rest: 41cdd7c8bff6b592dc8a33b3597cb5bc4eefa411
   Specta: d2158a483ad179e5f8d3a29f75ff4fc0ff6fab16
 
 COCOAPODS: 0.36.0.beta.1
