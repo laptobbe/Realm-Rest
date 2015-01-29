@@ -28,6 +28,9 @@
     ],
     "NSString-UrlEncode": [
       "~> 2.0.0"
+    ],
+    "NSURL+QueryDictionary": [
+      "~> 1.0.3"
     ]
   }
 }

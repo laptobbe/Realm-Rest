@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_NSString_UrlEncode 0
 #define COCOAPODS_VERSION_PATCH_NSString_UrlEncode 0
 
+// NSURL+QueryDictionary
+#define COCOAPODS_POD_AVAILABLE_NSURL_QueryDictionary
+#define COCOAPODS_VERSION_MAJOR_NSURL_QueryDictionary 1
+#define COCOAPODS_VERSION_MINOR_NSURL_QueryDictionary 0
+#define COCOAPODS_VERSION_PATCH_NSURL_QueryDictionary 3
+
 // Realm
 #define COCOAPODS_POD_AVAILABLE_Realm
 #define COCOAPODS_VERSION_MAJOR_Realm 0

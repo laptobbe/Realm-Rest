@@ -1,4 +1,3 @@
-#import "Specta.h"
 #import "Cat.h"
 #import "Dog.h"
 #import "Mouse.h"

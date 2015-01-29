@@ -28,6 +28,7 @@
 		CC3C714909034B1A9A956F67 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7D1C5722B5A9B33FCE1A /* Dog.m */; };
 		CC3C7F8A8A481358B0996067 /* Mouse.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C76A416D4EFF46E36794F /* Mouse.m */; };
 		F6F149AD1A7666CD00A24213 /* RestPathFinderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F149AC1A7666CD00A24213 /* RestPathFinderSpec.m */; };
+		F6F149B11A7A380A00A24213 /* RestRequestBuilderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7092701F23DD301DB536 /* RestRequestBuilderSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		ACF898E265E6828C12A84BB7 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C126C455A273A631C5A84224 /* Pods-Realm-Rest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Realm-Rest.release.xcconfig"; path = "Pods/Target Support Files/Pods-Realm-Rest/Pods-Realm-Rest.release.xcconfig"; sourceTree = "<group>"; };
+		CC3C7092701F23DD301DB536 /* RestRequestBuilderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestRequestBuilderSpec.m; sourceTree = "<group>"; };
 		CC3C730FF624D02191560761 /* Dog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dog.h; sourceTree = "<group>"; };
 		CC3C746A0A9F749B3A31F26D /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
 		CC3C76A416D4EFF46E36794F /* Mouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mouse.m; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				CC3C730FF624D02191560761 /* Dog.h */,
 				CC3C76A416D4EFF46E36794F /* Mouse.m */,
 				CC3C746A0A9F749B3A31F26D /* Mouse.h */,
+				CC3C7092701F23DD301DB536 /* RestRequestBuilderSpec.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 			files = (
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
 				F6F149AD1A7666CD00A24213 /* RestPathFinderSpec.m in Sources */,
+				F6F149B11A7A380A00A24213 /* RestRequestBuilderSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
