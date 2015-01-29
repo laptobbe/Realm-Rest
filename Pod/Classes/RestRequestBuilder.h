@@ -16,6 +16,7 @@ extern NSString *const RESTMethod;
 extern NSString *const RESTParameters;
 extern NSString *const RESTParameterStyle;
 extern NSString *const RESTHeaders;
+extern NSString *const RESTUserInfo;
 
 @interface RestRequestBuilder : NSObject
 

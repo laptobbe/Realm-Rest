@@ -3,32 +3,36 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm-Rest/RestRequestBuilder.h>
 
 typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
     RestRequestQueuePeristanceDatabase,
     RestRequestQueuePeristanceInMemory
 };
 
-@class RestRequestQueue;
 
-@protocol RestRequestQueueDelegate
+typedef BOOL (^RestFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo);
+typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDictionary *userInfo);
 
-- (BOOL)requestQueue:(RestRequestQueue *)queue shouldAbbondonRequest:(NSURLRequest *)request withResponse:(NSURLResponse *)response;
-
-@end
 
 @interface RestRequestQueue : NSObject
 
-@property (nonatomic, assign) id<RestRequestQueueDelegate> delegate;
-
 /**
-* Set before first request is enqueued. Default is RestRequestQueuePeristanceDatabase.
+* Set all properties before first request is enqueued. Default is RestRequestQueuePeristanceDatabase.
 */
 @property (nonatomic, assign) RestRequestQueuePeristance persistance;
+@property (nonatomic, copy) RestFailureBlock restFailureBlock;
+@property (nonatomic, copy) RestSuccessBlock restSuccessBlock;
 
 + (instancetype)sharedInstance;
 
-- (void)enqueueRequest:(NSURLRequest *)request;
+- (void)enqueueRequestWithBaseURL:(NSString *)baseURL
+                             path:(NSString *)path
+                           method:(NSString *)method
+                       parameters:(NSDictionary *)params
+                   parameterStyle:(RestRequestBuilderParameterStyle)paramStyle
+                          headers:(NSDictionary *)headers
+                         userInfo:(NSDictionary *)userInfo;
 
 - (void)emptyQueue;
 

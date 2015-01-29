@@ -12,6 +12,7 @@ NSString *const RESTMethod = @"method";
 NSString *const RESTParameters = @"parameters";
 NSString *const RESTParameterStyle = @"parameterStyle";
 NSString *const RESTHeaders = @"headers";
+NSString *const RESTUserInfo = @"userInfo";
 
 @implementation RestRequestBuilder
 
