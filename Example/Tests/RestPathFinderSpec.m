@@ -1,12 +1,14 @@
 #import "Cat.h"
 #import "Dog.h"
 #import "Mouse.h"
+#import <Realm-Rest/RLMRealm+Rest.h>
 #import <Realm-Rest/RestPathFinder.h>
 
 SpecBegin(RestPathFinder)
     __block Cat *cat;
     __block Dog *dog;
     __block Mouse *mouse;
+    __block RLMRealm *realm;
     beforeEach(^{
         cat = [[Cat alloc] init];
         cat.name = @"Misse";
@@ -16,6 +18,9 @@ SpecBegin(RestPathFinder)
 
         mouse = [[Mouse alloc] init];
         mouse.name = @"Jerry";
+
+        realm = [RLMRealm inMemoryRealmWithIdentifier:@"test"];
+        realm.baseURL = @"http://api.example.com";
     });
 
     describe(@"RestPathFinder", ^{
@@ -108,7 +113,17 @@ SpecBegin(RestPathFinder)
 
         });
 
+        context(@"Base url", ^{
+            it(@"Should find url on realm", ^{
+                NSString *baseURL = [RestPathFinder findBaseURLForModelClass:[Cat class] realm:realm];
+                expect(baseURL).to.equal(@"http://api.example.com");
+            });
 
+            it(@"should find class specific", ^{
+                NSString *baseURL = [RestPathFinder findBaseURLForModelClass:[Mouse class] realm:realm];
+                expect(baseURL).to.equal(@"http://custom.example.com");
+            });
+        });
 
     });
 

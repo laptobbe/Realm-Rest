@@ -22,7 +22,6 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		64D5E8D36C4A04FD8251F847 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB88CCA840C22542E1C6BDB /* libPods-Tests.a */; };
 		CC3C7090F3033A71110E862F /* Cat.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7E858C03A75D442E1622 /* Cat.m */; };
 		CC3C714909034B1A9A956F67 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7D1C5722B5A9B33FCE1A /* Dog.m */; };
@@ -67,7 +66,6 @@
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		ACF898E265E6828C12A84BB7 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C126C455A273A631C5A84224 /* Pods-Realm-Rest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Realm-Rest.release.xcconfig"; path = "Pods/Target Support Files/Pods-Realm-Rest/Pods-Realm-Rest.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				F6F149AC1A7666CD00A24213 /* RestPathFinderSpec.m */,
 				CC3C7E858C03A75D442E1622 /* Cat.m */,
@@ -398,7 +395,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
 				F6F149AD1A7666CD00A24213 /* RestPathFinderSpec.m in Sources */,
 				F6F149B11A7A380A00A24213 /* RestRequestBuilderSpec.m in Sources */,
 				CC3C7943D96A00FC2071C61B /* RestRequestQueueSpec.m in Sources */,

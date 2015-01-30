@@ -10,6 +10,7 @@
 #import <Realm-Rest/RestModelObjectProtocol.h>
 
 @class RLMObject;
+@class RLMRealm;
 
 typedef NS_ENUM(NSInteger , RestRequestType) {
     RestRequestTypeGet,
@@ -24,4 +25,5 @@ typedef NS_ENUM(NSInteger , RestRequestType) {
 
 + (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type;
 
++ (NSString *)findBaseURLForModelClass:(Class)pClass realm:(RLMRealm *)realm;
 @end

@@ -44,4 +44,7 @@
     return @"name";
 }
 
++ (NSString *)baseURL {
+    return @"http://custom.example.com";
+}
 @end

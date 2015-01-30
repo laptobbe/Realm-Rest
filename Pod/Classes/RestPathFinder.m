@@ -7,9 +7,11 @@
 //
 
 #import <Realm-Rest/RestPathFinder.h>
-#import <Realm/Realm/RLMObject.h>
+#import <Realm-Rest/RLMRealm+Rest.h>
+#import <Realm/Realm.h>
 #import <NSString-UrlEncode/NSString+URLEncode.h>
 #import "RestPathFinder.h"
+#import "RLMRealm.h"
 
 static NSString *const DefaultFormat        = @"%@/%%@";
 
@@ -81,4 +83,11 @@ static NSString *const DefaultFormat        = @"%@/%%@";
     return [self pathForPrimaryKey:key format:[NSString stringWithFormat:DefaultFormat, name]];
 }
 
++ (NSString *)findBaseURLForModelClass:(Class)class realm:(RLMRealm *)realm {
+    if ([class respondsToSelector:@selector(baseURL)]) {
+        return [class baseURL];
+    }
+
+    return realm.baseURL;
+}
 @end

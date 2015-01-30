@@ -20,4 +20,7 @@
 - (NSString *)restPathToResourcePOST;
 - (NSString *)restPathToResourcePUT;
 - (NSString *)restPathToResourceDELETE;
+
++ (NSString *)baseURL;
+
 @end
