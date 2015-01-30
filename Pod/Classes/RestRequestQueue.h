@@ -11,20 +11,23 @@ typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
     RestRequestQueuePeristanceInMemory
 };
 
-/**
-* Return YES to abandon the request
-*/
-typedef BOOL (^RestFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo);
-typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDictionary *userInfo);
 
+@class RestRequestQueue;
+
+@protocol RestRequestQueueDelegate
+
+@required
+- (BOOL)queue:(RestRequestQueue *)queue shouldAbandonFailedRequest:(NSURLRequest *)request response:(NSHTTPURLResponse *)response error:(NSError *)error userInfo:(NSDictionary *)userInfo;
+- (void)queue:(RestRequestQueue *)queue requestDidSucceed:(NSURLRequest *)request responseObject:(id)responseObject userInfo:(NSDictionary *)userInfo;
+
+@end
 
 @interface RestRequestQueue : NSObject
 
 /**
 * Set all properties before first request is enqueued. Default is RestRequestQueuePeristanceDatabase.
 */
-@property (nonatomic, copy) RestFailureBlock shouldAbandonFailedRequestBlock;
-@property (nonatomic, copy) RestSuccessBlock restSuccessBlock;
+@property (nonatomic, assign) NSObject<RestRequestQueueDelegate> *delegate;
 
 + (instancetype)sharedInstance;
 

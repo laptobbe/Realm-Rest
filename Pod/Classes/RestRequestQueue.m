@@ -51,8 +51,7 @@
                           headers:(NSDictionary *)headers
                          userInfo:(NSDictionary *)userInfo{
 
-    NSParameterAssert(self.restSuccessBlock);
-    NSParameterAssert(self.shouldAbandonFailedRequestBlock);
+    NSParameterAssert(self.delegate);
     NSParameterAssert(baseURL);
     NSParameterAssert(path);
     NSParameterAssert(method);
@@ -103,12 +102,19 @@
     requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
 
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.restSuccessBlock(operation.request, responseObject, task.userInfo[RESTUserInfo]);
+        [self.delegate queue:self
+           requestDidSucceed:operation.request
+              responseObject:responseObject
+                    userInfo:task.userInfo[RESTUserInfo]];
         completion(KTBTaskStatusSuccess);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if(self.shouldAbandonFailedRequestBlock(operation.request, operation.response, error, task.userInfo[RESTUserInfo])) {
+        if([self.delegate queue:self
+     shouldAbandonFailedRequest:operation.request
+                       response:operation.response
+                          error:error
+                       userInfo:task.userInfo[RESTUserInfo]]){
             completion(KTBTaskStatusAbandon);
-        }else {
+        } else {
             completion(KTBTaskStatusFailure);
         }
     }];

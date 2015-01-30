@@ -1,6 +1,37 @@
 #import <Realm-Rest/RestRequestQueue.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
 
+typedef BOOL (^RestFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo);
+typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDictionary *userInfo);
+
+
+@interface TestQueueDelegate : NSObject <RestRequestQueueDelegate>
+
+@property (nonatomic, copy) RestSuccessBlock successBlock;
+@property (nonatomic, copy) RestFailureBlock shouldAbandonFailedRequestBlock;
+
+@end
+
+@implementation TestQueueDelegate
+
+- (BOOL)             queue:(RestRequestQueue *)queue
+shouldAbandonFailedRequest:(NSURLRequest *)request
+                  response:(NSHTTPURLResponse *)response
+                     error:(NSError *)error
+                  userInfo:(NSDictionary *)userInfo {
+    return self.shouldAbandonFailedRequestBlock(request, response, error, userInfo);
+}
+
+- (void)    queue:(RestRequestQueue *)queue
+requestDidSucceed:(NSURLRequest *)request
+   responseObject:(id)responseObject
+         userInfo:(NSDictionary *)userInfo {
+    self.successBlock(request, responseObject, userInfo);
+}
+
+
+@end
+
 SpecBegin(RestRequestQueue)
     context(@"RestRequestQueue", ^{
 
@@ -9,9 +40,12 @@ SpecBegin(RestRequestQueue)
         });
 
         __block RestRequestQueue *queue;
+        __block TestQueueDelegate *queueDelegate;
         beforeEach(^{
             queue = [RestRequestQueue sharedInstance];
             [queue activateQueueWithPersistance:RestRequestQueuePeristanceInMemory];
+            queueDelegate = [TestQueueDelegate new];
+            queue.delegate = queueDelegate;
         });
 
         afterEach(^{
@@ -19,44 +53,13 @@ SpecBegin(RestRequestQueue)
             [OHHTTPStubs removeAllStubs];
         });
 
-        it(@"Should throw without success block", ^{
-            expect ( ^{
-                [queue enqueueRequestWithBaseURL:nil
-                                            path:nil
-                                          method:nil
-                                      parameters:nil
-                                  parameterStyle:RestRequestBuilderParameterStyleNone
-                                         headers:nil
-                                        userInfo:nil];
-            }
-
-            ).to.raise(NSInternalInconsistencyException);
-        });
-
-        it(@"Should throw without failure block", ^{
-            expect ( ^{
-                queue.restSuccessBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
-
-                };
-                [queue enqueueRequestWithBaseURL:nil
-                                            path:nil
-                                          method:nil
-                                      parameters:nil
-                                  parameterStyle:RestRequestBuilderParameterStyleNone
-                                         headers:nil
-                                        userInfo:nil];
-            }
-
-            ).to.raise(NSInternalInconsistencyException);
-        });
-
         it(@"Should call success block on 200", ^{
 
             __block BOOL success = NO;
-            queue.restSuccessBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
+            queueDelegate.successBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
                 success = YES;
             };
-            queue.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
+            queueDelegate.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
                 NSLog(error.description);
                 success = NO;
                 return NO;
@@ -84,10 +87,10 @@ SpecBegin(RestRequestQueue)
         it(@"Should call failure block on network error", ^{
 
             __block BOOL failure = NO;
-            queue.restSuccessBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
+            queueDelegate.successBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
                 failure = NO;
             };
-            queue.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
+            queueDelegate.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
                 failure = YES;
                 return NO;
             };
@@ -116,10 +119,10 @@ SpecBegin(RestRequestQueue)
 
             __block int count = 0;
             __block int wrongCount = 0;
-            queue.restSuccessBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
+            queueDelegate.successBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
                 XCTFail(@"Should not be called");
             };
-            queue.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
+            queueDelegate.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
                 if([request.URL.host isEqualToString:@"wrong.api.example"]) {
                     wrongCount++;
                 }else {
@@ -161,10 +164,10 @@ SpecBegin(RestRequestQueue)
 
             __block int count = 0;
             __block int wrongCount = 0;
-            queue.restSuccessBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
+            queueDelegate.successBlock = ^(NSURLRequest *request, id responseObject, NSDictionary *userInfo) {
                 XCTFail(@"Should not be called");
             };
-            queue.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
+            queueDelegate.shouldAbandonFailedRequestBlock = ^BOOL(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo) {
                 if([request.URL.host isEqualToString:@"wrong.api.example"]) {
                     wrongCount++;
                 }else {
