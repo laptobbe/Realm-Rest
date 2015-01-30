@@ -11,9 +11,8 @@
 #import <Realm/Realm.h>
 #import <NSString-UrlEncode/NSString+URLEncode.h>
 #import "RestPathFinder.h"
-#import "RLMRealm.h"
 
-static NSString *const DefaultFormat        = @"%@/%%@";
+static NSString *const DefaultFormat = @"%@/%%@";
 
 @implementation RestPathFinder
 
@@ -89,5 +88,19 @@ static NSString *const DefaultFormat        = @"%@/%%@";
     }
 
     return realm.baseURL;
+}
+
++ (NSString *)httpMethodFromRequestType:(RestRequestType)type {
+    switch (type) {
+        case RestRequestTypeGet:
+            return @"GET";
+        case RestRequestTypePost:
+            return @"POST";
+        case RestRequestTypePut:
+            return @"PUT";
+        case RestRequestTypeDelete:
+            return @"DELETE";
+    }
+    return nil;
 }
 @end

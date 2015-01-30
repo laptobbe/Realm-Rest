@@ -11,11 +11,11 @@ SpecBegin(RestRequestQueue)
         __block RestRequestQueue *queue;
         beforeEach(^{
             queue = [RestRequestQueue sharedInstance];
-            queue.persistance = RestRequestQueuePeristanceInMemory;
+            [queue activateQueueWithPersistance:RestRequestQueuePeristanceInMemory];
         });
 
         afterEach(^{
-            [queue emptyQueue];
+            [queue deactivateQueue];
             [OHHTTPStubs removeAllStubs];
         });
 

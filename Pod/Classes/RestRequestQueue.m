@@ -23,9 +23,24 @@
     static RestRequestQueue *queue;
     dispatch_once(&once, ^{
         queue = [RestRequestQueue new];
-        queue.persistance = RestRequestQueuePeristanceDatabase;
     });
     return queue;
+}
+
+- (void)activateQueueWithPersistance:(RestRequestQueuePeristance)persistance {
+    if(!self.queue) {
+        if(persistance == RestRequestQueuePeristanceDatabase) {
+            self.queue = [KTBTaskQueue queueAtPath:[self getQueuePath] delegate:self];
+        }else {
+            self.queue = [KTBTaskQueue queueInMemoryWithDelegate:self];
+        }
+    }
+    self.queue.suspended = NO;
+}
+
+- (void)deactivateQueue {
+    [self.queue deleteQueue];
+    self.queue = nil;
 }
 
 - (void)enqueueRequestWithBaseURL:(NSString *)baseURL
@@ -41,14 +56,6 @@
     NSParameterAssert(baseURL);
     NSParameterAssert(path);
     NSParameterAssert(method);
-
-    if(!self.queue) {
-        if(self.persistance == RestRequestQueuePeristanceDatabase) {
-            self.queue = [KTBTaskQueue queueAtPath:[self getQueuePath] delegate:self];
-        }else {
-            self.queue = [KTBTaskQueue queueInMemoryWithDelegate:self];
-        }
-    }
 
     NSMutableDictionary *taskUserInfo = [NSMutableDictionary dictionary];
 
@@ -89,10 +96,7 @@
 
 }
 
-- (void)emptyQueue {
-    [self.queue deleteQueue];
-    self.queue = nil;
-}
+
 
 - (void)taskQueue:(KTBTaskQueue *)queue executeTask:(KTBTask *)task completion:(KTBTaskCompletionBlock)completion {
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:[self requestFromTask:task]];

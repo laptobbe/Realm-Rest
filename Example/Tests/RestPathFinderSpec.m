@@ -125,6 +125,25 @@ SpecBegin(RestPathFinder)
             });
         });
 
+        context(@"HTTP method from request type", ^{
+            it(@"GET", ^{
+                NSString *method = [RestPathFinder httpMethodFromRequestType:RestRequestTypeGet];
+                expect(method).to.equal(@"GET");
+            });
+            it(@"POST", ^{
+                NSString *method = [RestPathFinder httpMethodFromRequestType:RestRequestTypePost];
+                expect(method).to.equal(@"POST");
+            });
+            it(@"PUT", ^{
+                NSString *method = [RestPathFinder httpMethodFromRequestType:RestRequestTypePut];
+                expect(method).to.equal(@"PUT");
+            });
+            it(@"DELETE", ^{
+                NSString *method = [RestPathFinder httpMethodFromRequestType:RestRequestTypeDelete];
+                expect(method).to.equal(@"DELETE");
+            });
+        });
+
     });
 
 SpecEnd

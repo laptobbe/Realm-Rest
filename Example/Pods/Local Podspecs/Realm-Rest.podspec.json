@@ -26,6 +26,9 @@
     "Realm": [
       "~> 0.90.2"
     ],
+    "Realm+JSON": [
+      "~> 0.2.5"
+    ],
     "NSString-UrlEncode": [
       "~> 2.0.0"
     ],

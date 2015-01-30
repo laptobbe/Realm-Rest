@@ -28,6 +28,7 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'Realm', '~> 0.90.2'
+  s.dependency 'Realm+JSON', '~> 0.2.5'
   s.dependency 'NSString-UrlEncode', '~> 2.0.0'
   s.dependency 'NSURL+QueryDictionary', '~> 1.0.3'
   s.dependency 'KTBTaskQueue', '~> 1.0.1'

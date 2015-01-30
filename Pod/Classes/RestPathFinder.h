@@ -26,4 +26,6 @@ typedef NS_ENUM(NSInteger , RestRequestType) {
 + (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type;
 
 + (NSString *)findBaseURLForModelClass:(Class)pClass realm:(RLMRealm *)realm;
+
++ (NSString *)httpMethodFromRequestType:(enum RestRequestType)type;
 @end
