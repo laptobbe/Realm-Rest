@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm-Rest/RestModelObjectProtocol.h>
 
 @class RLMObject;
 
 typedef NS_ENUM(NSInteger , RestRequestType) {
-    RestRequestTypeGetAll,
     RestRequestTypeGet,
     RestRequestTypePost,
     RestRequestTypePut,
@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger , RestRequestType) {
 
 @interface RestPathFinder : NSObject
 
-+ (NSString *)findPathForObject:(RLMObject *)object forType:(RestRequestType)type;
++ (NSString *)findPathForObject:(RLMObject<RestModelObjectProtocol> *)object forType:(RestRequestType)type;
+
++ (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type;
 
 @end

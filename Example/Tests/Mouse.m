@@ -8,24 +8,36 @@
 
 @implementation Mouse
 
-+ (NSString *)restPathToResources {
++ (NSString *)restPathToResourceGET {
     return @"rest/mouses";
 }
 
-+ (NSString *)restPathToResourceGET {
-    return @"rest/mouse/%@";
-}
-
 + (NSString *)restPathToResourcePOST {
-    return @"rest/mouse/%@/create";
+    return @"rest/mouses/create";
 }
 
 + (NSString *)restPathToResourcePUT {
-    return @"rest/mouse/%@/update";
+    return @"rest/mouses/updates";
 }
 
 + (NSString *)restPathToResourceDELETE {
-    return @"rest/mouse/%@/remove";
+    return @"rest/mouses/deletes";
+}
+
+- (NSString *)restPathToResourceGET {
+    return [NSString stringWithFormat:@"rest/mouse/%@",self.name];
+}
+
+- (NSString *)restPathToResourcePOST {
+    return [NSString stringWithFormat:@"rest/mouse/%@/create", self.name];
+}
+
+- (NSString *)restPathToResourcePUT {
+    return [NSString stringWithFormat:@"rest/mouse/%@/update", self.name];
+}
+
+- (NSString *)restPathToResourceDELETE {
+    return [NSString stringWithFormat:@"rest/mouse/%@/remove", self.name];
 }
 
 + (NSString *)primaryKey {

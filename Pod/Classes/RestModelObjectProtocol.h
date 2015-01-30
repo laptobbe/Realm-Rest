@@ -10,9 +10,14 @@
 + (NSString *)primaryKey;
 
 @optional
-+ (NSString *)restPathToResources;
+
 + (NSString *)restPathToResourceGET;
 + (NSString *)restPathToResourcePOST;
 + (NSString *)restPathToResourcePUT;
 + (NSString *)restPathToResourceDELETE;
+
+- (NSString *)restPathToResourceGET;
+- (NSString *)restPathToResourcePOST;
+- (NSString *)restPathToResourcePUT;
+- (NSString *)restPathToResourceDELETE;
 @end
