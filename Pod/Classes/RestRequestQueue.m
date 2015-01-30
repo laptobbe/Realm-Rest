@@ -37,7 +37,7 @@
                          userInfo:(NSDictionary *)userInfo{
 
     NSParameterAssert(self.restSuccessBlock);
-    NSParameterAssert(self.restFailureBlock);
+    NSParameterAssert(self.shouldAbandonFailedRequestBlock);
     NSParameterAssert(baseURL);
     NSParameterAssert(path);
     NSParameterAssert(method);
@@ -91,6 +91,7 @@
 
 - (void)emptyQueue {
     [self.queue deleteQueue];
+    self.queue = nil;
 }
 
 - (void)taskQueue:(KTBTaskQueue *)queue executeTask:(KTBTask *)task completion:(KTBTaskCompletionBlock)completion {
@@ -101,7 +102,7 @@
         self.restSuccessBlock(operation.request, responseObject, task.userInfo[RESTUserInfo]);
         completion(KTBTaskStatusSuccess);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if(self.restFailureBlock(operation.request, operation.response, error, task.userInfo[RESTUserInfo])) {
+        if(self.shouldAbandonFailedRequestBlock(operation.request, operation.response, error, task.userInfo[RESTUserInfo])) {
             completion(KTBTaskStatusAbandon);
         }else {
             completion(KTBTaskStatusFailure);

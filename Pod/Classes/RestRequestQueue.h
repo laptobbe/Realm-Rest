@@ -23,7 +23,7 @@ typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDic
 * Set all properties before first request is enqueued. Default is RestRequestQueuePeristanceDatabase.
 */
 @property (nonatomic, assign) RestRequestQueuePeristance persistance;
-@property (nonatomic, copy) RestFailureBlock restFailureBlock;
+@property (nonatomic, copy) RestFailureBlock shouldAbandonFailedRequestBlock;
 @property (nonatomic, copy) RestSuccessBlock restSuccessBlock;
 
 + (instancetype)sharedInstance;
