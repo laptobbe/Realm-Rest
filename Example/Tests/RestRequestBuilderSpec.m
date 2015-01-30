@@ -11,7 +11,6 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"cats/1312/adsg"
                                                                            method:@"GET"
                                                                        parameters:nil
-                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cats/1312/adsg");
             });
@@ -21,7 +20,6 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cats/1312/adsg"
                                                                            method:@"GET"
                                                                        parameters:nil
-                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cats/1312/adsg");
             });
@@ -31,28 +29,25 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cat"
                                                                            method:@"POST"
                                                                        parameters:nil
-                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:nil];
                 expect(urlRequest.HTTPMethod).to.equal(@"POST");
             });
 
-            it(@"should add path parameters for RestRequestBuilderParameterStyleURL", ^{
+            it(@"should add path parameters for RestRequestParameterStyleURL", ^{
                 NSURLRequest *urlRequest = [RestRequestBuilder requestWithBaseURL:[NSURL URLWithString:@"http://api.example.com"]
                                                                              path:@"/cat"
                                                                            method:@"GET"
-                                                                       parameters:@{@"foo" : @"bar", @"cat" : @"dog"}
-                                                                   parameterStyle:RestRequestBuilderParameterStyleURL
+                                                                       parameters:@{RestRequestParameterStyleURL: @{@"foo" : @"bar", @"cat" : @"dog"}}
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat?cat=dog&foo=bar");
             });
 
-            it(@"should add JSON body parameters for RestRequestBuilderParameterStyleBodyJSON", ^{
+            it(@"should add JSON body parameters for RestRequestParameterStyleJSON", ^{
                 NSDictionary *params = @{@"foo" : @"bar", @"cat" : @"dog"};
                 NSURLRequest *urlRequest = [RestRequestBuilder requestWithBaseURL:[NSURL URLWithString:@"http://api.example.com"]
                                                                              path:@"/cat"
                                                                            method:@"POST"
-                                                                       parameters:params
-                                                                   parameterStyle:RestRequestBuilderParameterStyleBodyJSON
+                                                                       parameters:@{RestRequestParameterStyleJSON : params}
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");
                 NSDictionary *decoded = [NSJSONSerialization JSONObjectWithData:urlRequest.HTTPBody
@@ -61,13 +56,12 @@ SpecBegin(RestRequestBuilder)
                 expect(decoded).to.equal(params);
             });
 
-            it(@"should add PARAMS body parameters for RestRequestBuilderParameterStyleBodyForm", ^{
+            it(@"should add PARAMS body parameters for RestRequesParameterStyleForm", ^{
                 NSDictionary *params = @{@"foo" : @"bar", @"cat" : @"dog"};
                 NSURLRequest *urlRequest = [RestRequestBuilder requestWithBaseURL:[NSURL URLWithString:@"http://api.example.com"]
                                                                              path:@"/cat"
                                                                            method:@"POST"
-                                                                       parameters:params
-                                                                   parameterStyle:RestRequestBuilderParameterStyleBodyForm
+                                                                       parameters:@{RestRequestParameterStyleForm: params }
                                                                           headers:nil];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");
                 NSString *decoded = [[NSString alloc] initWithData:urlRequest.HTTPBody
@@ -81,7 +75,6 @@ SpecBegin(RestRequestBuilder)
                                                                              path:@"/cat"
                                                                            method:@"POST"
                                                                        parameters:nil
-                                                                   parameterStyle:RestRequestBuilderParameterStyleNone
                                                                           headers:headers];
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");
                 expect(urlRequest.allHTTPHeaderFields).to.equal(headers);
@@ -126,22 +119,20 @@ SpecBegin(RestRequestBuilder)
                         RESTURL :@"http://api.example.com",
                         RESTPath :@"/cat",
                         RESTMethod :@"GET",
-                        RESTParameterStyle :@(RestRequestBuilderParameterStyleURL),
-                        RESTParameters : @{@"foo" : @"bar", @"cat" : @"dog"}
+                        RESTParameters :@{RestRequestParameterStyleURL: @{@"foo" : @"bar", @"cat" : @"dog"}}
                 }];
 
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat?cat=dog&foo=bar");
             });
 
-            it(@"should add JSON body parameters for RestRequestBuilderParameterStyleBodyJSON", ^{
+            it(@"should add JSON body parameters for RestRequestParameterStyleJSON", ^{
                 NSDictionary *params = @{@"foo" : @"bar", @"cat" : @"dog"};
 
                 NSURLRequest *urlRequest = [RestRequestBuilder requestWithDictionary:@{
                         RESTURL :@"http://api.example.com",
                         RESTPath :@"/cat",
                         RESTMethod :@"POST",
-                        RESTParameterStyle :@(RestRequestBuilderParameterStyleBodyJSON),
-                        RESTParameters : params
+                        RESTParameters :@{RestRequestParameterStyleJSON: params }
                 }];
 
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");
@@ -158,8 +149,7 @@ SpecBegin(RestRequestBuilder)
                         RESTURL :@"http://api.example.com",
                         RESTPath :@"/cat",
                         RESTMethod :@"POST",
-                        RESTParameterStyle :@(RestRequestBuilderParameterStyleBodyForm),
-                        RESTParameters : params
+                        RESTParameters : @{RestRequestParameterStyleForm : params}
                 }];
 
                 expect(urlRequest.URL.absoluteString).to.equal(@"http://api.example.com/cat");

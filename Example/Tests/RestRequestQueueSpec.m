@@ -77,7 +77,6 @@ SpecBegin(RestRequestQueue)
                                         path:@"/cat/22"
                                       method:@"GET"
                                   parameters:nil
-                              parameterStyle:RestRequestBuilderParameterStyleNone
                                      headers:nil
                                     userInfo:nil];
 
@@ -107,7 +106,6 @@ SpecBegin(RestRequestQueue)
                                         path:@"/cat/22"
                                       method:@"GET"
                                   parameters:nil
-                              parameterStyle:RestRequestBuilderParameterStyleNone
                                      headers:nil
                                     userInfo:nil];
 
@@ -143,7 +141,6 @@ SpecBegin(RestRequestQueue)
                                         path:@"/cat/22"
                                       method:@"GET"
                                   parameters:nil
-                              parameterStyle:RestRequestBuilderParameterStyleNone
                                      headers:nil
                                     userInfo:nil];
 
@@ -151,7 +148,6 @@ SpecBegin(RestRequestQueue)
                                         path:@"/cat/22"
                                       method:@"GET"
                                   parameters:nil
-                              parameterStyle:RestRequestBuilderParameterStyleNone
                                      headers:nil
                                     userInfo:nil];
 
@@ -188,7 +184,6 @@ SpecBegin(RestRequestQueue)
                                         path:@"/cat/22"
                                       method:@"GET"
                                   parameters:nil
-                              parameterStyle:RestRequestBuilderParameterStyleNone
                                      headers:nil
                                     userInfo:nil];
 
@@ -196,7 +191,6 @@ SpecBegin(RestRequestQueue)
                                         path:@"/cat/22"
                                       method:@"GET"
                                   parameters:nil
-                              parameterStyle:RestRequestBuilderParameterStyleNone
                                      headers:nil
                                     userInfo:nil];
 
@@ -204,7 +198,6 @@ SpecBegin(RestRequestQueue)
                                         path:@"/cat/22"
                                       method:@"GET"
                                   parameters:nil
-                              parameterStyle:RestRequestBuilderParameterStyleNone
                                      headers:nil
                                     userInfo:nil];
 

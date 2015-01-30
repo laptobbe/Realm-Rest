@@ -10,9 +10,12 @@ NSString *const RESTURL = @"url";
 NSString *const RESTPath = @"path";
 NSString *const RESTMethod = @"method";
 NSString *const RESTParameters = @"parameters";
-NSString *const RESTParameterStyle = @"parameterStyle";
 NSString *const RESTHeaders = @"headers";
 NSString *const RESTUserInfo = @"userInfo";
+
+NSString *const RestRequestParameterStyleURL = @"url_params";
+NSString *const RestRequestParameterStyleJSON = @"json_params";
+NSString *const RestRequestParameterStyleForm = @"form_params";
 
 @implementation RestRequestBuilder
 
@@ -20,26 +23,29 @@ NSString *const RESTUserInfo = @"userInfo";
                                 path:(NSString *)path
                               method:(NSString *)method
                           parameters:(NSDictionary *)params
-                      parameterStyle:(RestRequestBuilderParameterStyle)paramStyle
                              headers:(NSDictionary *)headers {
 
     NSURL *url = [baseURL URLByAppendingPathComponent:path];
 
-    if (paramStyle == RestRequestBuilderParameterStyleURL) {
-        url = [url uq_URLByAppendingQueryDictionary:params withSortedKeys:YES];
+
+    NSDictionary *urlParams = params[RestRequestParameterStyleURL];
+    if (urlParams) {
+        url = [url uq_URLByAppendingQueryDictionary:urlParams withSortedKeys:YES];
     }
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = method;
 
-    if (paramStyle == RestRequestBuilderParameterStyleBodyJSON) {
-        request.HTTPBody = [NSJSONSerialization dataWithJSONObject:params
-                                                           options:0
-                                                             error:nil];
+    NSDictionary *formParams = params[RestRequestParameterStyleForm];
+    if (formParams) {
+        request.HTTPBody = [[formParams uq_URLQueryStringWithSortedKeys:YES] dataUsingEncoding:NSUTF8StringEncoding];
     }
 
-    if (paramStyle == RestRequestBuilderParameterStyleBodyForm) {
-        request.HTTPBody = [[params uq_URLQueryStringWithSortedKeys:YES] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *jsonParams = params[RestRequestParameterStyleJSON];
+    if (jsonParams) {
+        request.HTTPBody = [NSJSONSerialization dataWithJSONObject:jsonParams
+                                                           options:0
+                                                             error:nil];
     }
 
     [request setAllHTTPHeaderFields:headers];
@@ -53,7 +59,6 @@ NSString *const RESTUserInfo = @"userInfo";
                                              path:dictionary[RESTPath]
                                            method:dictionary[RESTMethod]
                                        parameters:dictionary[RESTParameters]
-                                   parameterStyle:(RestRequestBuilderParameterStyle) [dictionary[RESTParameterStyle] integerValue]
                                           headers:dictionary[RESTHeaders]];
 }
 

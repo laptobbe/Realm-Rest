@@ -47,9 +47,8 @@
                              path:(NSString *)path
                            method:(NSString *)method
                        parameters:(NSDictionary *)params
-                   parameterStyle:(RestRequestBuilderParameterStyle)paramStyle
                           headers:(NSDictionary *)headers
-                         userInfo:(NSDictionary *)userInfo{
+                         userInfo:(NSDictionary *)userInfo {
 
     NSParameterAssert(self.delegate);
     NSParameterAssert(baseURL);
@@ -67,10 +66,6 @@
 
     if(method) {
         taskUserInfo[RESTMethod] = method;
-    }
-
-    if(paramStyle) {
-        taskUserInfo[RESTParameterStyle] = @(paramStyle);
     }
 
     if(params) {

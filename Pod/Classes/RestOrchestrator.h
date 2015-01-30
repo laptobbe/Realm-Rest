@@ -16,7 +16,6 @@
 
 + (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
-           paramStyle:(RestRequestBuilderParameterStyle)parameterStyle
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 queue:(RestRequestQueue *)queue

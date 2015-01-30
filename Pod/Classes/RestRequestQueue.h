@@ -35,12 +35,13 @@ typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
 
 /**
 * @param userInfo Needs to be JSON encodable (String key and basic types as values)
+* @params Use the keys: RestRequestParameterStyleURL, RestRequestParameterStyleJSON, RestRequestParameterStyleForm
+* with dictionary as values. JSON and Form are mutually exclusive. JSON overrides Form.
 */
 - (void)enqueueRequestWithBaseURL:(NSString *)baseURL
                              path:(NSString *)path
                            method:(NSString *)method
                        parameters:(NSDictionary *)params
-                   parameterStyle:(RestRequestBuilderParameterStyle)paramStyle
                           headers:(NSDictionary *)headers
                          userInfo:(NSDictionary *)userInfo;
 

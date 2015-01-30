@@ -10,6 +10,10 @@
 #import <Realm+JSON/RLMObject+JSON.h>
 #import "RestOrchestrator.h"
 
+static NSString *const ClassKey = @"class";
+static NSString *const RealmTypeKey = @"realmType";
+static NSString *const RealmKey = @"realm";
+
 @interface RestOrchestrator () <RestRequestQueueDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *requests;
@@ -27,10 +31,46 @@
     });
     return restOrchestrator;
 }
++ (void)restForModelClass:(Class)modelClass
+              requestType:(RestRequestType)requestType
+               parameters:(NSDictionary *)parameters
+                  headers:(NSDictionary *)headers
+                    queue:(RestRequestQueue *)queue
+                    realm:(RLMRealm *)realm
+          realmIdentifier:(NSString *)realmIdentifier {
+
+    [[self sharedInstance] restForModelClass:modelClass
+                                 requestType:requestType
+                                  parameters:parameters
+                                     headers:headers
+                                       queue:queue
+                                       realm:realm
+                             realmIdentifier:realmIdentifier];
+}
+
+- (void)restForModelClass:(Class)modelClass
+              requestType:(RestRequestType)requestType
+               parameters:(NSDictionary *)parameters
+                  headers:(NSDictionary *)headers
+                    queue:(RestRequestQueue *)queue
+                    realm:(RLMRealm *)realm
+          realmIdentifier:(NSString *)realmIdentifier {
+
+    queue.delegate = self;
+
+    NSString *baseURL = [RestPathFinder findBaseURLForModelClass:modelClass realm:realm];
+    NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType];
+    NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
+
+    [queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
+            ClassKey : NSStringFromClass(modelClass),
+            RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
+            RealmKey : realmIdentifier ?: realm.path
+    }];
+}
 
 + (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
-           paramStyle:(RestRequestBuilderParameterStyle)parameterStyle
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 queue:(RestRequestQueue *)queue
@@ -39,7 +79,6 @@
 
     [[self sharedInstance] restForObject:object
                              requestType:requestType
-                              paramStyle:parameterStyle
                               parameters:parameters
                                  headers:headers
                                    queue:queue
@@ -50,12 +89,11 @@
 
 - (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
-           paramStyle:(RestRequestBuilderParameterStyle)parameterStyle
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 queue:(RestRequestQueue *)queue
                 realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)identifier{
+      realmIdentifier:(NSString *)realmIdentifier {
 
     queue.delegate = self;
 
@@ -63,17 +101,11 @@
     NSString *path = [RestPathFinder findPathForObject:object forType:requestType];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
 
-    [queue enqueueRequestWithBaseURL:baseURL
-                                path:path
-                              method:method
-                          parameters:parameters
-                      parameterStyle:parameterStyle
-                             headers:headers
-                            userInfo:@{
-                                    @"class": NSStringFromClass(object.class),
-                                    @"realmType" : identifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
-                                    @"realm" : identifier ?: realm.path
-                            }];
+    [queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
+            ClassKey : NSStringFromClass(object.class),
+            RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
+            RealmKey : realmIdentifier ?: realm.path
+    }];
 }
 
 - (BOOL)             queue:(RestRequestQueue *)queue
@@ -103,14 +135,14 @@ requestDidSucceed:(NSURLRequest *)request
 }
 
 - (Class)modelClassFromUserInfo:(NSDictionary *)dictionary {
-    return NSClassFromString(dictionary[@"class"]);
+    return NSClassFromString(dictionary[ClassKey]);
 }
 
 - (RLMRealm *)realmFromUserInfo:(NSDictionary *)dictionary {
-    if([dictionary[@"realmType"] integerValue] == RestRequestQueuePeristanceDatabase){
-        return [RLMRealm realmWithPath:dictionary[@"realm"]];
+    if([dictionary[RealmTypeKey] integerValue] == RestRequestQueuePeristanceDatabase){
+        return [RLMRealm realmWithPath:dictionary[RealmKey]];
     }else {
-        return [RLMRealm inMemoryRealmWithIdentifier:dictionary[@"realm"]];
+        return [RLMRealm inMemoryRealmWithIdentifier:dictionary[RealmKey]];
     }
 }
 
