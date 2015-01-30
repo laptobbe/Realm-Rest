@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 #import <Realm/Realm.h>
 #import <Realm-Rest/RestModelObjectProtocol.h>
+#import <Realm/RLMObject.h>
 
 
 @interface Mouse : RLMObject <RestModelObjectProtocol>

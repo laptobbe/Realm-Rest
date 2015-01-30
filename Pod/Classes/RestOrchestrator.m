@@ -127,11 +127,13 @@ requestDidSucceed:(NSURLRequest *)request
     RLMRealm *realm = [self realmFromUserInfo:userInfo];
     Class modelClass = [self modelClassFromUserInfo:userInfo];
 
+    [realm beginWriteTransaction];
     if([responseObject isKindOfClass:[NSArray class]]) {
         [modelClass createOrUpdateInRealm:realm withJSONArray:responseObject];
     } else if([responseObject isKindOfClass:[NSDictionary class]]) {
         [modelClass createOrUpdateInRealm:realm withJSONDictionary:responseObject];
     }
+    [realm commitWriteTransaction];
 }
 
 - (Class)modelClassFromUserInfo:(NSDictionary *)dictionary {

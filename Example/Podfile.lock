@@ -33,8 +33,8 @@ PODS:
   - OHHTTPStubs (3.1.10):
     - OHHTTPStubs/Core (= 3.1.10)
   - OHHTTPStubs/Core (3.1.10)
-  - Realm (0.90.2):
-    - Realm/Headers (= 0.90.2)
+  - Realm (0.90.4):
+    - Realm/Headers (= 0.90.4)
   - Realm+JSON (0.2.5):
     - Realm (~> 0.90)
   - Realm-Rest (0.1.0):
@@ -42,14 +42,15 @@ PODS:
     - KTBTaskQueue (~> 1.0.1)
     - NSString-UrlEncode (~> 2.0.0)
     - NSURL+QueryDictionary (~> 1.0.3)
-    - Realm (~> 0.90.2)
+    - Realm (~> 0.90.4)
     - Realm+JSON (~> 0.2.5)
-  - Realm/Headers (0.90.2)
+  - Realm/Headers (0.90.4)
   - Specta (0.3.0.beta1)
 
 DEPENDENCIES:
   - Expecta
   - OHHTTPStubs
+  - Realm
   - Realm-Rest (from `../`)
   - Specta (from `https://github.com/specta/specta.git`, tag `v0.3.0.beta1`)
 
@@ -73,9 +74,9 @@ SPEC CHECKSUMS:
   NSString-UrlEncode: 884ff989b77aeec0fe25474edc32ad7e31ffc5ff
   NSURL+QueryDictionary: 1ad81be60c10e3f4d80c5c4beb7125de96aaec5e
   OHHTTPStubs: 2038e929b6abb94881000524c1cb4aba0a1bb4a2
-  Realm: e5e2a23e34e1f8c00a1484c130a9d00c1394a2af
+  Realm: 43ec5595f51849fabccd2213cfad90bc4ff9a3c0
   Realm+JSON: a47b93f0f37beba7dd4686f5f4b6813d83f78134
-  Realm-Rest: 5a3472de49bd0ca0843c317ba752459ce8b2308d
+  Realm-Rest: 92873e1c6ccb14bf8c5d76d3389bc82e2aba175a
   Specta: d2158a483ad179e5f8d3a29f75ff4fc0ff6fab16
 
 COCOAPODS: 0.36.0.beta.1

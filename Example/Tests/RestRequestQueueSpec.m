@@ -1,36 +1,7 @@
 #import <Realm-Rest/RestRequestQueue.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
+#import "TestQueueDelegate.h"
 
-typedef BOOL (^RestFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo);
-typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDictionary *userInfo);
-
-
-@interface TestQueueDelegate : NSObject <RestRequestQueueDelegate>
-
-@property (nonatomic, copy) RestSuccessBlock successBlock;
-@property (nonatomic, copy) RestFailureBlock shouldAbandonFailedRequestBlock;
-
-@end
-
-@implementation TestQueueDelegate
-
-- (BOOL)             queue:(RestRequestQueue *)queue
-shouldAbandonFailedRequest:(NSURLRequest *)request
-                  response:(NSHTTPURLResponse *)response
-                     error:(NSError *)error
-                  userInfo:(NSDictionary *)userInfo {
-    return self.shouldAbandonFailedRequestBlock(request, response, error, userInfo);
-}
-
-- (void)    queue:(RestRequestQueue *)queue
-requestDidSucceed:(NSURLRequest *)request
-   responseObject:(id)responseObject
-         userInfo:(NSDictionary *)userInfo {
-    self.successBlock(request, responseObject, userInfo);
-}
-
-
-@end
 
 SpecBegin(RestRequestQueue)
     context(@"RestRequestQueue", ^{
