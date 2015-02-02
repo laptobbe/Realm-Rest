@@ -6,13 +6,13 @@
 #import <Realm-Rest/RestPathFinder.h>
 #import <Realm-Rest/RestRequestBuilder.h>
 #import <Realm-Rest/RestRequestQueue.h>
+#import <Realm-Rest/RestNotifier.h>
 #import <Realm/RLMRealm.h>
 #import <Realm+JSON/RLMObject+JSON.h>
 #import "RestOrchestrator.h"
 
-static NSString *const ClassKey = @"class";
-static NSString *const RealmTypeKey = @"realmType";
-static NSString *const RealmKey = @"realm";
+
+
 
 @interface RestOrchestrator () <RestRequestQueueDelegate>
 
@@ -103,6 +103,9 @@ static NSString *const RealmKey = @"realm";
 
     [queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
             ClassKey : NSStringFromClass(object.class),
+            BaseUrlKey : baseURL,
+            PathUrlKey : path,
+            MethodKey : method,
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
             RealmKey : realmIdentifier ?: realm.path
     }];
@@ -124,16 +127,22 @@ requestDidSucceed:(NSURLRequest *)request
         return;
     }
 
+    NSMutableDictionary *notification = [NSMutableDictionary dictionary];
     RLMRealm *realm = [self realmFromUserInfo:userInfo];
     Class modelClass = [self modelClassFromUserInfo:userInfo];
 
+    id object;
     [realm beginWriteTransaction];
     if([responseObject isKindOfClass:[NSArray class]]) {
-        [modelClass createOrUpdateInRealm:realm withJSONArray:responseObject];
+        object = [modelClass createOrUpdateInRealm:realm withJSONArray:responseObject];
     } else if([responseObject isKindOfClass:[NSDictionary class]]) {
-        [modelClass createOrUpdateInRealm:realm withJSONDictionary:responseObject];
+        object = [modelClass createOrUpdateInRealm:realm withJSONDictionary:responseObject];
     }
     [realm commitWriteTransaction];
+
+    [notification addEntriesFromDictionary:userInfo];
+    notification[ObjectKey] = object;
+    [RestNotifier notifyWithUserInfo:userInfo];
 }
 
 - (Class)modelClassFromUserInfo:(NSDictionary *)dictionary {

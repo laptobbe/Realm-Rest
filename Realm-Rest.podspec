@@ -21,12 +21,10 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes'
-  s.resource_bundles = {
-    'Realm-Rest' => ['Pod/Assets/*.png']
-  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
+
   s.dependency 'Realm', '~> 0.90.4'
   s.dependency 'Realm+JSON', '~> 0.2.5'
   s.dependency 'NSString-UrlEncode', '~> 2.0.0'

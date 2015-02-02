@@ -17,11 +17,6 @@
   },
   "requires_arc": true,
   "source_files": "Pod/Classes",
-  "resource_bundles": {
-    "Realm-Rest": [
-      "Pod/Assets/*.png"
-    ]
-  },
   "dependencies": {
     "Realm": [
       "~> 0.90.4"
