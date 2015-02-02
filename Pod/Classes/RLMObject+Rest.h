@@ -3,10 +3,30 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Realm/Realm/RLMObject.h>
+#import <Realm/RLMObject.h>
+#import <Realm-Rest/RestPathFinder.h>
 
 @interface RLMObject (Rest)
 
 + (NSString *)restNotification;
 
++ (void)restWithRequestType:(RestRequestType)requestType
+                 parameters:(NSDictionary *)parameters
+                    headers:(NSDictionary *)headers
+                      realm:(RLMRealm *)realm
+            realmIdentifier:(NSString *)realmIdentifier;
+
++ (void)restInDefaultRealmWithRequestType:(RestRequestType)requestType
+                               parameters:(NSDictionary *)parameters
+                                  headers:(NSDictionary *)headers;
+
+- (void)restInDefaultRealmWithRequestType:(RestRequestType)requestType
+                               parameters:(NSDictionary *)parameters
+                                  headers:(NSDictionary *)headers;
+
+- (void)restWithRequestType:(RestRequestType)requestType
+                 parameters:(NSDictionary *)parameters
+                    headers:(NSDictionary *)headers
+                      realm:(RLMRealm *)realm
+            realmIdentifier:(NSString *)realmIdentifier;
 @end

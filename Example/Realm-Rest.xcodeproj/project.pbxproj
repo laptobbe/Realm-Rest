@@ -23,6 +23,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		64D5E8D36C4A04FD8251F847 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB88CCA840C22542E1C6BDB /* libPods-Tests.a */; };
+		CC3C7503454175E66083405D /* RLMObjectRestSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7C444692F8A3F4EB5AB2 /* RLMObjectRestSpec.m */; };
 		CC3C7802A37D1B4A2B5FA3B8 /* RestNotifierSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7A8CAA2F8B33AC754991 /* RestNotifierSpec.m */; };
 		CC3C7943D96A00FC2071C61B /* RestRequestQueueSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7A3F76D12C8CA545A57D /* RestRequestQueueSpec.m */; };
 		CC3C7D446FC303DE5856407E /* TestQueueDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C75A2DF583FD125073515 /* TestQueueDelegate.m */; };
@@ -82,6 +83,7 @@
 		CC3C78AE3D8B13D2DFE25CD6 /* TestQueueDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestQueueDelegate.h; sourceTree = "<group>"; };
 		CC3C7A3F76D12C8CA545A57D /* RestRequestQueueSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestRequestQueueSpec.m; sourceTree = "<group>"; };
 		CC3C7A8CAA2F8B33AC754991 /* RestNotifierSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestNotifierSpec.m; sourceTree = "<group>"; };
+		CC3C7C444692F8A3F4EB5AB2 /* RLMObjectRestSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLMObjectRestSpec.m; sourceTree = "<group>"; };
 		CC3C7D1C5722B5A9B33FCE1A /* Dog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dog.m; sourceTree = "<group>"; };
 		CC3C7E858C03A75D442E1622 /* Cat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cat.m; sourceTree = "<group>"; };
 		CC3C7FBE4C48AA37F92A1349 /* Cat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cat.h; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				F6F149BC1A7BDCBB00A24213 /* RLMRealm+Rest.h */,
 				F6F149BD1A7BDCBB00A24213 /* RLMRealm+Rest.m */,
 				CC3C7A8CAA2F8B33AC754991 /* RestNotifierSpec.m */,
+				CC3C7C444692F8A3F4EB5AB2 /* RLMObjectRestSpec.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				CC3C7D446FC303DE5856407E /* TestQueueDelegate.m in Sources */,
 				F6F149BE1A7BDCBB00A24213 /* RLMRealm+Rest.m in Sources */,
 				CC3C7802A37D1B4A2B5FA3B8 /* RestNotifierSpec.m in Sources */,
+				CC3C7503454175E66083405D /* RLMObjectRestSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
