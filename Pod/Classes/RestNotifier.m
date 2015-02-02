@@ -17,8 +17,15 @@ NSString *const RestNotification = @"RestNotification";
 @implementation RestNotifier
 
 + (void)notifyWithUserInfo:(NSDictionary *)dictionary {
-    NSString *notification = [NSString stringWithFormat:@"%@%@",dictionary[ClassKey], RestNotification];
-    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil];
+
+    NSObject *className = dictionary[ClassKey];
+    if(!className) {
+        [NSException raise:NSInternalInconsistencyException format:@"Need to have a class in userInfo to be able to notify"];
+    }
+
+    NSString *notification = [NSString stringWithFormat:@"%@%@", className, RestNotification];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil userInfo:dictionary];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RestNotification object:nil userInfo:dictionary];
 }
 
 @end
