@@ -10,13 +10,10 @@
 #import <Realm/RLMRealm.h>
 #import <Realm+JSON/RLMObject+JSON.h>
 #import "RestOrchestrator.h"
-
-
+#import "RestModelObjectProtocol.h"
 
 
 @interface RestOrchestrator () <RestRequestQueueDelegate>
-
-@property (nonatomic, strong) NSMutableDictionary *requests;
 
 @end
 
@@ -27,10 +24,10 @@
     static RestOrchestrator *restOrchestrator;
     dispatch_once(&once, ^{
         restOrchestrator = [RestOrchestrator new];
-        restOrchestrator.requests = [NSMutableDictionary dictionary];
     });
     return restOrchestrator;
 }
+
 + (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
                parameters:(NSDictionary *)parameters
@@ -116,6 +113,13 @@ shouldAbandonFailedRequest:(NSURLRequest *)request
                   response:(NSHTTPURLResponse *)response
                      error:(NSError *)error
                   userInfo:(NSDictionary *)userInfo {
+    Class modelClass = [self modelClassFromUserInfo:userInfo];
+    if([modelClass respondsToSelector:@selector(shouldAbandonFailedRequest:response:error:userInfo:)]){
+        return [(Class<RestModelObjectProtocol>)modelClass shouldAbandonFailedRequest:request
+                                                                             response:response
+                                                                                error:error
+                                                                             userInfo:userInfo];
+    }
     return NO;
 }
 

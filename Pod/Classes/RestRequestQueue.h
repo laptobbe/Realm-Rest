@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
 */
 @property (nonatomic, assign) NSObject<RestRequestQueueDelegate> *delegate;
 
+@property (nonatomic, readonly) NSUInteger count;
+
 + (instancetype)sharedInstance;
 
 - (void)activateQueueWithPersistance:(RestRequestQueuePeristance)persistance;

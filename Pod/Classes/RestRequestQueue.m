@@ -43,6 +43,10 @@
     self.queue = nil;
 }
 
+- (NSUInteger)count {
+    return self.queue.count;
+}
+
 - (void)enqueueRequestWithBaseURL:(NSString *)baseURL
                              path:(NSString *)path
                            method:(NSString *)method

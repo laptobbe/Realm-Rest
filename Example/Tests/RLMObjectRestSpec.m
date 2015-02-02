@@ -5,6 +5,7 @@
 #import <Realm+JSON/RLMObject+JSON.h>
 #import <Realm/Realm.h>
 #import "Cat.h"
+#import "Mouse.h"
 
 static NSString *const realmIdentifier = @"test";
 
@@ -100,6 +101,40 @@ SpecBegin(RLMObject)
                 expect(request.URL.absoluteString).will.equal(@"http://api.example.com/cats");
                 expect(request.HTTPBody).will.beFalsy();
                 expect(success).will.beTruthy();
+            });
+        });
+
+        context(@"Abandon request", ^{
+            it(@"Abandons if implemeted", ^{
+
+                [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *stubRequest) {
+                    return YES;
+                } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *stubRequest) {
+                    return [OHHTTPStubsResponse responseWithError:[NSError errorWithDomain:NSURLErrorDomain
+                                                                                      code:NSURLErrorNotConnectedToInternet
+                                                                                  userInfo:nil]];
+                }];
+
+                [Mouse restWithRequestType:RestRequestTypeGet
+                                parameters:nil
+                                   headers:nil
+                                     realm:realm
+                           realmIdentifier:realmIdentifier];
+
+                [Mouse restWithRequestType:RestRequestTypeGet
+                                parameters:nil
+                                   headers:nil
+                                     realm:realm
+                           realmIdentifier:realmIdentifier];
+
+                [Mouse restWithRequestType:RestRequestTypeGet
+                                parameters:nil
+                                   headers:nil
+                                     realm:realm
+                           realmIdentifier:realmIdentifier];
+
+                expect([[RestRequestQueue sharedInstance] count]).to.equal(3);
+                expect([[RestRequestQueue sharedInstance] count]).will.equal(0);
             });
         });
     });

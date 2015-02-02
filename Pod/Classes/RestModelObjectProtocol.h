@@ -23,4 +23,9 @@
 
 + (NSString *)baseURL;
 
++ (BOOL)shouldAbandonFailedRequest:(NSURLRequest *)request
+                          response:(NSHTTPURLResponse *)response
+                             error:(NSError *)error
+                          userInfo:(NSDictionary *)userInfo;
+
 @end
