@@ -7,13 +7,23 @@
 
 
 @implementation RLMRealm (Rest)
+@dynamic baseURL;
 
 - (NSString *)baseURL {
-    return objc_getAssociatedObject(self, @selector(baseURL));
+    return self.baseURLs[self.path];
 }
 
 - (void)setBaseURL:(NSString *)baseURL {
-    objc_setAssociatedObject(self, @selector(baseURL), baseURL, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.baseURLs[self.path] = baseURL;
+}
+
+- (NSMutableDictionary *)baseURLs {
+    static NSMutableDictionary *urls;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        urls = [NSMutableDictionary dictionary];
+    });
+    return urls;
 }
 
 @end
