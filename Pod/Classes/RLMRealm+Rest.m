@@ -14,7 +14,7 @@
 }
 
 - (void)setBaseURL:(NSString *)baseURL {
-    self.baseURLs[self.path] = baseURL;
+    self.baseURLs[self.path] = [baseURL copy];
 }
 
 - (NSMutableDictionary *)baseURLs {
