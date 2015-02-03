@@ -120,7 +120,7 @@ shouldAbandonFailedRequest:(NSURLRequest *)request
                                                                                 error:error
                                                                              userInfo:userInfo];
     }
-    return NO;
+    return response.statusCode >= 400;
 }
 
 - (void)    queue:(RestRequestQueue *)queue
