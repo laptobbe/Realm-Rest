@@ -123,6 +123,19 @@ SpecBegin(RestPathFinder)
                 NSString *baseURL = [RestPathFinder findBaseURLForModelClass:[Mouse class] realm:realm];
                 expect(baseURL).to.equal(@"http://custom.example.com");
             });
+
+            it(@"Should find it on a new realm instance", ^{
+                RLMRealm *realm2 = [RLMRealm inMemoryRealmWithIdentifier:@"test"];
+                NSString *baseURL = [RestPathFinder findBaseURLForModelClass:[Cat class] realm:realm2];
+                expect(baseURL).to.equal(@"http://api.example.com");
+            });
+
+            it(@"Should find it on a the default realm", ^{
+                [[RLMRealm defaultRealm] setBaseURL:@"http://api.example.com"];
+                NSString *baseURL = [RestPathFinder findBaseURLForModelClass:[Cat class] realm:[RLMRealm defaultRealm]];
+                expect(baseURL).to.equal(@"http://api.example.com");
+            });
+
         });
 
         context(@"HTTP method from request type", ^{
