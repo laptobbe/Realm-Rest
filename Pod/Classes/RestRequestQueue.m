@@ -59,6 +59,10 @@
     NSParameterAssert(path);
     NSParameterAssert(method);
 
+    if(!self.queue) {
+        [self activateQueueWithPersistance:RestRequestQueuePeristanceDatabase];
+    }
+
     NSMutableDictionary *taskUserInfo = [NSMutableDictionary dictionary];
 
     if(baseURL) {
