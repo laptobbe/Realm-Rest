@@ -16,6 +16,7 @@ extern NSString *const PrimaryKeyValueKey;
 
 @interface RestNotifier : NSObject
 
-+ (void)notifyWithUserInfo:(NSDictionary *)dictionary;
++ (void)notifySuccessWithUserInfo:(NSDictionary *)dictionary;
 
++ (void)notifyFailureWithUserInfo:(NSDictionary *)dictionary;
 @end

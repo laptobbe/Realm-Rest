@@ -148,7 +148,7 @@ requestDidSucceed:(NSURLRequest *)request
 
     [notification addEntriesFromDictionary:userInfo];
     notification[PrimaryKeyValueKey] = [self primaryKeyValuesForObject:object];
-    [RestNotifier notifyWithUserInfo:notification];
+    [RestNotifier notifySuccessWithUserInfo:notification];
 }
 
 - (id)primaryKeyValuesForObject:(id)object {

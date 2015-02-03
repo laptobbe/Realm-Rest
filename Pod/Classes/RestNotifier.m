@@ -3,6 +3,7 @@
 //
 
 #import "RestNotifier.h"
+#import "RLMObject+Rest.h"
 
 NSString *const ClassKey = @"class";
 NSString *const RealmTypeKey = @"realmType";
@@ -16,16 +17,28 @@ NSString *const RestNotification = @"RestNotification";
 
 @implementation RestNotifier
 
-+ (void)notifyWithUserInfo:(NSDictionary *)dictionary {
++ (void)notifySuccessWithUserInfo:(NSDictionary *)dictionary {
 
-    NSObject *className = dictionary[ClassKey];
+    NSString *className = dictionary[ClassKey];
     if(!className) {
         [NSException raise:NSInternalInconsistencyException format:@"Need to have a class in userInfo to be able to notify"];
     }
 
-    NSString *notification = [NSString stringWithFormat:@"%@%@", className, RestNotification];
+    NSString *notification = [NSClassFromString(className) restSuccessNotification];
     [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil userInfo:dictionary];
     [[NSNotificationCenter defaultCenter] postNotificationName:RestNotification object:nil userInfo:dictionary];
+}
+
++ (void)notifyFailureWithUserInfo:(NSDictionary *)dictionary {
+    NSString *className = dictionary[ClassKey];
+    if(!className) {
+        [NSException raise:NSInternalInconsistencyException format:@"Need to have a class in userInfo to be able to notify"];
+    }
+
+    NSString *notification = [NSClassFromString(className) restFailureNotification];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil userInfo:dictionary];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RestNotification object:nil userInfo:dictionary];
+
 }
 
 @end

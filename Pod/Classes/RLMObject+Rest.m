@@ -12,8 +12,12 @@
 
 @implementation RLMObject (Rest)
 
-+ (NSString *)restNotification {
-    return [NSString stringWithFormat:@"%@%@", NSStringFromClass(self), RestNotification];
++ (NSString *)restSuccessNotification {
+    return [NSString stringWithFormat:@"%@Success%@", NSStringFromClass(self), RestNotification];
+}
+
++ (NSString *)restFailureNotification {
+    return [NSString stringWithFormat:@"%@Failure%@", NSStringFromClass(self), RestNotification];
 }
 
 + (void)restWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers realm:(RLMRealm *)realm realmIdentifier:(NSString *)realmIdentifier {

@@ -8,7 +8,9 @@
 
 @interface RLMObject (Rest)
 
-+ (NSString *)restNotification;
++ (NSString *)restSuccessNotification;
+
++ (NSString *)restFailureNotification;
 
 + (void)restWithRequestType:(RestRequestType)requestType
                  parameters:(NSDictionary *)parameters
