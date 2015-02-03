@@ -12,7 +12,7 @@ extern NSString *const RealmKey;
 extern NSString *const BaseUrlKey;
 extern NSString *const PathUrlKey;
 extern NSString *const MethodKey;
-extern NSString *const ObjectKey;
+extern NSString *const PrimaryKeyValueKey;
 
 @interface RestNotifier : NSObject
 

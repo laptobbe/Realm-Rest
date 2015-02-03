@@ -31,4 +31,5 @@ Pod::Spec.new do |s|
   s.dependency 'NSURL+QueryDictionary', '~> 1.0.3'
   s.dependency 'KTBTaskQueue', '~> 1.0.1'
   s.dependency 'AFNetworking', '~> 2.5.0'
+  s.dependency 'Functional.m', '~> 1.0.0'
 end

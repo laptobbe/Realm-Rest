@@ -35,6 +35,9 @@
     ],
     "AFNetworking": [
       "~> 2.5.0"
+    ],
+    "Functional.m": [
+      "~> 1.0.0"
     ]
   }
 }

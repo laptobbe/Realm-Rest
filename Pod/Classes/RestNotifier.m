@@ -10,7 +10,7 @@ NSString *const RealmKey = @"realm";
 NSString *const BaseUrlKey = @"baseurl";
 NSString *const PathUrlKey = @"path";
 NSString *const MethodKey = @"method";
-NSString *const ObjectKey = @"object";
+NSString *const PrimaryKeyValueKey = @"primary_key_value";
 
 NSString *const RestNotification = @"RestNotification";
 

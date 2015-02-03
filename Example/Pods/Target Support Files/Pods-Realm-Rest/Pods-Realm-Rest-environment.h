@@ -66,6 +66,12 @@
 #define COCOAPODS_VERSION_MINOR_FMDB_standard 5
 #define COCOAPODS_VERSION_PATCH_FMDB_standard 0
 
+// Functional.m
+#define COCOAPODS_POD_AVAILABLE_Functional_m
+#define COCOAPODS_VERSION_MAJOR_Functional_m 1
+#define COCOAPODS_VERSION_MINOR_Functional_m 0
+#define COCOAPODS_VERSION_PATCH_Functional_m 0
+
 // KTBTaskQueue
 #define COCOAPODS_POD_AVAILABLE_KTBTaskQueue
 #define COCOAPODS_VERSION_MAJOR_KTBTaskQueue 1

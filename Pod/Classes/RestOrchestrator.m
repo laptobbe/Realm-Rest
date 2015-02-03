@@ -9,6 +9,8 @@
 #import <Realm-Rest/RestNotifier.h>
 #import <Realm/RLMRealm.h>
 #import <Realm+JSON/RLMObject+JSON.h>
+#import <OCMock/OCMArg.h>
+#import <Functional.m/NSArray+F.h>
 #import "RestOrchestrator.h"
 #import "RestModelObjectProtocol.h"
 
@@ -145,8 +147,18 @@ requestDidSucceed:(NSURLRequest *)request
     [realm commitWriteTransaction];
 
     [notification addEntriesFromDictionary:userInfo];
-    notification[ObjectKey] = object;
-    [RestNotifier notifyWithUserInfo:userInfo];
+    notification[PrimaryKeyValueKey] = [self primaryKeyValuesForObject:object];
+    [RestNotifier notifyWithUserInfo:notification];
+}
+
+- (id)primaryKeyValuesForObject:(id)object {
+    if ([object isKindOfClass:[RLMObject class]]) {
+        return [object valueForKey:[[object class] primaryKey]];
+    }else if([object isKindOfClass:[NSArray class]]){
+        return [object map:^id(id obj) {
+            return [self primaryKeyValuesForObject:obj];
+        }];
+    }
 }
 
 - (Class)modelClassFromUserInfo:(NSDictionary *)dictionary {
