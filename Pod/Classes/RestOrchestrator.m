@@ -17,6 +17,8 @@
 
 @interface RestOrchestrator () <RestRequestQueueDelegate>
 
+@property (nonatomic, strong) RestRequestQueue *queue;
+
 @end
 
 @implementation RestOrchestrator
@@ -30,11 +32,15 @@
     return restOrchestrator;
 }
 
+- (void)initiateWithPersistance:(RestRequestQueuePeristance)persistance {
+    self.queue = [[RestRequestQueue alloc] initWitPersistance:persistance
+                                                     delegate:self];
+}
+
 + (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
-                    queue:(RestRequestQueue *)queue
                     realm:(RLMRealm *)realm
           realmIdentifier:(NSString *)realmIdentifier {
 
@@ -42,7 +48,6 @@
                                  requestType:requestType
                                   parameters:parameters
                                      headers:headers
-                                       queue:queue
                                        realm:realm
                              realmIdentifier:realmIdentifier];
 }
@@ -51,17 +56,14 @@
               requestType:(RestRequestType)requestType
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
-                    queue:(RestRequestQueue *)queue
                     realm:(RLMRealm *)realm
           realmIdentifier:(NSString *)realmIdentifier {
-
-    queue.delegate = self;
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:modelClass realm:realm];
     NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
 
-    [queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
+    [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
             ClassKey : NSStringFromClass(modelClass),
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
             RealmKey : realmIdentifier ?: realm.path
@@ -72,7 +74,6 @@
           requestType:(RestRequestType)requestType
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
-                queue:(RestRequestQueue *)queue
                 realm:(RLMRealm *)realm
       realmIdentifier:(NSString *)realmIdentifier {
 
@@ -80,7 +81,6 @@
                              requestType:requestType
                               parameters:parameters
                                  headers:headers
-                                   queue:queue
                                    realm:realm
                          realmIdentifier:realmIdentifier];
 
@@ -90,17 +90,14 @@
           requestType:(RestRequestType)requestType
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
-                queue:(RestRequestQueue *)queue
                 realm:(RLMRealm *)realm
       realmIdentifier:(NSString *)realmIdentifier {
-
-    queue.delegate = self;
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:object.class realm:realm];
     NSString *path = [RestPathFinder findPathForObject:object forType:requestType];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
 
-    [queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
+    [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
             ClassKey : NSStringFromClass(object.class),
             BaseUrlKey : baseURL,
             PathUrlKey : path,
@@ -115,6 +112,13 @@ shouldAbandonFailedRequest:(NSURLRequest *)request
                   response:(NSHTTPURLResponse *)response
                      error:(NSError *)error
                   userInfo:(NSDictionary *)userInfo {
+
+    NSMutableDictionary *notification = [NSMutableDictionary dictionary];
+    [notification addEntriesFromDictionary:userInfo];
+    notification[NSUnderlyingErrorKey] = error;
+    notification[ResponseKey] = response;
+    [RestNotifier notifyFailureWithUserInfo:notification];
+
     Class modelClass = [self modelClassFromUserInfo:userInfo];
     if([modelClass respondsToSelector:@selector(shouldAbandonFailedRequest:response:error:userInfo:)]){
         return [(Class<RestModelObjectProtocol>)modelClass shouldAbandonFailedRequest:request
@@ -147,7 +151,9 @@ requestDidSucceed:(NSURLRequest *)request
     [realm commitWriteTransaction];
 
     [notification addEntriesFromDictionary:userInfo];
-    notification[PrimaryKeyValueKey] = [self primaryKeyValuesForObject:object];
+    id primaryKeyValuesForObject = [self primaryKeyValuesForObject:object];
+    if(primaryKeyValuesForObject)
+        notification[PrimaryKeyValueKey] = primaryKeyValuesForObject;
     [RestNotifier notifySuccessWithUserInfo:notification];
 }
 
@@ -159,6 +165,7 @@ requestDidSucceed:(NSURLRequest *)request
             return [self primaryKeyValuesForObject:obj];
         }];
     }
+    return nil;
 }
 
 - (Class)modelClassFromUserInfo:(NSDictionary *)dictionary {

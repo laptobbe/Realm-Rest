@@ -12,6 +12,7 @@ NSString *const BaseUrlKey = @"baseurl";
 NSString *const PathUrlKey = @"path";
 NSString *const MethodKey = @"method";
 NSString *const PrimaryKeyValueKey = @"primary_key_value";
+NSString *const ResponseKey = @"response";
 
 NSString *const RestNotification = @"RestNotification";
 

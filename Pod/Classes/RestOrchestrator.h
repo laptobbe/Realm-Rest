@@ -5,7 +5,9 @@
 #import <Foundation/Foundation.h>
 #import <Realm-Rest/RestRequestBuilder.h>
 #import <Realm-Rest/RestPathFinder.h>
+#import <Realm-Rest/RestRequestQueue.h>
 #import "RestRequestBuilder.h"
+#import "RestPathFinder.h"
 
 @protocol RestModelObjectProtocol;
 @class RLMObject;
@@ -14,11 +16,28 @@
 
 @interface RestOrchestrator : NSObject
 
++ (instancetype)sharedInstance;
+
+- (void)initiateWithPersistance:(RestRequestQueuePeristance)persistance;
+
+- (void)restForModelClass:(Class)modelClass
+              requestType:(RestRequestType)requestType
+               parameters:(NSDictionary *)parameters
+                  headers:(NSDictionary *)headers
+                    realm:(RLMRealm *)realm
+          realmIdentifier:(NSString *)realmIdentifier;
+
+- (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
+          requestType:(RestRequestType)requestType
+           parameters:(NSDictionary *)parameters
+              headers:(NSDictionary *)headers
+                realm:(RLMRealm *)realm
+      realmIdentifier:(NSString *)realmIdentifier;
+
 + (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
-                    queue:(RestRequestQueue *)queue
                     realm:(RLMRealm *)realm
           realmIdentifier:(NSString *)realmIdentifier;
 
@@ -26,7 +45,6 @@
           requestType:(RestRequestType)requestType
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
-                queue:(RestRequestQueue *)queue
                 realm:(RLMRealm *)realm
       realmIdentifier:(NSString *)realmIdentifier;
 

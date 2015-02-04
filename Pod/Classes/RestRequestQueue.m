@@ -7,6 +7,7 @@
 #import <KTBTaskQueue/KTBTaskQueue.h>
 #import <AFNetworking/AFNetworking.h>
 #import <Realm-Rest/RestRequestBuilder.h>
+#import <Realm-Rest/RestRequestQueue.h>
 
 @interface RestRequestQueue() <KTBTaskQueueDelegate>
 
@@ -18,24 +19,13 @@
 @implementation RestRequestQueue
 
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static RestRequestQueue *queue;
-    dispatch_once(&once, ^{
-        queue = [RestRequestQueue new];
-    });
-    return queue;
-}
-
-- (void)activateQueueWithPersistance:(RestRequestQueuePeristance)persistance {
-    if(!self.queue) {
-        if(persistance == RestRequestQueuePeristanceDatabase) {
-            self.queue = [KTBTaskQueue queueAtPath:[self getQueuePath] delegate:self];
-        }else {
-            self.queue = [KTBTaskQueue queueInMemoryWithDelegate:self];
-        }
+- (instancetype)initWitPersistance:(RestRequestQueuePeristance)persistance delegate:(NSObject <RestRequestQueueDelegate> *)delegate {
+    self = [super init];
+    if (self) {
+        self.delegate = delegate;
+        self.queue = persistance == RestRequestQueuePeristanceDatabase ? [KTBTaskQueue queueAtPath:[self getQueuePath] delegate:self] : [KTBTaskQueue queueInMemoryWithDelegate:self];
     }
-    self.queue.suspended = NO;
+    return self;
 }
 
 - (void)deactivateQueue {
@@ -54,14 +44,9 @@
                           headers:(NSDictionary *)headers
                          userInfo:(NSDictionary *)userInfo {
 
-    NSParameterAssert(self.delegate);
     NSParameterAssert(baseURL);
     NSParameterAssert(path);
     NSParameterAssert(method);
-
-    if(!self.queue) {
-        [self activateQueueWithPersistance:RestRequestQueuePeristanceDatabase];
-    }
 
     NSMutableDictionary *taskUserInfo = [NSMutableDictionary dictionary];
 

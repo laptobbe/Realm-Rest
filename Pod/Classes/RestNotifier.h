@@ -13,6 +13,7 @@ extern NSString *const BaseUrlKey;
 extern NSString *const PathUrlKey;
 extern NSString *const MethodKey;
 extern NSString *const PrimaryKeyValueKey;
+extern NSString *const ResponseKey;
 
 @interface RestNotifier : NSObject
 

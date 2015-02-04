@@ -25,7 +25,6 @@
                             requestType:requestType
                              parameters:parameters
                                 headers:headers
-                                  queue:[RestRequestQueue sharedInstance]
                                   realm:realm
                         realmIdentifier:realmIdentifier];
 }
@@ -45,7 +44,6 @@
                         requestType:requestType
                          parameters:newParameters
                             headers:headers
-                              queue:[RestRequestQueue sharedInstance]
                               realm:realm
                     realmIdentifier:realmIdentifier];
 }

@@ -20,8 +20,7 @@ SpecBegin(RestOrchestrator)
         __block RLMRealm *realm;
         __block RLMNotificationToken *notificationToken;
         beforeEach(^{
-            queue = [RestRequestQueue sharedInstance];
-            [queue activateQueueWithPersistance:RestRequestQueuePeristanceInMemory];
+            [[RestOrchestrator sharedInstance] initiateWithPersistance:RestRequestQueuePeristanceInMemory];
             realm = [RLMRealm inMemoryRealmWithIdentifier:RealmIdentifier];
             realm.baseURL = @"http://api.example.com";
         });
@@ -57,7 +56,6 @@ SpecBegin(RestOrchestrator)
                                         requestType:RestRequestTypeGet
                                          parameters:nil
                                             headers:nil
-                                              queue:queue
                                               realm:realm
                                     realmIdentifier:RealmIdentifier];
 

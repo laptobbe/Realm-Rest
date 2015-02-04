@@ -13,10 +13,8 @@ SpecBegin(RestRequestQueue)
         __block RestRequestQueue *queue;
         __block TestQueueDelegate *queueDelegate;
         beforeEach(^{
-            queue = [RestRequestQueue sharedInstance];
-            [queue activateQueueWithPersistance:RestRequestQueuePeristanceInMemory];
             queueDelegate = [TestQueueDelegate new];
-            queue.delegate = queueDelegate;
+            queue = [[RestRequestQueue alloc] initWitPersistance:RestRequestQueuePeristanceInMemory delegate:queueDelegate];
         });
 
         afterEach(^{

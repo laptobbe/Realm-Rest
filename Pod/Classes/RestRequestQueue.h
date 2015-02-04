@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 #import <Realm-Rest/RestRequestBuilder.h>
 #import <Realm-Rest/RestRequestQueue.h>
+#import "RestRequestQueue.h"
 
 typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
     RestRequestQueuePeristanceDatabase,
@@ -31,9 +32,8 @@ typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
 
 @property (nonatomic, readonly) NSUInteger count;
 
-+ (instancetype)sharedInstance;
-
-- (void)activateQueueWithPersistance:(RestRequestQueuePeristance)persistance;
+- (instancetype)initWitPersistance:(RestRequestQueuePeristance)persistance
+                          delegate:(NSObject <RestRequestQueueDelegate> *)delegate;
 
 /**
 * @param userInfo Needs to be JSON encodable (String key and basic types as values)
