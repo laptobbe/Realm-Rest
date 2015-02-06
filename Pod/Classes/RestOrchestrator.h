@@ -20,32 +20,32 @@
 
 - (void)initiateWithPersistance:(RestRequestQueuePeristance)persistance;
 
-- (void)restForModelClass:(Class)modelClass
-              requestType:(RestRequestType)requestType
-               parameters:(NSDictionary *)parameters
-                  headers:(NSDictionary *)headers
-                    realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier;
+- (NSString *)restForModelClass:(Class)modelClass
+                    requestType:(RestRequestType)requestType
+                     parameters:(NSDictionary *)parameters
+                        headers:(NSDictionary *)headers
+                          realm:(RLMRealm *)realm
+                realmIdentifier:(NSString *)realmIdentifier;
 
-- (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
-          requestType:(RestRequestType)requestType
-           parameters:(NSDictionary *)parameters
-              headers:(NSDictionary *)headers
-                realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier;
+- (NSString *)restForObject:(RLMObject <RestModelObjectProtocol> *)object
+                requestType:(RestRequestType)requestType
+                 parameters:(NSDictionary *)parameters
+                    headers:(NSDictionary *)headers
+                      realm:(RLMRealm *)realm
+            realmIdentifier:(NSString *)realmIdentifier;
 
-+ (void)restForModelClass:(Class)modelClass
-              requestType:(RestRequestType)requestType
-               parameters:(NSDictionary *)parameters
-                  headers:(NSDictionary *)headers
-                    realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier;
++ (NSString *)restForModelClass:(Class)modelClass
+                    requestType:(RestRequestType)requestType
+                     parameters:(NSDictionary *)parameters
+                        headers:(NSDictionary *)headers
+                          realm:(RLMRealm *)realm
+                realmIdentifier:(NSString *)realmIdentifier;
 
-+ (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
-          requestType:(RestRequestType)requestType
-           parameters:(NSDictionary *)parameters
-              headers:(NSDictionary *)headers
-                realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier;
++ (NSString *)restForObject:(RLMObject <RestModelObjectProtocol> *)object
+                requestType:(RestRequestType)requestType
+                 parameters:(NSDictionary *)parameters
+                    headers:(NSDictionary *)headers
+                      realm:(RLMRealm *)realm
+            realmIdentifier:(NSString *)realmIdentifier;
 
 @end

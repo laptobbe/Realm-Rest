@@ -6,6 +6,7 @@
 
 extern NSString *const RestNotification;
 
+extern NSString *const RequestIdKey;
 extern NSString *const ClassKey;
 extern NSString *const RealmTypeKey;
 extern NSString *const RealmKey;

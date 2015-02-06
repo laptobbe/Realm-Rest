@@ -5,6 +5,7 @@
 #import <Realm+JSON/RLMObject+JSON.h>
 #import <Realm/Realm.h>
 #import <Realm-Rest/RestOrchestrator.h>
+#import <Realm-Rest/RestNotifier.h>
 #import "Cat.h"
 #import "Mouse.h"
 
@@ -18,6 +19,7 @@ SpecBegin(RLMObject)
         __block RLMRealm *realm;
         __block NSURLRequest *request;
         __block RLMNotificationToken *notificationToken;
+        __block id nsNotificationToken;
 
         beforeAll(^{
             [[RestOrchestrator sharedInstance] initiateWithPersistance:RestRequestQueuePeristanceInMemory];
@@ -33,6 +35,7 @@ SpecBegin(RLMObject)
             notificationToken = nil;
             realm = nil;
             [OHHTTPStubs removeAllStubs];
+            [[NSNotificationCenter defaultCenter] removeObserver:nsNotificationToken];
         });
         context(@"Object", ^{
             it(@"Should add JSON parameters", ^{
@@ -102,6 +105,39 @@ SpecBegin(RLMObject)
                 expect(request.URL.absoluteString).will.equal(@"http://api.example.com/cats");
                 expect(request.HTTPBody).will.beFalsy();
                 expect(success).will.beTruthy();
+            });
+
+            it(@"Should include request id in notification", ^{
+                __block NSString *actualIdentifier;
+                NSArray *jsonObject = @[
+                        @{@"name":@"Misse", @"speed":@12},
+                        @{@"name":@"Kisse", @"speed":@2},
+                        @{@"name":@"Disse", @"speed":@53}
+                ];
+
+                [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *stubRequest) {
+                    return YES;
+                } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *stubRequest) {
+                    return [OHHTTPStubsResponse responseWithJSONObject:jsonObject
+                                                            statusCode:200
+                                                               headers:nil];
+                }];
+
+                nsNotificationToken= [[NSNotificationCenter defaultCenter] addObserverForName:[Cat restSuccessNotification]
+                                                                                       object:nil
+                                                                                        queue:[NSOperationQueue mainQueue]
+                                                                                   usingBlock:^(NSNotification *note) {
+                                                                                       actualIdentifier = note.userInfo[RequestIdKey];
+                                                                                   }];
+
+                NSString *identifier = [Cat restWithRequestType:RestRequestTypeGet
+                                                     parameters:nil
+                                                        headers:nil
+                                                          realm:realm
+                                                realmIdentifier:realmIdentifier];
+
+                expect(identifier).to.beTruthy();
+                expect(actualIdentifier).will.equal(identifier);
             });
         });
     });

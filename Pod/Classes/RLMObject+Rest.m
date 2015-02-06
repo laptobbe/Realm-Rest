@@ -20,40 +20,40 @@
     return [NSString stringWithFormat:@"%@Failure%@", NSStringFromClass(self), RestNotification];
 }
 
-+ (void)restWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers realm:(RLMRealm *)realm realmIdentifier:(NSString *)realmIdentifier {
-    [RestOrchestrator restForModelClass:self
-                            requestType:requestType
-                             parameters:parameters
-                                headers:headers
-                                  realm:realm
-                        realmIdentifier:realmIdentifier];
++ (NSString *)restWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers realm:(RLMRealm *)realm realmIdentifier:(NSString *)realmIdentifier {
+    return [RestOrchestrator restForModelClass:self
+                                   requestType:requestType
+                                    parameters:parameters
+                                       headers:headers
+                                         realm:realm
+                               realmIdentifier:realmIdentifier];
 }
 
-+ (void)restInDefaultRealmWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers {
-    [self restWithRequestType:requestType
-                   parameters:parameters
-                      headers:headers
-                        realm:[RLMRealm defaultRealm]
-              realmIdentifier:nil];
++ (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers {
+    return [self restWithRequestType:requestType
+                          parameters:parameters
+                             headers:headers
+                               realm:[RLMRealm defaultRealm]
+                     realmIdentifier:nil];
 }
 
-- (void)restWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers realm:(RLMRealm *)realm realmIdentifier:(NSString *)realmIdentifier {
+- (NSString *)restWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers realm:(RLMRealm *)realm realmIdentifier:(NSString *)realmIdentifier {
     NSMutableDictionary *newParameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
     newParameters[RestRequestParameterStyleJSON] = [self JSONDictionary];
-    [RestOrchestrator restForObject:(RLMObject <RestModelObjectProtocol> *) self
-                        requestType:requestType
-                         parameters:newParameters
-                            headers:headers
-                              realm:realm
-                    realmIdentifier:realmIdentifier];
+    return [RestOrchestrator restForObject:(RLMObject <RestModelObjectProtocol> *) self
+                               requestType:requestType
+                                parameters:newParameters
+                                   headers:headers
+                                     realm:realm
+                           realmIdentifier:realmIdentifier];
 }
 
-- (void)restInDefaultRealmWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers {
-    [self restWithRequestType:requestType
-                   parameters:parameters
-                      headers:headers
-                        realm:[RLMRealm defaultRealm]
-              realmIdentifier:nil];
+- (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers {
+    return [self restWithRequestType:requestType
+                          parameters:parameters
+                             headers:headers
+                               realm:[RLMRealm defaultRealm]
+                     realmIdentifier:nil];
 }
 
 @end

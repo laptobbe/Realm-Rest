@@ -12,23 +12,23 @@
 
 + (NSString *)restFailureNotification;
 
-+ (void)restWithRequestType:(RestRequestType)requestType
-                 parameters:(NSDictionary *)parameters
-                    headers:(NSDictionary *)headers
-                      realm:(RLMRealm *)realm
-            realmIdentifier:(NSString *)realmIdentifier;
++ (NSString *)restWithRequestType:(RestRequestType)requestType
+                       parameters:(NSDictionary *)parameters
+                          headers:(NSDictionary *)headers
+                            realm:(RLMRealm *)realm
+                  realmIdentifier:(NSString *)realmIdentifier;
 
-+ (void)restInDefaultRealmWithRequestType:(RestRequestType)requestType
-                               parameters:(NSDictionary *)parameters
-                                  headers:(NSDictionary *)headers;
++ (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
+                                     parameters:(NSDictionary *)parameters
+                                        headers:(NSDictionary *)headers;
 
-- (void)restInDefaultRealmWithRequestType:(RestRequestType)requestType
-                               parameters:(NSDictionary *)parameters
-                                  headers:(NSDictionary *)headers;
+- (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
+                                     parameters:(NSDictionary *)parameters
+                                        headers:(NSDictionary *)headers;
 
-- (void)restWithRequestType:(RestRequestType)requestType
-                 parameters:(NSDictionary *)parameters
-                    headers:(NSDictionary *)headers
-                      realm:(RLMRealm *)realm
-            realmIdentifier:(NSString *)realmIdentifier;
+- (NSString *)restWithRequestType:(RestRequestType)requestType
+                       parameters:(NSDictionary *)parameters
+                          headers:(NSDictionary *)headers
+                            realm:(RLMRealm *)realm
+                  realmIdentifier:(NSString *)realmIdentifier;
 @end

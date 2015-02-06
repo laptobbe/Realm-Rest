@@ -5,6 +5,7 @@
 #import "RestNotifier.h"
 #import "RLMObject+Rest.h"
 
+NSString *const RequestIdKey = @"requestId";
 NSString *const ClassKey = @"class";
 NSString *const RealmTypeKey = @"realmType";
 NSString *const RealmKey = @"realm";

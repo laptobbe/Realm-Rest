@@ -51,15 +51,15 @@ SpecBegin(RestOrchestrator)
                         success = YES;
                     }
                 }];
-                
-                [RestOrchestrator restForModelClass:[Cat class]
-                                        requestType:RestRequestTypeGet
-                                         parameters:nil
-                                            headers:nil
-                                              realm:realm
-                                    realmIdentifier:RealmIdentifier];
 
+                NSString *requestId = [RestOrchestrator restForModelClass:[Cat class]
+                                                    requestType:RestRequestTypeGet
+                                                     parameters:nil
+                                                        headers:nil
+                                                          realm:realm
+                                                realmIdentifier:RealmIdentifier];
 
+                expect(requestId).to.beTruthy();
                 expect(success).will.beTruthy();
 
             });
