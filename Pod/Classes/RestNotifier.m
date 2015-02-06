@@ -27,8 +27,8 @@ NSString *const RestNotification = @"RestNotification";
     }
 
     NSString *notification = [NSClassFromString(className) restSuccessNotification];
-    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil userInfo:dictionary];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RestNotification object:nil userInfo:dictionary];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:dictionary[RequestIdKey] userInfo:dictionary];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RestNotification object:dictionary[RequestIdKey] userInfo:dictionary];
 }
 
 + (void)notifyFailureWithUserInfo:(NSDictionary *)dictionary {
