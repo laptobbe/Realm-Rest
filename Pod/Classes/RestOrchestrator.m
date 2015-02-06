@@ -68,7 +68,7 @@
             RequestIdKey : requestId,
             ClassKey : NSStringFromClass(modelClass),
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
-            RealmKey : realmIdentifier ?: realm.path
+            RealmKey : realmIdentifier ?: realm.path.lastPathComponent
     }];
     return requestId;
 }
@@ -108,7 +108,7 @@
             PathUrlKey : path,
             MethodKey : method,
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
-            RealmKey : realmIdentifier ?: realm.path
+            RealmKey : realmIdentifier ?: realm.path.lastPathComponent
     }];
     return requestId;
 }
@@ -147,21 +147,21 @@ requestDidSucceed:(NSURLRequest *)request
     RLMRealm *realm = [self realmFromUserInfo:userInfo];
     Class modelClass = [self modelClassFromUserInfo:userInfo];
 
-    id object;
-    [realm beginWriteTransaction];
-    if([responseObject isKindOfClass:[NSArray class]]) {
-        object = [modelClass createOrUpdateInRealm:realm withJSONArray:responseObject];
-    } else if([responseObject isKindOfClass:[NSDictionary class]]) {
-        object = [modelClass createOrUpdateInRealm:realm withJSONDictionary:responseObject];
-    }
+        id object;
+        [realm beginWriteTransaction];
+        if([responseObject isKindOfClass:[NSArray class]]) {
+            object = [modelClass createOrUpdateInRealm:realm withJSONArray:responseObject];
+        } else if([responseObject isKindOfClass:[NSDictionary class]]) {
+            object = [modelClass createOrUpdateInRealm:realm withJSONDictionary:responseObject];
+        }
     [realm commitWriteTransaction];
 
     [notification addEntriesFromDictionary:userInfo];
-    id primaryKeyValuesForObject = [self primaryKeyValuesForObject:object];
+        id primaryKeyValuesForObject = [self primaryKeyValuesForObject:object];
     if(primaryKeyValuesForObject)
-        notification[PrimaryKeyValueKey] = primaryKeyValuesForObject;
-    [RestNotifier notifySuccessWithUserInfo:notification];
-}
+            notification[PrimaryKeyValueKey] = primaryKeyValuesForObject;
+        [RestNotifier notifySuccessWithUserInfo:notification];
+    }
 
 - (id)primaryKeyValuesForObject:(id)object {
     if ([object isKindOfClass:[RLMObject class]]) {
@@ -180,10 +180,17 @@ requestDidSucceed:(NSURLRequest *)request
 
 - (RLMRealm *)realmFromUserInfo:(NSDictionary *)dictionary {
     if([dictionary[RealmTypeKey] integerValue] == RestRequestQueuePeristanceDatabase){
-        return [RLMRealm realmWithPath:dictionary[RealmKey]];
+        return [RLMRealm realmWithPath:[self pathWithName:dictionary[RealmKey]]];
     }else {
         return [RLMRealm inMemoryRealmWithIdentifier:dictionary[RealmKey]];
     }
+}
+
+- (NSString *)pathWithName:(NSString *)name {
+    NSString *documentdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *path = [documentdir stringByAppendingPathComponent:name];
+    return path;
+
 }
 
 
