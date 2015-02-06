@@ -20,24 +20,23 @@ NSString *const RestNotification = @"RestNotification";
 @implementation RestNotifier
 
 + (void)notifySuccessWithUserInfo:(NSDictionary *)dictionary {
-
-    NSString *className = dictionary[ClassKey];
-    if(!className) {
-        [NSException raise:NSInternalInconsistencyException format:@"Need to have a class in userInfo to be able to notify"];
-    }
-
-    NSString *notification = [NSClassFromString(className) restSuccessNotification];
-    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:dictionary[RequestIdKey] userInfo:dictionary];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RestNotification object:dictionary[RequestIdKey] userInfo:dictionary];
+    [self notifyWithUserInfo:dictionary notification:@selector(restSuccessNotification)];
 }
 
 + (void)notifyFailureWithUserInfo:(NSDictionary *)dictionary {
+    [self notifyWithUserInfo:dictionary notification:@selector(restFailureNotification)];
+}
+
++ (void)notifyWithUserInfo:(NSDictionary *)dictionary notification:(SEL)sel{
+
     NSString *className = dictionary[ClassKey];
-    if(!className) {
-        [NSException raise:NSInternalInconsistencyException format:@"Need to have a class in userInfo to be able to notify"];
+    NSString * requestId = dictionary[RequestIdKey];
+    if(!className || !requestId) {
+        [NSException raise:NSInternalInconsistencyException format:@"Need to have a class and requestId in userInfo to be able to notify"];
     }
 
-    NSString *notification = [NSClassFromString(className) restFailureNotification];
+    NSString *notification = [NSClassFromString(className) performSelector:sel];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil userInfo:dictionary];
     [[NSNotificationCenter defaultCenter] postNotificationName:RestNotification object:nil userInfo:dictionary];
 

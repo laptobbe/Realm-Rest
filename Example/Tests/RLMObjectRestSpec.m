@@ -15,7 +15,6 @@ SpecBegin(RLMObject)
 
     describe(@"RLMObject with Rest addons", ^{
 
-        __block RestRequestQueue *queue;
         __block RLMRealm *realm;
         __block NSURLRequest *request;
         __block RLMNotificationToken *notificationToken;
@@ -138,6 +137,64 @@ SpecBegin(RLMObject)
 
                 expect(identifier).to.beTruthy();
                 expect(actualIdentifier).will.equal(identifier);
+            });
+
+            it(@"Should call the success block", ^{
+                __block NSArray *primaryKeys;
+                NSArray *jsonObject = @[
+                        @{@"name":@"Misse", @"speed":@12},
+                        @{@"name":@"Kisse", @"speed":@2},
+                        @{@"name":@"Disse", @"speed":@53}
+                ];
+
+                [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *stubRequest) {
+                    return YES;
+                } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *stubRequest) {
+                    return [OHHTTPStubsResponse responseWithJSONObject:jsonObject
+                                                            statusCode:200
+                                                               headers:nil];
+                }];
+
+                [Cat restWithRequestType:RestRequestTypeGet
+                              parameters:nil
+                                 headers:nil
+                                   realm:realm
+                         realmIdentifier:realmIdentifier
+                                 success:^(id primaryKey){
+                                     primaryKeys = primaryKey;
+                                 }
+                                 failure:nil];
+
+                NSArray *expected = @[@"Misse", @"Kisse", @"Disse"];
+                expect(primaryKeys).will.beTruthy();
+                expect(primaryKeys).will.equal(expected);
+            });
+
+            it(@"Should call the failure block", ^{
+                __block NSError *expected = [NSError errorWithDomain:NSURLErrorDomain
+                                                             code:NSURLErrorNotConnectedToInternet
+                                                         userInfo:nil];
+                __block NSError *actual;
+
+                [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *stubRequest) {
+                    return YES;
+                } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *stubRequest) {
+                    return [OHHTTPStubsResponse responseWithError:expected];
+                }];
+
+                [Cat restWithRequestType:RestRequestTypeGet
+                              parameters:nil
+                                 headers:nil
+                                   realm:realm
+                         realmIdentifier:realmIdentifier
+                                 success:nil
+                                 failure:^(NSError *error, NSDictionary *userInfo) {
+                                    actual = error;
+                                 }];
+
+                expect(actual).will.beTruthy();
+                expect(actual.domain).will.equal(expected.domain);
+                expect(actual.code).will.equal(expected.code);
             });
         });
     });

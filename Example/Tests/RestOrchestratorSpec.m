@@ -52,14 +52,14 @@ SpecBegin(RestOrchestrator)
                     }
                 }];
 
-                NSString *requestId = [RestOrchestrator restForModelClass:[Cat class]
-                                                    requestType:RestRequestTypeGet
-                                                     parameters:nil
-                                                        headers:nil
-                                                          realm:realm
-                                                realmIdentifier:RealmIdentifier];
+                [RestOrchestrator restForModelClass:[Cat class]
+                                        requestType:RestRequestTypeGet
+                                          requestId:@"testrequest"
+                                         parameters:nil
+                                            headers:nil
+                                              realm:realm
+                                    realmIdentifier:RealmIdentifier];
 
-                expect(requestId).to.beTruthy();
                 expect(success).will.beTruthy();
 
             });

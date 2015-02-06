@@ -26,7 +26,8 @@ SpecBegin(RestNotifier)
                                                                object:nil];
 
                 NSDictionary *userInfo = @{
-                        ClassKey : @"Cat"
+                        ClassKey : @"Cat",
+                        RequestIdKey : @"test"
                 };
 
                 [[observerMock expect] notificationWithName:notification object:nil userInfo:userInfo];
@@ -52,7 +53,8 @@ SpecBegin(RestNotifier)
                                                                object:nil];
 
                 NSDictionary *userInfo = @{
-                        ClassKey : @"Cat"
+                        ClassKey : @"Cat",
+                        RequestIdKey : @"test"
                 };
 
                 [[observerMock expect] notificationWithName:RestNotification object:nil userInfo:userInfo];
@@ -65,6 +67,7 @@ SpecBegin(RestNotifier)
             it(@"Should send class specific notification", ^{
                 NSString *notification = [Cat restSuccessNotification];
 
+
                 expect(notification).to.equal(@"CatSuccessRestNotification");
 
                 [[NSNotificationCenter defaultCenter] addMockObserver:observerMock
@@ -72,7 +75,8 @@ SpecBegin(RestNotifier)
                                                                object:nil];
 
                 NSDictionary *userInfo = @{
-                        ClassKey : NSStringFromClass([Cat class])
+                        ClassKey : NSStringFromClass([Cat class]),
+                        RequestIdKey : @"test"
                 };
 
                 [[observerMock expect] notificationWithName:notification object:nil userInfo:userInfo];
@@ -92,7 +96,8 @@ SpecBegin(RestNotifier)
                                                                object:nil];
 
                 NSDictionary *userInfo = @{
-                        ClassKey : @"Cat"
+                        ClassKey : @"Cat",
+                        RequestIdKey : @"test"
                 };
 
                 [[observerMock expect] notificationWithName:notification object:nil userInfo:userInfo];
@@ -112,13 +117,13 @@ SpecBegin(RestNotifier)
             });
 
             it(@"Should send general notification", ^{
-
                 [[NSNotificationCenter defaultCenter] addMockObserver:observerMock
                                                                  name:RestNotification
                                                                object:nil];
 
                 NSDictionary *userInfo = @{
-                        ClassKey : @"Cat"
+                        ClassKey : @"Cat",
+                        RequestIdKey : @"test"
                 };
 
                 [[observerMock expect] notificationWithName:RestNotification object:nil userInfo:userInfo];
@@ -138,7 +143,8 @@ SpecBegin(RestNotifier)
                                                                object:nil];
 
                 NSDictionary *userInfo = @{
-                        ClassKey : NSStringFromClass([Cat class])
+                        ClassKey : NSStringFromClass([Cat class]),
+                        RequestIdKey : @"test"
                 };
 
                 [[observerMock expect] notificationWithName:notification object:nil userInfo:userInfo];

@@ -37,29 +37,31 @@
                                                      delegate:self];
 }
 
-+ (NSString *)restForModelClass:(Class)modelClass
++ (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
+                requestId:(NSString *)requestId
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
           realmIdentifier:(NSString *)realmIdentifier {
 
-    return [[self sharedInstance] restForModelClass:modelClass
+    [[self sharedInstance] restForModelClass:modelClass
                                  requestType:requestType
+                                   requestId:requestId
                                   parameters:parameters
                                      headers:headers
                                        realm:realm
                              realmIdentifier:realmIdentifier];
 }
 
-- (NSString *)restForModelClass:(Class)modelClass
+- (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
+                requestId:(NSString *)requestId
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
           realmIdentifier:(NSString *)realmIdentifier {
 
-    NSString *requestId = [[NSUUID UUID] UUIDString];
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:modelClass realm:realm];
     NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
@@ -70,18 +72,19 @@
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
             RealmKey : realmIdentifier ?: realm.path.lastPathComponent
     }];
-    return requestId;
 }
 
-+ (NSString *)restForObject:(RLMObject <RestModelObjectProtocol> *)object
++ (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
+            requestId:(NSString *)requestId
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
       realmIdentifier:(NSString *)realmIdentifier {
 
-    return [[self sharedInstance] restForObject:object
+    [[self sharedInstance] restForObject:object
                              requestType:requestType
+                               requestId:requestId
                               parameters:parameters
                                  headers:headers
                                    realm:realm
@@ -89,14 +92,14 @@
 
 }
 
-- (NSString *)restForObject:(RLMObject <RestModelObjectProtocol> *)object
+- (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
+            requestId:(NSString *)requestId
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
       realmIdentifier:(NSString *)realmIdentifier {
 
-    NSString *requestId = [[NSUUID UUID] UUIDString];
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:object.class realm:realm];
     NSString *path = [RestPathFinder findPathForObject:object forType:requestType];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
@@ -110,7 +113,6 @@
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
             RealmKey : realmIdentifier ?: realm.path.lastPathComponent
     }];
-    return requestId;
 }
 
 - (BOOL)             queue:(RestRequestQueue *)queue
@@ -121,8 +123,15 @@ shouldAbandonFailedRequest:(NSURLRequest *)request
 
     NSMutableDictionary *notification = [NSMutableDictionary dictionary];
     [notification addEntriesFromDictionary:userInfo];
-    notification[NSUnderlyingErrorKey] = error;
-    notification[ResponseKey] = response;
+
+    if(error) {
+        notification[NSUnderlyingErrorKey] = error;
+    }
+
+    if(response) {
+        notification[ResponseKey] = response;
+    }
+
     [RestNotifier notifyFailureWithUserInfo:notification];
 
     Class modelClass = [self modelClassFromUserInfo:userInfo];
@@ -167,7 +176,11 @@ requestDidSucceed:(NSURLRequest *)request
     }
     @catch (NSException *exception) {
         notification[NSUnderlyingErrorKey] = exception;
-        notification[ResponseKey] = responseObject;
+
+        if(responseObject) {
+            notification[ResponseKey] = responseObject;
+        }
+
         [RestNotifier notifyFailureWithUserInfo:notification];
     } @finally {
         [realm commitWriteTransaction];
