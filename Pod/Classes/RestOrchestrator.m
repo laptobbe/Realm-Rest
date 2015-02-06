@@ -146,6 +146,9 @@ requestDidSucceed:(NSURLRequest *)request
     NSMutableDictionary *notification = [NSMutableDictionary dictionary];
     RLMRealm *realm = [self realmFromUserInfo:userInfo];
     Class modelClass = [self modelClassFromUserInfo:userInfo];
+    [notification addEntriesFromDictionary:userInfo];
+
+    @try {
 
         id object;
         [realm beginWriteTransaction];
@@ -154,14 +157,22 @@ requestDidSucceed:(NSURLRequest *)request
         } else if([responseObject isKindOfClass:[NSDictionary class]]) {
             object = [modelClass createOrUpdateInRealm:realm withJSONDictionary:responseObject];
         }
-    [realm commitWriteTransaction];
 
-    [notification addEntriesFromDictionary:userInfo];
         id primaryKeyValuesForObject = [self primaryKeyValuesForObject:object];
-    if(primaryKeyValuesForObject)
+        if(primaryKeyValuesForObject) {
             notification[PrimaryKeyValueKey] = primaryKeyValuesForObject;
+        }
+
         [RestNotifier notifySuccessWithUserInfo:notification];
     }
+    @catch (NSException *exception) {
+        notification[NSUnderlyingErrorKey] = exception;
+        notification[ResponseKey] = responseObject;
+        [RestNotifier notifyFailureWithUserInfo:notification];
+    } @finally {
+        [realm commitWriteTransaction];
+    }
+}
 
 - (id)primaryKeyValuesForObject:(id)object {
     if ([object isKindOfClass:[RLMObject class]]) {
