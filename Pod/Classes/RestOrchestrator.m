@@ -166,6 +166,7 @@ requestDidSucceed:(NSURLRequest *)request
         } else if([responseObject isKindOfClass:[NSDictionary class]]) {
             object = [modelClass createOrUpdateInRealm:realm withJSONDictionary:responseObject];
         }
+        [realm commitWriteTransaction];
 
         id primaryKeyValuesForObject = [self primaryKeyValuesForObject:object];
         if(primaryKeyValuesForObject) {
@@ -175,6 +176,8 @@ requestDidSucceed:(NSURLRequest *)request
         [RestNotifier notifySuccessWithUserInfo:notification];
     }
     @catch (NSException *exception) {
+        [realm cancelWriteTransaction];
+
         notification[NSUnderlyingErrorKey] = exception;
 
         if(responseObject) {
@@ -182,8 +185,6 @@ requestDidSucceed:(NSURLRequest *)request
         }
 
         [RestNotifier notifyFailureWithUserInfo:notification];
-    } @finally {
-        [realm commitWriteTransaction];
     }
 }
 
