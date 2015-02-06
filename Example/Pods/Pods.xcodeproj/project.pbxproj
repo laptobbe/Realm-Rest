@@ -104,7 +104,6 @@
 		338A6D001EABB0E53AC0865B /* OCMArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D245E6694310D58CFA0CBBD /* OCMArg.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3571898894E7FAD5FB6B63A8 /* KTBTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AF70CDFD045F04D97D3BADCB /* KTBTask.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		35B4B501412A35F8396D57AB /* RLMSchema.h in Headers */ = {isa = PBXBuildFile; fileRef = 41068B90539807E4995F407E /* RLMSchema.h */; };
-		3610F5B3732948784FD270B8 /* RestMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D8B34D85CAC94340BC74A1 /* RestMapper.h */; };
 		36D499D254E0215A872DBC23 /* MCJSONPrimaryKeyTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C9C54C2FF26E0160124D8A8B /* MCJSONPrimaryKeyTransformer.h */; };
 		36E01A3C53A855584C28D79B /* commit_log.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 076A479D9C2D7D0AF305EC21 /* commit_log.hpp */; };
 		371707C0DAC0E93937399092 /* OCMExpectationRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D19A55453FB228460EE362D8 /* OCMExpectationRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -421,7 +420,6 @@
 		ED22BF17325005A8811D8BCA /* RLMSchema.h in Headers */ = {isa = PBXBuildFile; fileRef = C405F250C1228AA3A8CD902F /* RLMSchema.h */; };
 		ED4F064202AC4AFC2A6BC469 /* query_expression.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 5E386CFD0C06D90A07FA564E /* query_expression.hpp */; };
 		ED51F4EB35F032291B4C7284 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 333EB4049859233E99FD3B59 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		EDD7376F443C368137EBA60C /* RestMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E7C8AA90F4AA9AE5291F8F /* RestMapper.m */; };
 		EE7C13FFB62AD0CBF2CE3CB6 /* RLMObject_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 241D72EBBFF6A2A23EA8F0D4 /* RLMObject_Private.h */; };
 		EF2123C0EF164258D186F37C /* RLMAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 44229A8D95B763C5D8D1D828 /* RLMAccessor.h */; };
 		EFEE68A39C6DA52007BFFE0A /* table_accessors.hpp in Headers */ = {isa = PBXBuildFile; fileRef = EEF0C379029109483366A79D /* table_accessors.hpp */; };
@@ -931,7 +929,6 @@
 		A1E74C2FE7882E43BFA49E44 /* RLMSwiftSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSwiftSupport.h; path = Realm/RLMSwiftSupport.h; sourceTree = "<group>"; };
 		A25DF2C8FEC0F152553B2A8B /* column_table.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = column_table.hpp; path = include/tightdb/column_table.hpp; sourceTree = "<group>"; };
 		A29580492257BD84CC8BBD21 /* EXPMatchers+notify.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+notify.m"; path = "src/matchers/EXPMatchers+notify.m"; sourceTree = "<group>"; };
-		A2E7C8AA90F4AA9AE5291F8F /* RestMapper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RestMapper.m; sourceTree = "<group>"; };
 		A368B30C46B1327FBA874EDB /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		A419E6C274C52992B5AEBDA3 /* SpectaUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SpectaUtility.m; path = Specta/Specta/SpectaUtility.m; sourceTree = "<group>"; };
 		A426760386CEBD9AC9F8C5A8 /* XCTest+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "XCTest+Private.h"; path = "Specta/Specta/XCTest+Private.h"; sourceTree = "<group>"; };
@@ -940,7 +937,6 @@
 		A4CE96E3C5978040966980A3 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
 		A502EE9FBE3539CBDB860FCC /* EXPMatchers+notify.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+notify.h"; path = "src/matchers/EXPMatchers+notify.h"; sourceTree = "<group>"; };
 		A5956C52E3EE614441D653D0 /* OCPartialMockObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCPartialMockObject.m; path = Source/OCMock/OCPartialMockObject.m; sourceTree = "<group>"; };
-		A5D8B34D85CAC94340BC74A1 /* RestMapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RestMapper.h; sourceTree = "<group>"; };
 		A65832F30AA02BD5340FF611 /* RLMSwiftSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSwiftSupport.h; path = include/Realm/RLMSwiftSupport.h; sourceTree = "<group>"; };
 		A6AF07ADEE2C590ED2462E85 /* Pods-Realm-Rest-NSString-UrlEncode-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Realm-Rest-NSString-UrlEncode-prefix.pch"; sourceTree = "<group>"; };
 		A6F43AB5F7A975C8FF25C4BB /* index_string.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = index_string.hpp; path = include/tightdb/index_string.hpp; sourceTree = "<group>"; };
@@ -1013,6 +1009,7 @@
 		C9F3DD5E29ABC94A4F0D555A /* output_stream.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = output_stream.hpp; path = include/tightdb/impl/output_stream.hpp; sourceTree = "<group>"; };
 		CB326EE5EAF084983D2D3EA6 /* replication.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = replication.hpp; path = include/tightdb/replication.hpp; sourceTree = "<group>"; };
 		CB7AE242D68B9FDF6316F8DB /* OCMBlockCaller.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMBlockCaller.h; path = Source/OCMock/OCMBlockCaller.h; sourceTree = "<group>"; };
+		CC3C79FDBA9C682C06838099 /* Realm+Rest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Realm+Rest.h"; sourceTree = "<group>"; };
 		CC918E90BEC28723A4719EB2 /* RLMObjectStore.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = RLMObjectStore.mm; path = Realm/RLMObjectStore.mm; sourceTree = "<group>"; };
 		CCB3B18386749E57A1B056D2 /* EXPMatchers+raiseWithReason.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+raiseWithReason.h"; path = "src/matchers/EXPMatchers+raiseWithReason.h"; sourceTree = "<group>"; };
 		CE3D9876D33F9BC0BC645838 /* RLMConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMConstants.h; path = Realm/RLMConstants.h; sourceTree = "<group>"; };
@@ -1917,8 +1914,6 @@
 				2846D03FB917FA54A95B8D86 /* RLMObject+Rest.m */,
 				B86BFF3C6410D6CE1386945D /* RLMRealm+Rest.h */,
 				7B9928FD40447BE8E3E35C93 /* RLMRealm+Rest.m */,
-				A5D8B34D85CAC94340BC74A1 /* RestMapper.h */,
-				A2E7C8AA90F4AA9AE5291F8F /* RestMapper.m */,
 				E1FD728126E4CBB62AB7D090 /* RestModelObjectProtocol.h */,
 				72F87EC2740BC23B9C60F0B9 /* RestNotifier.h */,
 				39346EC2483A2A8C758CA2EF /* RestNotifier.m */,
@@ -1930,6 +1925,7 @@
 				DE3E9AD593A4411CAAB4E750 /* RestRequestBuilder.m */,
 				A175D1A2168EF51AE68FB9BD /* RestRequestQueue.h */,
 				B48A27E90347C37EB492FDBA /* RestRequestQueue.m */,
+				CC3C79FDBA9C682C06838099 /* Realm+Rest.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2390,7 +2386,6 @@
 			files = (
 				1AE4077E0CD8DFF381D3FE85 /* RLMObject+Rest.h in Headers */,
 				95A7AF257FEBF718E9AA52F7 /* RLMRealm+Rest.h in Headers */,
-				3610F5B3732948784FD270B8 /* RestMapper.h in Headers */,
 				A1F318748F3CA67C4EA0DA96 /* RestModelObjectProtocol.h in Headers */,
 				B496E1992447B9FBF48CB739 /* RestNotifier.h in Headers */,
 				E8E32300F067E5C645307FE3 /* RestOrchestrator.h in Headers */,
@@ -2950,7 +2945,6 @@
 				8E261F736E48174CCEC8F394 /* Pods-Realm-Rest-Realm-Rest-dummy.m in Sources */,
 				AB387E0FBB291C8153069A63 /* RLMObject+Rest.m in Sources */,
 				8422D189BAD4B8137123C509 /* RLMRealm+Rest.m in Sources */,
-				EDD7376F443C368137EBA60C /* RestMapper.m in Sources */,
 				7C54D434C2DA836271EE85F7 /* RestNotifier.m in Sources */,
 				46B2D6274475E009F4A93E63 /* RestOrchestrator.m in Sources */,
 				CCA1EF2B1E2B78C397FCCF9E /* RestPathFinder.m in Sources */,
