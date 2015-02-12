@@ -26,44 +26,44 @@ SpecBegin(RestPathFinder)
     describe(@"RestPathFinder", ^{
         context(@"Single object", ^{
             it(@"finds basic get path", ^{
-                NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypeGet];
+                NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypeGet action:nil];
                 expect(path).to.equal(@"cat/misse");
             });
 
             it(@"finds basic post path", ^{
-                NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypePost];
+                NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypePost action:nil];
                 expect(path).to.equal(@"cat/misse");
             });
 
             it(@"url encodes paths", ^{
                 cat.name = @"Misse Miss";
-                NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypeGet];
+                NSString *path = [RestPathFinder findPathForObject:cat forType:RestRequestTypeGet action:nil];
                 expect(path).to.equal(@"cat/misse%20miss");
             });
 
             it(@"fails without primary key", ^{
                 expect(^{
-                    [RestPathFinder findPathForObject:dog forType:RestRequestTypeGet];
+                    [RestPathFinder findPathForObject:dog forType:RestRequestTypeGet action:nil];
                 }).to.raise(NSInternalInconsistencyException);
             });
 
             it(@"finds custom path", ^{
-                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeGet];
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeGet action:nil];
                 expect(path).to.equal(@"rest/mouse/jerry");
             });
 
             it(@"finds custom path POST", ^{
-                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePost];
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePost action:nil];
                 expect(path).to.equal(@"rest/mouse/jerry/create");
             });
 
             it(@"finds custom path PUT", ^{
-                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePut];
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePut action:nil];
                 expect(path).to.equal(@"rest/mouse/jerry/update");
             });
 
             it(@"finds custom path DELETE", ^{
-                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeDelete];
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeDelete action:nil];
                 expect(path).to.equal(@"rest/mouse/jerry/remove");
             });
 
@@ -71,42 +71,42 @@ SpecBegin(RestPathFinder)
 
         context(@"Multiple objects", ^{
             it(@"finds basic get all", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypeGet];
+                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypeGet action:nil];
                 expect(path).to.equal(@"cats");
             });
 
             it(@"finds basic post all", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypePost];
+                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypePost action:nil];
                 expect(path).to.equal(@"cats");
             });
 
             it(@"finds basic put all", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypePut];
+                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypePut action:nil];
                 expect(path).to.equal(@"cats");
             });
 
             it(@"finds basic delete all", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypeDelete];
+                NSString *path = [RestPathFinder findPathForClass:[Cat class] forType:RestRequestTypeDelete action:nil];
                 expect(path).to.equal(@"cats");
             });
 
             it(@"finds custom get all path", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypeGet];
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypeGet action:nil];
                 expect(path).to.equal(@"rest/mouses");
             });
 
             it(@"finds custom post all path", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypePost];
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypePost action:nil];
                 expect(path).to.equal(@"rest/mouses/create");
             });
 
             it(@"finds custom put all path", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypePut];
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypePut action:nil];
                 expect(path).to.equal(@"rest/mouses/updates");
             });
 
             it(@"finds custom delete all path", ^{
-                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypeDelete];
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypeDelete action:nil];
                 expect(path).to.equal(@"rest/mouses/deletes");
             });
 

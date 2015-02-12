@@ -60,7 +60,7 @@
           realmIdentifier:(NSString *)realmIdentifier {
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:modelClass realm:realm];
-    NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType];
+    NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType action:nil];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
 
     [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
@@ -98,7 +98,7 @@
       realmIdentifier:(NSString *)realmIdentifier {
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:object.class realm:realm];
-    NSString *path = [RestPathFinder findPathForObject:object forType:requestType];
+    NSString *path = [RestPathFinder findPathForObject:object forType:requestType action:nil];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
 
     [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{

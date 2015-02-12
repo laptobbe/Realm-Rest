@@ -8,36 +8,32 @@
 
 @implementation Mouse
 
-+ (NSString *)restPathToResourceGET {
-    return @"rest/mouses";
++ (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action {
+    switch (requestType) {
+        case RestRequestTypeGet:
+            return @"rest/mouses";
+        case RestRequestTypePost:
+            return @"rest/mouses/create";
+        case RestRequestTypePut:
+            return @"rest/mouses/updates";
+        case RestRequestTypeDelete:
+            return @"rest/mouses/deletes";
+    }
+    return nil;
 }
 
-+ (NSString *)restPathToResourcePOST {
-    return @"rest/mouses/create";
-}
-
-+ (NSString *)restPathToResourcePUT {
-    return @"rest/mouses/updates";
-}
-
-+ (NSString *)restPathToResourceDELETE {
-    return @"rest/mouses/deletes";
-}
-
-- (NSString *)restPathToResourceGET {
-    return [NSString stringWithFormat:@"rest/mouse/%@",self.name];
-}
-
-- (NSString *)restPathToResourcePOST {
-    return [NSString stringWithFormat:@"rest/mouse/%@/create", self.name];
-}
-
-- (NSString *)restPathToResourcePUT {
-    return [NSString stringWithFormat:@"rest/mouse/%@/update", self.name];
-}
-
-- (NSString *)restPathToResourceDELETE {
-    return [NSString stringWithFormat:@"rest/mouse/%@/remove", self.name];
+- (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action {
+    switch (requestType) {
+        case RestRequestTypeGet:
+            return [NSString stringWithFormat:@"rest/mouse/%@", self.name];
+        case RestRequestTypePost:
+            return [NSString stringWithFormat:@"rest/mouse/%@/create", self.name];
+        case RestRequestTypePut:
+            return [NSString stringWithFormat:@"rest/mouse/%@/update", self.name];
+        case RestRequestTypeDelete:
+            return [NSString stringWithFormat:@"rest/mouse/%@/remove", self.name];
+    }
+    return nil;
 }
 
 + (NSString *)primaryKey {
