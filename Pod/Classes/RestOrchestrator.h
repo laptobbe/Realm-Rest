@@ -6,8 +6,7 @@
 #import <Realm-Rest/RestRequestBuilder.h>
 #import <Realm-Rest/RestPathFinder.h>
 #import <Realm-Rest/RestRequestQueue.h>
-#import "RestRequestBuilder.h"
-#import "RestPathFinder.h"
+#import <Realm-Rest/RestConstants.h>
 
 @protocol RestModelObjectProtocol;
 @class RLMObject;
@@ -26,7 +25,8 @@
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier;
+          realmIdentifier:(NSString *)realmIdentifier
+                   action:(NSString *)action;
 
 - (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
@@ -34,7 +34,8 @@
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier;
+      realmIdentifier:(NSString *)realmIdentifier
+               action:(NSString *)action;
 
 + (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
@@ -42,7 +43,8 @@
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier;
+          realmIdentifier:(NSString *)realmIdentifier
+                   action:(NSString *)action;
 
 + (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
@@ -50,6 +52,7 @@
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier;
+      realmIdentifier:(NSString *)realmIdentifier
+               action:(NSString *)action;
 
 @end

@@ -60,7 +60,8 @@ SpecBegin(RLMObject)
                               parameters:nil
                                  headers:nil
                                    realm:realm
-                         realmIdentifier:realmIdentifier];
+                         realmIdentifier:realmIdentifier
+                                  action:nil];
 
                 expect(request.URL.absoluteString).will.equal(@"http://api.example.com/cat/misse");
                 expect(request.HTTPBody).will.equal(jsonData);
@@ -99,7 +100,8 @@ SpecBegin(RLMObject)
                               parameters:nil
                                  headers:nil
                                    realm:realm
-                         realmIdentifier:realmIdentifier];
+                         realmIdentifier:realmIdentifier
+                                  action:nil];
 
                 expect(request.URL.absoluteString).will.equal(@"http://api.example.com/cats");
                 expect(request.HTTPBody).will.beFalsy();
@@ -133,7 +135,8 @@ SpecBegin(RLMObject)
                                                      parameters:nil
                                                         headers:nil
                                                           realm:realm
-                                                realmIdentifier:realmIdentifier];
+                                                realmIdentifier:realmIdentifier
+                                                         action:nil];
 
                 expect(identifier).to.beTruthy();
                 expect(actualIdentifier).will.equal(identifier);
@@ -160,7 +163,8 @@ SpecBegin(RLMObject)
                                  headers:nil
                                    realm:realm
                          realmIdentifier:realmIdentifier
-                                 success:^(id primaryKey){
+                                  action:nil
+                                 success:^(id primaryKey) {
                                      primaryKeys = primaryKey;
                                  }
                                  failure:nil];
@@ -187,9 +191,10 @@ SpecBegin(RLMObject)
                                  headers:nil
                                    realm:realm
                          realmIdentifier:realmIdentifier
+                                  action:nil
                                  success:nil
                                  failure:^(NSError *error, NSDictionary *userInfo) {
-                                    actual = error;
+                                     actual = error;
                                  }];
 
                 expect(actual).will.beTruthy();

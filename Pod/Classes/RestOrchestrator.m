@@ -2,15 +2,12 @@
 // Created by Tobias Sundstrand on 15-01-30.
 //
 
+#import "RestOrchestrator.h"
 #import <Realm/RLMObject.h>
-#import <Realm-Rest/RestPathFinder.h>
-#import <Realm-Rest/RestRequestQueue.h>
 #import <Realm-Rest/RestNotifier.h>
 #import <Realm/RLMRealm.h>
 #import <Realm+JSON/RLMObject+JSON.h>
 #import <Functional.m/NSArray+F.h>
-#import "RestOrchestrator.h"
-
 
 @interface RestOrchestrator () <RestRequestQueueDelegate>
 
@@ -40,7 +37,8 @@
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier {
+          realmIdentifier:(NSString *)realmIdentifier
+                   action:(NSString *)action {
 
     [[self sharedInstance] restForModelClass:modelClass
                                  requestType:requestType
@@ -48,7 +46,8 @@
                                   parameters:parameters
                                      headers:headers
                                        realm:realm
-                             realmIdentifier:realmIdentifier];
+                             realmIdentifier:realmIdentifier
+                                      action:action];
 }
 
 - (void)restForModelClass:(Class)modelClass
@@ -57,17 +56,19 @@
                parameters:(NSDictionary *)parameters
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier {
+          realmIdentifier:(NSString *)realmIdentifier
+                   action:(NSString *)action {
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:modelClass realm:realm];
-    NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType action:nil];
+    NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType action:action];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
 
     [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
             RequestIdKey : requestId,
             ClassKey : NSStringFromClass(modelClass),
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
-            RealmKey : realmIdentifier ?: realm.path.lastPathComponent
+            RealmKey : realmIdentifier ?: realm.path.lastPathComponent,
+            ActionKey : action ?: @"<none>"
     }];
 }
 
@@ -77,7 +78,8 @@
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier {
+      realmIdentifier:(NSString *)realmIdentifier
+               action:(NSString *)action {
 
     [[self sharedInstance] restForObject:object
                              requestType:requestType
@@ -85,7 +87,8 @@
                               parameters:parameters
                                  headers:headers
                                    realm:realm
-                         realmIdentifier:realmIdentifier];
+                         realmIdentifier:realmIdentifier
+                                  action:action];
 
 }
 
@@ -95,10 +98,11 @@
            parameters:(NSDictionary *)parameters
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier {
+      realmIdentifier:(NSString *)realmIdentifier
+               action:(NSString *)action {
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:object.class realm:realm];
-    NSString *path = [RestPathFinder findPathForObject:object forType:requestType action:nil];
+    NSString *path = [RestPathFinder findPathForObject:object forType:requestType action:action];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
 
     [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
@@ -108,7 +112,8 @@
             PathUrlKey : path,
             MethodKey : method,
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
-            RealmKey : realmIdentifier ?: realm.path.lastPathComponent
+            RealmKey : realmIdentifier ?: realm.path.lastPathComponent,
+            ActionKey : action ?: @"<none>"
     }];
 }
 
