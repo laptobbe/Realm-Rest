@@ -19,8 +19,9 @@
         [NSException raise:NSInternalInconsistencyException format:@"Class %@ does not have a primary key", [[object class] className]];
     }
 
+
     if([object respondsToSelector:@selector(restPathForRequestType:action:)]){
-        return [[object restPathForRequestType:type action:action] lowercaseString];
+        return [[object restPathForRequestType:type action:action] lowercaseString] ?: [self defaultPathForObject:object];
     }else {
         return [self defaultPathForObject:object];
     }
@@ -34,7 +35,7 @@
 
 + (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type action:(NSString *)action {
     if ([class respondsToSelector:@selector(restPathForRequestType:action:)]){
-        return [[(Class <RestModelObjectProtocol>) class restPathForRequestType:type action:action] lowercaseString];
+        return [[(Class <RestModelObjectProtocol>) class restPathForRequestType:type action:action] lowercaseString] ?: [self defaultPathForClass:class];
     } else {
         return [self defaultPathForClass:class];
     }

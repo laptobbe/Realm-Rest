@@ -1,6 +1,6 @@
 {
   "name": "Realm-Rest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "summary": "An extension to Realm.io for working with JSON based Rest API's",
   "homepage": "https://github.com/laptobbe/Realm-Rest",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/laptobbe/Realm-Rest.git",
-    "tag": "1.0.0"
+    "tag": "1.0.1"
   },
   "social_media_url": "https://twitter.com/laptobbe",
   "platforms": {
