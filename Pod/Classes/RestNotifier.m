@@ -9,6 +9,7 @@ NSString *const RequestIdKey = @"requestId";
 NSString *const ClassKey = @"class";
 NSString *const RealmTypeKey = @"realmType";
 NSString *const RealmKey = @"realm";
+NSString *const ActionKey = @"action";
 NSString *const BaseUrlKey = @"baseurl";
 NSString *const PathUrlKey = @"path";
 NSString *const MethodKey = @"method";

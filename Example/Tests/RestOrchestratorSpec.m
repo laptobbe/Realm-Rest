@@ -58,7 +58,8 @@ SpecBegin(RestOrchestrator)
                                          parameters:nil
                                             headers:nil
                                               realm:realm
-                                    realmIdentifier:RealmIdentifier];
+                                    realmIdentifier:RealmIdentifier
+                                             action:nil];
 
                 expect(success).will.beTruthy();
 

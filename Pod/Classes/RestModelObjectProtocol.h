@@ -3,6 +3,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm-Rest/RestConstants.h>
+
 
 @protocol RestModelObjectProtocol <NSObject>
 
@@ -11,15 +13,8 @@
 
 @optional
 
-+ (NSString *)restPathToResourceGET;
-+ (NSString *)restPathToResourcePOST;
-+ (NSString *)restPathToResourcePUT;
-+ (NSString *)restPathToResourceDELETE;
-
-- (NSString *)restPathToResourceGET;
-- (NSString *)restPathToResourcePOST;
-- (NSString *)restPathToResourcePUT;
-- (NSString *)restPathToResourceDELETE;
++ (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action;
+- (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action;
 
 + (NSString *)baseURL;
 
