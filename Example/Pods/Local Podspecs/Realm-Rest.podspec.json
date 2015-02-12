@@ -19,7 +19,7 @@
   "source_files": "Pod/Classes",
   "dependencies": {
     "Realm": [
-      "~> 0.90.4"
+      "~> 0.90.5"
     ],
     "Realm+JSON": [
       "~> 0.2.5"

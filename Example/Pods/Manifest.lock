@@ -1,23 +1,23 @@
 PODS:
-  - AFNetworking (2.5.0):
-    - AFNetworking/NSURLConnection (= 2.5.0)
-    - AFNetworking/NSURLSession (= 2.5.0)
-    - AFNetworking/Reachability (= 2.5.0)
-    - AFNetworking/Security (= 2.5.0)
-    - AFNetworking/Serialization (= 2.5.0)
-    - AFNetworking/UIKit (= 2.5.0)
-  - AFNetworking/NSURLConnection (2.5.0):
+  - AFNetworking (2.5.1):
+    - AFNetworking/NSURLConnection (= 2.5.1)
+    - AFNetworking/NSURLSession (= 2.5.1)
+    - AFNetworking/Reachability (= 2.5.1)
+    - AFNetworking/Security (= 2.5.1)
+    - AFNetworking/Serialization (= 2.5.1)
+    - AFNetworking/UIKit (= 2.5.1)
+  - AFNetworking/NSURLConnection (2.5.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.0):
+  - AFNetworking/NSURLSession (2.5.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.0)
-  - AFNetworking/Security (2.5.0)
-  - AFNetworking/Serialization (2.5.0)
-  - AFNetworking/UIKit (2.5.0):
+  - AFNetworking/Reachability (2.5.1)
+  - AFNetworking/Security (2.5.1)
+  - AFNetworking/Serialization (2.5.1)
+  - AFNetworking/UIKit (2.5.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Expecta (0.3.1)
@@ -35,8 +35,8 @@ PODS:
   - OHHTTPStubs (3.1.10):
     - OHHTTPStubs/Core (= 3.1.10)
   - OHHTTPStubs/Core (3.1.10)
-  - Realm (0.90.4):
-    - Realm/Headers (= 0.90.4)
+  - Realm (0.90.5):
+    - Realm/Headers (= 0.90.5)
   - Realm+JSON (0.2.5):
     - Realm (~> 0.90)
   - Realm-Rest (0.1.0):
@@ -45,9 +45,9 @@ PODS:
     - KTBTaskQueue (~> 1.0.1)
     - NSString-UrlEncode (~> 2.0.0)
     - NSURL+QueryDictionary (~> 1.0.3)
-    - Realm (~> 0.90.4)
+    - Realm (~> 0.90.5)
     - Realm+JSON (~> 0.2.5)
-  - Realm/Headers (0.90.4)
+  - Realm/Headers (0.90.5)
   - Specta (0.3.0.beta1)
 
 DEPENDENCIES:
@@ -70,7 +70,7 @@ CHECKOUT OPTIONS:
     :tag: v0.3.0.beta1
 
 SPEC CHECKSUMS:
-  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
+  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
   FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
   Functional.m: e01ad5fc30324b63273af1f37284ac609192caa4
@@ -79,9 +79,9 @@ SPEC CHECKSUMS:
   NSURL+QueryDictionary: 1ad81be60c10e3f4d80c5c4beb7125de96aaec5e
   OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
   OHHTTPStubs: 2038e929b6abb94881000524c1cb4aba0a1bb4a2
-  Realm: 43ec5595f51849fabccd2213cfad90bc4ff9a3c0
+  Realm: aea25534b97be77995650c2339aa6ed010dfcc8a
   Realm+JSON: a47b93f0f37beba7dd4686f5f4b6813d83f78134
-  Realm-Rest: 56af5cb7fc1b9d78f2bea8ce86200bc5914bf4f5
+  Realm-Rest: a1ab69262e3ad4cd8b0261d7cee49bd3d10450c0
   Specta: d2158a483ad179e5f8d3a29f75ff4fc0ff6fab16
 
 COCOAPODS: 0.36.0.beta.2
