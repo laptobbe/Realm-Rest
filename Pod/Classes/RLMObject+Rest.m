@@ -7,6 +7,7 @@
 #import <Realm/RLMRealm.h>
 #import <Realm+JSON/RLMObject+JSON.h>
 #import <Realm-Rest/RestPathFinder.h>
+#import <Realm-Rest/RLMObject+Rest.h>
 #import "RLMObject+Rest.h"
 
 
@@ -25,6 +26,7 @@
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
+                           action:(NSString *)action
                           success:(RestSuccessBlock)success
                           failure:(RestFailureBlock)failure {
 
@@ -39,7 +41,8 @@
                              parameters:parameters
                                 headers:headers
                                   realm:realm
-                        realmIdentifier:realmIdentifier];
+                        realmIdentifier:realmIdentifier
+                                 action:action];
 
     return requestId;
 }
@@ -49,6 +52,7 @@
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
+                           action:(NSString *)action
                           success:(RestSuccessBlock)success
                           failure:(RestFailureBlock)failure {
 
@@ -66,7 +70,8 @@
                          parameters:newParameters
                             headers:headers
                               realm:realm
-                    realmIdentifier:realmIdentifier];
+                    realmIdentifier:realmIdentifier
+                             action:action];
 
     return requestId;
 }
@@ -76,55 +81,65 @@
                        parameters:(NSDictionary *)parameters
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
-                  realmIdentifier:(NSString *)realmIdentifier {
+                  realmIdentifier:(NSString *)realmIdentifier
+                           action:(NSString *)action {
 
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:realm
                      realmIdentifier:realmIdentifier
+                              action:action
                              success:nil
                              failure:nil];
 }
 
 + (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
-                                        headers:(NSDictionary *)headers {
+                                        headers:(NSDictionary *)headers
+                                         action:(NSString *)action {
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:[RLMRealm defaultRealm]
-                     realmIdentifier:nil];
+                     realmIdentifier:nil
+                              action:action];
 }
 
 - (NSString *)restWithRequestType:(RestRequestType)requestType
                        parameters:(NSDictionary *)parameters
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
-                  realmIdentifier:(NSString *)realmIdentifier {
+                  realmIdentifier:(NSString *)realmIdentifier
+                           action:(NSString *)action {
 
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:realm
                      realmIdentifier:realmIdentifier
+                              action:action
                              success:nil
                              failure:nil];
 }
 
-- (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType parameters:(NSDictionary *)parameters headers:(NSDictionary *)headers {
+- (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
+                                     parameters:(NSDictionary *)parameters
+                                        headers:(NSDictionary *)headers
+                                         action:(NSString *)action {
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:[RLMRealm defaultRealm]
-                     realmIdentifier:nil];
+                     realmIdentifier:nil
+                              action:action];
 }
-
 
 
 + (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
+                                         action:(NSString *)action
                                         success:(RestSuccessBlock)success
                                         failure:(RestFailureBlock)failure {
     return [self restWithRequestType:requestType
@@ -132,6 +147,7 @@
                              headers:headers
                                realm:[RLMRealm defaultRealm]
                      realmIdentifier:nil
+                              action:action
                              success:success
                              failure:failure];
 }
@@ -139,6 +155,7 @@
 - (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
+                                         action:(NSString *)action
                                         success:(RestSuccessBlock)success
                                         failure:(RestFailureBlock)failure {
     return [self restWithRequestType:requestType
@@ -146,6 +163,7 @@
                              headers:headers
                                realm:[RLMRealm defaultRealm]
                      realmIdentifier:nil
+                              action:action
                              success:success
                              failure:failure];
 }

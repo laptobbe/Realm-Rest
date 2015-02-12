@@ -12,20 +12,13 @@
 @class RLMObject;
 @class RLMRealm;
 
-typedef NS_ENUM(NSInteger , RestRequestType) {
-    RestRequestTypeGet,
-    RestRequestTypePost,
-    RestRequestTypePut,
-    RestRequestTypeDelete
-};
-
 @interface RestPathFinder : NSObject
 
-+ (NSString *)findPathForObject:(RLMObject<RestModelObjectProtocol> *)object forType:(RestRequestType)type;
++ (NSString *)findPathForObject:(RLMObject <RestModelObjectProtocol> *)object forType:(RestRequestType)type action:(NSString *)action;
 
-+ (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type;
++ (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type action:(NSString *)action;
 
 + (NSString *)findBaseURLForModelClass:(Class)pClass realm:(RLMRealm *)realm;
 
-+ (NSString *)httpMethodFromRequestType:(enum RestRequestType)type;
++ (NSString *)httpMethodFromRequestType:(RestRequestType)type;
 @end

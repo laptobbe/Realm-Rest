@@ -10,6 +10,7 @@ extern NSString *const RequestIdKey;
 extern NSString *const ClassKey;
 extern NSString *const RealmTypeKey;
 extern NSString *const RealmKey;
+extern NSString *const ActionKey;
 extern NSString *const BaseUrlKey;
 extern NSString *const PathUrlKey;
 extern NSString *const MethodKey;
