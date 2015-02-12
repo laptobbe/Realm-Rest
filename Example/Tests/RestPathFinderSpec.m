@@ -157,6 +157,48 @@ SpecBegin(RestPathFinder)
             });
         });
 
+        context(@"with action", ^{
+            it(@"finds get all path", ^{
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypeGet action:@"chasing"];
+                expect(path).to.equal(@"rest/mouses/chase");
+            });
+
+            it(@"finds post all path", ^{
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypePost action:@"chasing"];
+                expect(path).to.equal(@"rest/mouses/create/chase");
+            });
+
+            it(@"finds put all path", ^{
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypePut action:@"chasing"];
+                expect(path).to.equal(@"rest/mouses/updates/chase");
+            });
+
+            it(@"finds delete all path", ^{
+                NSString *path = [RestPathFinder findPathForClass:[Mouse class] forType:RestRequestTypeDelete action:@"chasing"];
+                expect(path).to.equal(@"rest/mouses/deletes/chase");
+            });
+
+            it(@"finds path GET", ^{
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeGet action:@"chasing"];
+                expect(path).to.equal(@"rest/mouse/jerry/chase");
+            });
+
+            it(@"finds path POST", ^{
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePost action:@"chasing"];
+                expect(path).to.equal(@"rest/mouse/jerry/create/chase");
+            });
+
+            it(@"finds path PUT", ^{
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypePut action:@"chasing"];
+                expect(path).to.equal(@"rest/mouse/jerry/update/chase");
+            });
+
+            it(@"finds path DELETE", ^{
+                NSString *path = [RestPathFinder findPathForObject:mouse forType:RestRequestTypeDelete action:@"chasing"];
+                expect(path).to.equal(@"rest/mouse/jerry/remove/chase");
+            });
+        });
+
     });
 
 SpecEnd

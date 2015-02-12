@@ -4,6 +4,7 @@
 //
 
 #import "Mouse.h"
+#import "RestPathFinder.h"
 
 
 @implementation Mouse
@@ -11,13 +12,29 @@
 + (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action {
     switch (requestType) {
         case RestRequestTypeGet:
-            return @"rest/mouses";
+            if([action isEqualToString:@"chasing"]){
+                return @"rest/mouses/chase";
+            } else{
+                return @"rest/mouses";
+            }
         case RestRequestTypePost:
-            return @"rest/mouses/create";
+            if([action isEqualToString:@"chasing"]){
+                return @"rest/mouses/create/chase";
+            } else {
+                return @"rest/mouses/create";
+            }
         case RestRequestTypePut:
-            return @"rest/mouses/updates";
+            if([action isEqualToString:@"chasing"]){
+                return @"rest/mouses/updates/chase";
+            }else {
+                return @"rest/mouses/updates";
+            }
         case RestRequestTypeDelete:
-            return @"rest/mouses/deletes";
+            if([action isEqualToString:@"chasing"]){
+                return @"rest/mouses/deletes/chase";
+            } else {
+                return @"rest/mouses/deletes";
+            }
     }
     return nil;
 }
@@ -25,13 +42,29 @@
 - (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action {
     switch (requestType) {
         case RestRequestTypeGet:
-            return [NSString stringWithFormat:@"rest/mouse/%@", self.name];
+            if([action isEqualToString:@"chasing"]){
+                return [NSString stringWithFormat:@"rest/mouse/%@/chase", self.name];
+            } else {
+                return [NSString stringWithFormat:@"rest/mouse/%@", self.name];
+            }
         case RestRequestTypePost:
-            return [NSString stringWithFormat:@"rest/mouse/%@/create", self.name];
+            if([action isEqualToString:@"chasing"]){
+                return [NSString stringWithFormat:@"rest/mouse/%@/create/chase", self.name];
+            } else {
+                return [NSString stringWithFormat:@"rest/mouse/%@/create", self.name];
+            }
         case RestRequestTypePut:
-            return [NSString stringWithFormat:@"rest/mouse/%@/update", self.name];
+            if([action isEqualToString:@"chasing"]){
+                return [NSString stringWithFormat:@"rest/mouse/%@/update/chase", self.name];
+            } else {
+                return [NSString stringWithFormat:@"rest/mouse/%@/update", self.name];
+            }
         case RestRequestTypeDelete:
-            return [NSString stringWithFormat:@"rest/mouse/%@/remove", self.name];
+            if([action isEqualToString:@"chasing"]){
+                return [NSString stringWithFormat:@"rest/mouse/%@/remove/chase", self.name];
+            } else {
+                return [NSString stringWithFormat:@"rest/mouse/%@/remove", self.name];
+            }
     }
     return nil;
 }
