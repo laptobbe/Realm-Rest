@@ -24,6 +24,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		64D5E8D36C4A04FD8251F847 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB88CCA840C22542E1C6BDB /* libPods-Tests.a */; };
 		CC3C7503454175E66083405D /* RLMObjectRestSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7C444692F8A3F4EB5AB2 /* RLMObjectRestSpec.m */; };
+		CC3C7648A0C912E9CDE2FD83 /* RestRealmSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7E1FF17147B04046FD58 /* RestRealmSpec.m */; };
 		CC3C7802A37D1B4A2B5FA3B8 /* RestNotifierSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7A8CAA2F8B33AC754991 /* RestNotifierSpec.m */; };
 		CC3C7943D96A00FC2071C61B /* RestRequestQueueSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7A3F76D12C8CA545A57D /* RestRequestQueueSpec.m */; };
 		CC3C7D446FC303DE5856407E /* TestQueueDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C75A2DF583FD125073515 /* TestQueueDelegate.m */; };
@@ -33,7 +34,6 @@
 		F6F149B11A7A380A00A24213 /* RestRequestBuilderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7092701F23DD301DB536 /* RestRequestBuilderSpec.m */; };
 		F6F149B81A7BDB5600A24213 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C7D1C5722B5A9B33FCE1A /* Dog.m */; };
 		F6F149BA1A7BDBE900A24213 /* Mouse.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3C76A416D4EFF46E36794F /* Mouse.m */; };
-		F6F149BE1A7BDCBB00A24213 /* RLMRealm+Rest.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F149BD1A7BDCBB00A24213 /* RLMRealm+Rest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,13 +85,12 @@
 		CC3C7A8CAA2F8B33AC754991 /* RestNotifierSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestNotifierSpec.m; sourceTree = "<group>"; };
 		CC3C7C444692F8A3F4EB5AB2 /* RLMObjectRestSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLMObjectRestSpec.m; sourceTree = "<group>"; };
 		CC3C7D1C5722B5A9B33FCE1A /* Dog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dog.m; sourceTree = "<group>"; };
+		CC3C7E1FF17147B04046FD58 /* RestRealmSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestRealmSpec.m; sourceTree = "<group>"; };
 		CC3C7E858C03A75D442E1622 /* Cat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cat.m; sourceTree = "<group>"; };
 		CC3C7FBE4C48AA37F92A1349 /* Cat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cat.h; sourceTree = "<group>"; };
 		DBB88CCA840C22542E1C6BDB /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1201186B33F2925AA2E3481 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F6F149AC1A7666CD00A24213 /* RestPathFinderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestPathFinderSpec.m; sourceTree = "<group>"; };
-		F6F149BC1A7BDCBB00A24213 /* RLMRealm+Rest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RLMRealm+Rest.h"; sourceTree = "<group>"; };
-		F6F149BD1A7BDCBB00A24213 /* RLMRealm+Rest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RLMRealm+Rest.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,10 +195,9 @@
 				CC3C7401DD4539A95FAE99E1 /* RestOrchestratorSpec.m */,
 				CC3C78AE3D8B13D2DFE25CD6 /* TestQueueDelegate.h */,
 				CC3C75A2DF583FD125073515 /* TestQueueDelegate.m */,
-				F6F149BC1A7BDCBB00A24213 /* RLMRealm+Rest.h */,
-				F6F149BD1A7BDCBB00A24213 /* RLMRealm+Rest.m */,
 				CC3C7A8CAA2F8B33AC754991 /* RestNotifierSpec.m */,
 				CC3C7C444692F8A3F4EB5AB2 /* RLMObjectRestSpec.m */,
+				CC3C7E1FF17147B04046FD58 /* RestRealmSpec.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -419,9 +417,9 @@
 				CC3C7943D96A00FC2071C61B /* RestRequestQueueSpec.m in Sources */,
 				CC3C7E58E9037A09F6E8268D /* RestOrchestratorSpec.m in Sources */,
 				CC3C7D446FC303DE5856407E /* TestQueueDelegate.m in Sources */,
-				F6F149BE1A7BDCBB00A24213 /* RLMRealm+Rest.m in Sources */,
 				CC3C7802A37D1B4A2B5FA3B8 /* RestNotifierSpec.m in Sources */,
 				CC3C7503454175E66083405D /* RLMObjectRestSpec.m in Sources */,
+				CC3C7648A0C912E9CDE2FD83 /* RestRealmSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

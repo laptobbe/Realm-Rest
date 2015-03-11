@@ -15,9 +15,9 @@
 
 @interface RestOrchestrator : NSObject
 
-+ (instancetype)sharedInstance;
+@property (nonatomic, readonly) RestRequestQueuePeristance peristance;
 
-- (void)initiateWithPersistance:(RestRequestQueuePeristance)persistance;
+- (instancetype)initWithPersistance:(RestRequestQueuePeristance)persistance;
 
 - (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
@@ -29,24 +29,6 @@
                    action:(NSString *)action;
 
 - (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
-          requestType:(RestRequestType)requestType
-            requestId:(NSString *)requestId
-           parameters:(NSDictionary *)parameters
-              headers:(NSDictionary *)headers
-                realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier
-               action:(NSString *)action;
-
-+ (void)restForModelClass:(Class)modelClass
-              requestType:(RestRequestType)requestType
-                requestId:(NSString *)requestId
-               parameters:(NSDictionary *)parameters
-                  headers:(NSDictionary *)headers
-                    realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier
-                   action:(NSString *)action;
-
-+ (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
             requestId:(NSString *)requestId
            parameters:(NSDictionary *)parameters

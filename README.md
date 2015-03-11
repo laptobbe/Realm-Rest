@@ -9,18 +9,44 @@ Will eventually be an extension to Realm.io for working with JSON based Rest API
 
 See issues and wiki for discussion on how we should implement this.
 
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
 ## Installation
 
 Realm-Rest is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
     pod "Realm-Rest"
+
+## Usage
+
+``` objc
+[realm setBaseUrl:@"http://api.example.com" queuePersistance:RestRequestQueuePeristanceDatabase];
+
+@interface User : RLMObject
+@property NSString* username;
+@property NSString* name;
+@end
+
+[User restInDefaultRealmWithRequestType:RestRequestTypePost
+	parameters:@{
+		RestRequestParameterStyleJSON : @{
+			”username”:”foo”,
+			”password”:”bar”
+		}}
+	headers:nil
+	action:@"login”
+	success:^(id primaryKey) {
+    	User *user = [User objectForPrimaryKey:primaryKey];
+    	//Use object
+	}
+	failure:^(NSError *error, NSDictionary *userInfo) {
+		//Handle error
+	}
+];
+
+```
+
+###Actions
+
 
 ## Author
 

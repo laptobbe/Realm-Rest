@@ -32,6 +32,8 @@ typedef NS_ENUM(NSInteger , RestRequestQueuePeristance) {
 
 @property (nonatomic, readonly) NSUInteger count;
 
+@property(nonatomic, readonly) RestRequestQueuePeristance persistance;
+
 - (instancetype)initWitPersistance:(RestRequestQueuePeristance)persistance
                           delegate:(NSObject <RestRequestQueueDelegate> *)delegate;
 

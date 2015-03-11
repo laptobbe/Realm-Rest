@@ -22,8 +22,9 @@
 - (instancetype)initWitPersistance:(RestRequestQueuePeristance)persistance delegate:(NSObject <RestRequestQueueDelegate> *)delegate {
     self = [super init];
     if (self) {
-        self.delegate = delegate;
-        self.queue = persistance == RestRequestQueuePeristanceDatabase ? [KTBTaskQueue queueAtPath:[self getQueuePath] delegate:self] : [KTBTaskQueue queueInMemoryWithDelegate:self];
+        _delegate = delegate;
+        _persistance = persistance;
+        _queue = persistance == RestRequestQueuePeristanceDatabase ? [KTBTaskQueue queueAtPath:[self getQueuePath] delegate:self] : [KTBTaskQueue queueInMemoryWithDelegate:self];
     }
     return self;
 }

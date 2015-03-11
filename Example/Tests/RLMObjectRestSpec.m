@@ -20,13 +20,9 @@ SpecBegin(RLMObject)
         __block RLMNotificationToken *notificationToken;
         __block id nsNotificationToken;
 
-        beforeAll(^{
-            [[RestOrchestrator sharedInstance] initiateWithPersistance:RestRequestQueuePeristanceInMemory];
-        });
-
         beforeEach(^{
             realm = [RLMRealm inMemoryRealmWithIdentifier:realmIdentifier];
-            realm.baseURL = @"http://api.example.com";
+            [realm setBaseUrl:@"http://api.example.com" queuePersistance:RestRequestQueuePeristanceInMemory];
         });
 
         afterEach(^{
