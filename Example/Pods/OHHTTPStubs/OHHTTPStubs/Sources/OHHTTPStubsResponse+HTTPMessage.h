@@ -8,6 +8,14 @@
 
 #import "OHHTTPStubsResponse.h"
 
+#ifdef NS_ASSUME_NONNULL_BEGIN
+  NS_ASSUME_NONNULL_BEGIN
+  #define _nullable_ __nullable
+#else
+  #define _nullable_
+#endif
+
+
 /**
  *  Adds support for building stubs from "HTTP Messages" conforming to
  *  the format output by `curl -is`
@@ -44,7 +52,11 @@
  */
 
 +(instancetype)responseNamed:(NSString*)responseName
-                    inBundle:(NSBundle*)bundleOrNil;
+                    inBundle:(NSBundle* _nullable_)bundleOrNil;
 
 
 @end
+
+#ifdef NS_ASSUME_NONNULL_END
+  NS_ASSUME_NONNULL_END
+#endif
