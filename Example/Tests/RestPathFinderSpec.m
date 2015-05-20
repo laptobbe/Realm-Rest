@@ -20,7 +20,7 @@ SpecBegin(RestPathFinder)
         mouse.name = @"Jerry";
 
         realm = [RLMRealm inMemoryRealmWithIdentifier:@"test"];
-        realm.baseURL = @"http://api.example.com";
+        [realm setBaseUrl:@"http://api.example.com" queuePersistance:RestRequestQueuePeristanceInMemory];
     });
 
     describe(@"RestPathFinder", ^{
@@ -131,7 +131,8 @@ SpecBegin(RestPathFinder)
             });
 
             it(@"Should find it on a the default realm", ^{
-                [[RLMRealm defaultRealm] setBaseURL:@"http://api.example.com"];
+                [[RLMRealm defaultRealm] setBaseUrl:@"http://api.example.com"
+                                   queuePersistance:RestRequestQueuePeristanceInMemory];
                 NSString *baseURL = [RestPathFinder findBaseURLForModelClass:[Cat class] realm:[RLMRealm defaultRealm]];
                 expect(baseURL).to.equal(@"http://api.example.com");
             });

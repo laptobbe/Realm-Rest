@@ -8,6 +8,7 @@
 #import <Realm+JSON/RLMObject+JSON.h>
 #import <Realm-Rest/RestPathFinder.h>
 #import <Realm-Rest/RLMObject+Rest.h>
+#import <Realm-Rest/RLMRealm+Rest.h>
 #import "RLMObject+Rest.h"
 
 
@@ -35,14 +36,14 @@
     [self addObserverWithSuccessBlock:success identifier:requestId notification:[self restSuccessNotification]];
     [self addObserverWithFailureBlock:failure identifier:requestId notification:[self restFailureNotification]];
 
-    [RestOrchestrator restForModelClass:self
-                            requestType:requestType
-                              requestId:requestId
-                             parameters:parameters
-                                headers:headers
-                                  realm:realm
-                        realmIdentifier:realmIdentifier
-                                 action:action];
+    [realm.orchistrator restForModelClass:self
+                              requestType:requestType
+                                requestId:requestId
+                               parameters:parameters
+                                  headers:headers
+                                    realm:realm
+                          realmIdentifier:realmIdentifier
+                                   action:action];
 
     return requestId;
 }
@@ -64,14 +65,14 @@
     [self.class addObserverWithSuccessBlock:success identifier:requestId notification:[self.class restSuccessNotification]];
     [self.class addObserverWithFailureBlock:failure identifier:requestId notification:[self.class restFailureNotification]];
 
-    [RestOrchestrator restForObject:(RLMObject <RestModelObjectProtocol> *) self
-                        requestType:requestType
-                          requestId:requestId
-                         parameters:newParameters
-                            headers:headers
-                              realm:realm
-                    realmIdentifier:realmIdentifier
-                             action:action];
+    [realm.orchistrator restForObject:(RLMObject <RestModelObjectProtocol> *) self
+                          requestType:requestType
+                            requestId:requestId
+                           parameters:newParameters
+                              headers:headers
+                                realm:realm
+                      realmIdentifier:realmIdentifier
+                               action:action];
 
     return requestId;
 }

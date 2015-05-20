@@ -20,9 +20,8 @@ SpecBegin(RestOrchestrator)
         __block RLMRealm *realm;
         __block RLMNotificationToken *notificationToken;
         beforeEach(^{
-            [[RestOrchestrator sharedInstance] initiateWithPersistance:RestRequestQueuePeristanceInMemory];
             realm = [RLMRealm inMemoryRealmWithIdentifier:RealmIdentifier];
-            realm.baseURL = @"http://api.example.com";
+            [realm setBaseUrl:@"http://api.example.com" queuePersistance:RestRequestQueuePeristanceInMemory];
         });
 
         afterEach(^{
@@ -52,14 +51,14 @@ SpecBegin(RestOrchestrator)
                     }
                 }];
 
-                [RestOrchestrator restForModelClass:[Cat class]
-                                        requestType:RestRequestTypeGet
-                                          requestId:@"testrequest"
-                                         parameters:nil
-                                            headers:nil
-                                              realm:realm
-                                    realmIdentifier:RealmIdentifier
-                                             action:nil];
+                [realm.orchistrator restForModelClass:[Cat class]
+                                          requestType:RestRequestTypeGet
+                                            requestId:@"testrequest"
+                                           parameters:nil
+                                              headers:nil
+                                                realm:realm
+                                      realmIdentifier:RealmIdentifier
+                                               action:nil];
 
                 expect(success).will.beTruthy();
 

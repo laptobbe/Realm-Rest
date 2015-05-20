@@ -8,6 +8,7 @@
 #import <Realm/RLMRealm.h>
 #import <Realm+JSON/RLMObject+JSON.h>
 #import <Functional.m/NSArray+F.h>
+#import <Realm-Rest/RestRequestQueue.h>
 
 @interface RestOrchestrator () <RestRequestQueueDelegate>
 
@@ -17,38 +18,18 @@
 
 @implementation RestOrchestrator
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static RestOrchestrator *restOrchestrator;
-    dispatch_once(&once, ^{
-        restOrchestrator = [RestOrchestrator new];
-    });
-    return restOrchestrator;
+- (RestRequestQueuePeristance)peristance {
+    return self.queue.persistance;
 }
 
-- (void)initiateWithPersistance:(RestRequestQueuePeristance)persistance {
-    self.queue = [[RestRequestQueue alloc] initWitPersistance:persistance
-                                                     delegate:self];
+- (instancetype)initWithPersistance:(RestRequestQueuePeristance)persistance {
+    self = [super init];
+    if (self) {
+        self.queue = [[RestRequestQueue alloc] initWitPersistance:persistance delegate:self];
+    }
+    return self;
 }
 
-+ (void)restForModelClass:(Class)modelClass
-              requestType:(RestRequestType)requestType
-                requestId:(NSString *)requestId
-               parameters:(NSDictionary *)parameters
-                  headers:(NSDictionary *)headers
-                    realm:(RLMRealm *)realm
-          realmIdentifier:(NSString *)realmIdentifier
-                   action:(NSString *)action {
-
-    [[self sharedInstance] restForModelClass:modelClass
-                                 requestType:requestType
-                                   requestId:requestId
-                                  parameters:parameters
-                                     headers:headers
-                                       realm:realm
-                             realmIdentifier:realmIdentifier
-                                      action:action];
-}
 
 - (void)restForModelClass:(Class)modelClass
               requestType:(RestRequestType)requestType
@@ -70,26 +51,6 @@
             RealmKey : realmIdentifier ?: realm.path.lastPathComponent,
             ActionKey : action ?: @"<none>"
     }];
-}
-
-+ (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
-          requestType:(RestRequestType)requestType
-            requestId:(NSString *)requestId
-           parameters:(NSDictionary *)parameters
-              headers:(NSDictionary *)headers
-                realm:(RLMRealm *)realm
-      realmIdentifier:(NSString *)realmIdentifier
-               action:(NSString *)action {
-
-    [[self sharedInstance] restForObject:object
-                             requestType:requestType
-                               requestId:requestId
-                              parameters:parameters
-                                 headers:headers
-                                   realm:realm
-                         realmIdentifier:realmIdentifier
-                                  action:action];
-
 }
 
 - (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object

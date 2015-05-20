@@ -84,4 +84,4 @@ SPEC CHECKSUMS:
   Realm-Rest: 127ec0cf6f6e68bd6e5a0dd0b179b4dda56bb86d
   Specta: d2158a483ad179e5f8d3a29f75ff4fc0ff6fab16
 
-COCOAPODS: 0.36.0.beta.2
+COCOAPODS: 0.36.0.rc.1
