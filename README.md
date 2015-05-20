@@ -5,9 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/Realm-Rest.svg?style=flat)](http://cocoadocs.org/docsets/Realm-Rest)
 [![Platform](https://img.shields.io/cocoapods/p/Realm-Rest.svg?style=flat)](http://cocoadocs.org/docsets/Realm-Rest)
 
-Will eventually be an extension to Realm.io for working with JSON based Rest API's
-
-See issues and wiki for discussion on how we should implement this.
+A first version of an extension to Realm.io for working with JSON based Rest API's
 
 ## Installation
 
@@ -16,7 +14,7 @@ it, simply add the following line to your Podfile:
 
     pod "Realm-Rest"
 
-## Usage
+## Basic Usage
 
 ``` objc
 [realm setBaseUrl:@"http://api.example.com" queuePersistance:RestRequestQueuePeristanceDatabase];
@@ -33,7 +31,7 @@ it, simply add the following line to your Podfile:
 			”password”:”bar”
 		}}
 	headers:nil
-	action:@"login”
+	action:@"login"
 	success:^(id primaryKey) {
     	User *user = [User objectForPrimaryKey:primaryKey];
     	//Use object
@@ -45,8 +43,9 @@ it, simply add the following line to your Podfile:
 
 ```
 
-###Actions
+## Usage Details
 
+Se the [Wiki](https://github.com/laptobbe/Realm-Rest/wiki/Usage) for more details on how to use Realm-Rest
 
 ## Author
 
