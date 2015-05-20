@@ -22,6 +22,14 @@
  *
  ***********************************************************************************/
 
+// For SDK 7.1 Compatibility (as this macro was only included starting SDK 8.0)
+#ifndef NS_DESIGNATED_INITIALIZER
+  #if __has_attribute(objc_designated_initializer)
+    #define NS_DESIGNATED_INITIALIZER __attribute__((objc_designated_initializer))
+  #else
+    #define NS_DESIGNATED_INITIALIZER
+  #endif
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Imports
@@ -39,6 +47,13 @@ OHHTTPStubsDownloadSpeed3G,
 OHHTTPStubsDownloadSpeed3GPlus,
 OHHTTPStubsDownloadSpeedWifi;
 
+#ifdef NS_ASSUME_NONNULL_BEGIN
+  NS_ASSUME_NONNULL_BEGIN
+  #define _nullable_ __nullable
+#else
+  #define _nullable_
+#endif
+
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Interface
@@ -55,7 +70,7 @@ OHHTTPStubsDownloadSpeedWifi;
 /**
  *  The headers to use for the fake response
  */
-@property(nonatomic, strong) NSDictionary* httpHeaders;
+@property(nonatomic, strong) NSDictionary* _nullable_ httpHeaders;
 /**
  *  The HTTP status code to use for the fake response
  */
@@ -64,7 +79,7 @@ OHHTTPStubsDownloadSpeedWifi;
  *  The inputStream used when sending the response.
  *  @note You generally don't manipulate this directly.
  */
-@property(nonatomic, strong) NSInputStream* inputStream;
+@property(nonatomic, strong) NSInputStream* _nullable_ inputStream;
 /**
  *  The size of the fake response body, in bytes.
  */
@@ -86,7 +101,7 @@ OHHTTPStubsDownloadSpeedWifi;
  *
  *  If `error` is non-`nil`, the request will result in a failure and no response will be sent.
  */
-@property(nonatomic, strong) NSError* error;
+@property(nonatomic, strong) NSError* _nullable_ error;
 
 
 
@@ -110,50 +125,11 @@ OHHTTPStubsDownloadSpeedWifi;
  */
 +(instancetype)responseWithData:(NSData*)data
                      statusCode:(int)statusCode
-                        headers:(NSDictionary*)httpHeaders;
+                        headers:(NSDictionary* _nullable_)httpHeaders;
 
 
 /* -------------------------------------------------------------------------- */
 #pragma mark > Building response from a file
-
-/**
- *  Useful macro to build a path given a file name and a bundle.
- *
- *  @param fileName The name of the file to get the path to, including file extension
- *  @param bundleOrNil The bundle in which the file is located.
- *                     If nil, the application bundle (`[NSBundle bundleForClass:self.class]`) is used
- *
- *  @return The path of the given file in the given bundle
- */
-#define OHPathForFileInBundle(fileName,bundleOrNil) ({ \
-  [(bundleOrNil?:[NSBundle bundleForClass:self.class]) pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]]; \
-})
-
-/**
- *  Useful macro to build a path to a file in the Documents's directory in the
- *  app sandbox, used by iTunes File Sharing for example.
- *
- *  @param fileName The name of the file to get the path to, including file extension
- *
- *  @return The path of the file in the Documents directory in your App Sandbox
- */
-#define OHPathForFileInDocumentsDir(fileName) ({ \
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); \
-  NSString *basePath = (paths.count > 0) ? [paths objectAtIndex:0] : nil; \
-  [basePath stringByAppendingPathComponent:fileName]; \
-})
-
-/**
- *  Useful macro to build an NSBundle located in the application's resources simply from its name
- *
- *  @param bundleBasename The base name, without extension (extension is assumed to be ".bundle").
- *
- *  @return The NSBundle object representing the bundle with the given basename located in your application's resources.
- */
-#define OHResourceBundle(bundleBasename) ({ \
-    [NSBundle bundleWithPath:[[NSBundle bundleForClass:self.class] pathForResource:bundleBasename ofType:@"bundle"]]; \
-})
-
 
 /**
  *  Builds a response given a file path, the status code and headers.
@@ -164,15 +140,12 @@ OHHTTPStubsDownloadSpeedWifi;
  *
  *  @return An `OHHTTPStubsResponse` describing the corresponding response to return by the stub
  *
- *  @note It is encouraged to use the `OHPathForFileInBundle(fileName, bundleOrNil)`
- *        and `OHResourceBundle(bundleBasename)` macros to easily build a path to a
- *        file located in the app bundle or any arbitrary bundle.
- *        Likewise, you may use the `OHPathForFileInDocumentsDir(fileName)` macro to 
- *        build a path to a file located in the Documents directory of your application' sandbox.
+ *  @note It is encouraged to use the OHPathHelpers functions & macros to build
+ *        the filePath parameter easily
  */
 +(instancetype)responseWithFileAtPath:(NSString *)filePath
                            statusCode:(int)statusCode
-                              headers:(NSDictionary*)httpHeaders;
+                              headers:(NSDictionary* _nullable_)httpHeaders;
 
 /* -------------------------------------------------------------------------- */
 #pragma mark > Building an error response
@@ -247,7 +220,7 @@ OHHTTPStubsDownloadSpeedWifi;
 -(instancetype)initWithInputStream:(NSInputStream*)inputStream
                           dataSize:(unsigned long long)dataSize
                         statusCode:(int)statusCode
-                           headers:(NSDictionary*)httpHeaders NS_DESIGNATED_INITIALIZER;
+                           headers:(NSDictionary* _nullable_)httpHeaders NS_DESIGNATED_INITIALIZER;
 
 
 /**
@@ -263,7 +236,7 @@ OHHTTPStubsDownloadSpeedWifi;
  */
 -(instancetype)initWithFileAtPath:(NSString*)filePath
                        statusCode:(int)statusCode
-                          headers:(NSDictionary*)httpHeaders;
+                          headers:(NSDictionary* _nullable_)httpHeaders;
 
 
 /**
@@ -277,7 +250,7 @@ OHHTTPStubsDownloadSpeedWifi;
  */
 -(instancetype)initWithData:(NSData*)data
                  statusCode:(int)statusCode
-                    headers:(NSDictionary*)httpHeaders;
+                    headers:(NSDictionary* _nullable_)httpHeaders;
 
 
 /**
@@ -292,3 +265,7 @@ OHHTTPStubsDownloadSpeedWifi;
 -(instancetype)initWithError:(NSError*)error NS_DESIGNATED_INITIALIZER;
 
 @end
+
+#ifdef NS_ASSUME_NONNULL_END
+  NS_ASSUME_NONNULL_END
+#endif

@@ -6,14 +6,14 @@
  *
  *************************************************************************/
 
-#define TIGHTDB_VERSION "unknown"
+#define TIGHTDB_VERSION "0.88.4-10-g9c0ffc7"
 
-#define TIGHTDB_INSTALL_PREFIX      "/Users/tightdb/workspace/core_osx/install"
-#define TIGHTDB_INSTALL_EXEC_PREFIX "/Users/tightdb/workspace/core_osx/install"
-#define TIGHTDB_INSTALL_INCLUDEDIR  "/Users/tightdb/workspace/core_osx/install/include"
-#define TIGHTDB_INSTALL_BINDIR      "/Users/tightdb/workspace/core_osx/install/bin"
-#define TIGHTDB_INSTALL_LIBDIR      "/Users/tightdb/workspace/core_osx/install/lib"
-#define TIGHTDB_INSTALL_LIBEXECDIR  "/Users/tightdb/workspace/core_osx/install/libexec"
+#define TIGHTDB_INSTALL_PREFIX      "/src/install"
+#define TIGHTDB_INSTALL_EXEC_PREFIX "/src/install"
+#define TIGHTDB_INSTALL_INCLUDEDIR  "/src/install/include"
+#define TIGHTDB_INSTALL_BINDIR      "/src/install/bin"
+#define TIGHTDB_INSTALL_LIBDIR      "/src/install/lib"
+#define TIGHTDB_INSTALL_LIBEXECDIR  "/src/install/libexec"
 
 #ifdef TIGHTDB_DEBUG
 #  define TIGHTDB_MAX_BPNODE_SIZE 1000

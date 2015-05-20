@@ -39,12 +39,22 @@
 // Because this is supposed to be an umbrella header, we should import every public headers here
 #import "OHHTTPStubsResponse+HTTPMessage.h"
 #import "OHHTTPStubsResponse+JSON.h"
+#import "OHPathHelpers.h"
+
+#ifdef NS_ASSUME_NONNULL_BEGIN
+  NS_ASSUME_NONNULL_BEGIN
+  #define _nullable_ __nullable
+  #define _nonnull_ __nonnull
+#else
+  #define _nullable_
+  #define _nonnull_
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Types
 
 typedef BOOL(^OHHTTPStubsTestBlock)(NSURLRequest* request);
-typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
+typedef OHHTTPStubsResponse* _nonnull_ (^OHHTTPStubsResponseBlock)( NSURLRequest* request);
 
 /**
  *  This opaque type represents an installed stub and is used to uniquely
@@ -64,7 +74,7 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
  *  This is especially useful if you dump all installed stubs using `allStubs`
  *  or if you want to log which stubs are being triggered using `onStubActivation:`.
  */
-@property(nonatomic, strong) NSString* name;
+@property(nonatomic, strong) NSString* _nullable_ name;
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +102,7 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
  *  @return a stub descriptor that uniquely identifies the stub and can be later used to remove it with `removeStub:`.
  *
  *  @note The returned stub descriptor is retained (`__strong` reference) by `OHHTTPStubs`
- *        until it is removed (with one of the `removeStub:`/`removeLastStub`/`removeAllStubs`
+ *        until it is removed (with one of the `removeStub:` / `removeAllStubs`
  *        methods); it is thus recommended to keep it in a `__weak` storage (and not `__strong`)
  *        in your app code, to let the stub descriptor be destroyed and let the variable go
  *        back to `nil` automatically when the stub is removed.
@@ -110,11 +120,6 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
  *          not a valid stub identifier
  */
 +(BOOL)removeStub:(id<OHHTTPStubsDescriptor>)stubDesc;
-
-/**
- *  Remove the last added stub from the stubs list
- */
-+(void)removeLastStub;
 
 /**
  *  Remove all the stubs from the stubs list.
@@ -185,3 +190,6 @@ typedef OHHTTPStubsResponse*(^OHHTTPStubsResponseBlock)(NSURLRequest* request);
 
 @end
 
+#ifdef NS_ASSUME_NONNULL_END
+  NS_ASSUME_NONNULL_END
+#endif
