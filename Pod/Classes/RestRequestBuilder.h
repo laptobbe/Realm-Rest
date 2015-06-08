@@ -15,6 +15,8 @@ extern NSString *const RestRequestParameterStyleURL;
 extern NSString *const RestRequestParameterStyleJSON;
 extern NSString *const RestRequestParameterStyleForm;
 
+extern NSString *const RestRequestHeaderContentType;
+
 @interface RestRequestBuilder : NSObject
 
 /**

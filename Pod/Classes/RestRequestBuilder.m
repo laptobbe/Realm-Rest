@@ -17,6 +17,8 @@ NSString *const RestRequestParameterStyleURL = @"url_params";
 NSString *const RestRequestParameterStyleJSON = @"json_params";
 NSString *const RestRequestParameterStyleForm = @"form_params";
 
+NSString *const RestRequestHeaderContentType = @"Content-Type";
+
 @implementation RestRequestBuilder
 
 + (NSURLRequest *)requestWithBaseURL:(NSURL *)baseURL
