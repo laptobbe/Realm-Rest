@@ -26,4 +26,4 @@ system "git push"
 system "git tag #{version}"
 system "git push --tags"
 
-system "pod trunk push #{podspec}"
+system "pod trunk push #{podspec}" --allow-warnings
