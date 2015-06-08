@@ -145,7 +145,7 @@ requestDidSucceed:(NSURLRequest *)request
     } @catch (NSException *exception) {
         [realm cancelWriteTransaction];
 
-        notification[NSUnderlyingErrorKey] = exception;
+        notification[NSUnderlyingErrorKey] = [NSError errorWithDomain:@"Realm-Rest" code:-12 userInfo:exception.userInfo];
 
         if(responseObject) {
             notification[ResponseKey] = responseObject;
