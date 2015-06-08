@@ -43,8 +43,13 @@
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:modelClass realm:realm];
     NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType action:action];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
+    NSMutableDictionary *newHeaders = [[NSMutableDictionary alloc] initWithDictionary:headers];
 
-    [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
+    if (parameters[RestRequestParameterStyleJSON]) {
+        newHeaders[RestRequestHeaderContentType] = @"application/json";
+    }
+
+    [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:newHeaders userInfo:@{
             RequestIdKey : requestId,
             ClassKey : NSStringFromClass(modelClass),
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
@@ -65,8 +70,13 @@
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:object.class realm:realm];
     NSString *path = [RestPathFinder findPathForObject:object forType:requestType action:action];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
+    NSMutableDictionary *newHeaders = [[NSMutableDictionary alloc] initWithDictionary:headers];
 
-    [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:headers userInfo:@{
+    if (parameters[RestRequestParameterStyleJSON]) {
+        newHeaders[RestRequestHeaderContentType] = @"application/json";
+    }
+
+    [self.queue enqueueRequestWithBaseURL:baseURL path:path method:method parameters:parameters headers:newHeaders userInfo:@{
             RequestIdKey : requestId,
             ClassKey : NSStringFromClass(object.class),
             BaseUrlKey : baseURL,

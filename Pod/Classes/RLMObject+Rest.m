@@ -62,9 +62,6 @@
 
     NSString *requestId = [[NSUUID UUID] UUIDString];
 
-    NSMutableDictionary *newHeaders = [[NSMutableDictionary alloc] initWithDictionary:headers];
-    newHeaders[RestRequestHeaderContentType] = @"application/json";
-
     [self.class addObserverWithSuccessBlock:success identifier:requestId notification:[self.class restSuccessNotification]];
     [self.class addObserverWithFailureBlock:failure identifier:requestId notification:[self.class restFailureNotification]];
 
