@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Realm-Rest"
-  s.version          = "2.0.1"
+  s.version          = "2.0.2"
   s.summary          = "An extension to Realm.io for working with JSON based Rest API's"
   s.homepage         = "https://github.com/laptobbe/Realm-Rest"
   s.license          = 'MIT'
