@@ -32,12 +32,12 @@ PODS:
   - NSString-UrlEncode (2.0.0)
   - NSURL+QueryDictionary (1.0.3)
   - OCMock (3.1.2)
-  - OHHTTPStubs (4.0.1)
+  - OHHTTPStubs (4.0.2)
   - Realm (0.90.6):
     - Realm/Headers (= 0.90.6)
   - Realm+JSON (0.2.5):
     - Realm (~> 0.90)
-  - Realm-Rest (2.0.1):
+  - Realm-Rest (2.0.5):
     - AFNetworking (~> 2.5.0)
     - Functional.m (~> 1.0.0)
     - KTBTaskQueue (~> 1.0.1)
@@ -76,10 +76,10 @@ SPEC CHECKSUMS:
   NSString-UrlEncode: d26eb4378531911d54694733143dd493c1571f5c
   NSURL+QueryDictionary: 06f93589c2948128321ea562592ed6bf1c84d070
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
-  OHHTTPStubs: 69b1d48b7dfe838a355fdf48d8592d1042e3d85f
+  OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
   Realm: a4b2766a29006293693a0f26664ecb5a84a54455
   Realm+JSON: 93dc6d91a8cffdb09e8d872f74f8dc3d8676715d
-  Realm-Rest: 1757f729e5cd20f55a354d9b2e281c7d32357cad
+  Realm-Rest: d38909ea7b08066825fea8f9050b030050cd59ee
   Specta: d2158a483ad179e5f8d3a29f75ff4fc0ff6fab16
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2

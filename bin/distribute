@@ -16,10 +16,11 @@ print "Preparing to upgrade from #{currentVersion} to #{version}\n"
 file = File.read(podspec).gsub("#{currentVersion}", "#{version}")
 File.write(podspec, file)
 
+system "rm Example/Podfile.lock"
 system "pod install --project-directory=Example"
 
 #Create version commit
-system "git add #{podspec}"
+system "git add ."
 system "git commit -m 'Updated version to #{version}'"
 system "git push"
 
@@ -27,4 +28,4 @@ system "git push"
 system "git tag #{version}"
 system "git push --tags"
 
-system "pod trunk push #{podspec}" --allow-warnings
+system "pod trunk push #{podspec} --allow-warnings" 
