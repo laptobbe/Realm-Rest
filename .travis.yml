@@ -11,5 +11,5 @@ before_install:
 install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 script:
-- set -o pipefail && xcodebuild test -workspace Example/Realm-Rest.xcworkspace -scheme Tests -sdk iphonesimulator -destination platform='iOS Simulator',name='iPhone 6' ONLY_ACTIVE_ARCH=YES | xcpretty -c
+- set -o pipefail && xcodebuild test -workspace Example/Realm-Rest.xcworkspace -scheme Realm-Rest-Example -sdk iphonesimulator -destination platform='iOS Simulator',name='iPhone 6' ONLY_ACTIVE_ARCH=YES | xcpretty -c
 - pod lib lint --quick
