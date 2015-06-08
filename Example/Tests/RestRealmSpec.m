@@ -1,7 +1,5 @@
 #import <Realm/Realm/RLMRealm.h>
-#import <Realm-Rest/RestRequestQueue.h>
-#import <Realm-Rest/RLMRealm+Rest.h>
-#import <Realm-Rest/RestOrchestrator.h>
+#import <Realm-Rest/Realm-Rest.h>
 
 SpecBegin(RLMRealm)
     describe(@"Get orchistration", ^{

@@ -1,13 +1,9 @@
-#import <Realm-Rest/RLMObject+Rest.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
-#import <Realm-Rest/RestRequestQueue.h>
-#import <Realm-Rest/RLMRealm+Rest.h>
 #import <Realm+JSON/RLMObject+JSON.h>
 #import <Realm/Realm.h>
-#import <Realm-Rest/RestOrchestrator.h>
-#import <Realm-Rest/RestNotifier.h>
 #import "Cat.h"
 #import "Mouse.h"
+#import <Realm-Rest/Realm-Rest.h>
 
 static NSString *const realmIdentifier = @"test";
 

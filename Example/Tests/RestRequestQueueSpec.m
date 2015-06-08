@@ -1,7 +1,6 @@
-#import <Realm-Rest/RestRequestQueue.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
 #import "TestQueueDelegate.h"
-
+#import <Realm-Rest/Realm-Rest.h>
 
 SpecBegin(RestRequestQueue)
     context(@"RestRequestQueue", ^{

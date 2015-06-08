@@ -16,5 +16,6 @@
 #import <Realm-Rest/RestRequestBuilder.h>
 #import <Realm-Rest/RestRequestQueue.h>
 #import <Realm-Rest/RestNotifier.h>
+#import <Realm-Rest/RestModelObjectProtocol.h>
 
 #endif

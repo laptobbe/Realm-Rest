@@ -1,7 +1,6 @@
 #import <OCMock/OCMock.h>
-#import <Realm-Rest/RestNotifier.h>
+#import <Realm-Rest/Realm-Rest.h>
 #import "Cat.h"
-#import "RLMObject+Rest.h"
 
 SpecBegin(RestNotifier)
 

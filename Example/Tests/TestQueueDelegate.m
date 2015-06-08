@@ -3,10 +3,8 @@
 // Copyright (c) 2015 Tobias Sundstrand. All rights reserved.
 //
 
-#import <Realm-Rest/RestRequestQueue.h>
+#import <Realm-Rest/Realm-Rest.h>
 #include "TestQueueDelegate.h"
-
-
 
 @implementation TestQueueDelegate
 

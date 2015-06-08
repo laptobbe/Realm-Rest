@@ -1,8 +1,7 @@
 #import "Cat.h"
 #import "Dog.h"
 #import "Mouse.h"
-#import <Realm-Rest/RLMRealm+Rest.h>
-#import <Realm-Rest/RestPathFinder.h>
+#import <Realm-Rest/Realm-Rest.h>
 
 SpecBegin(RestPathFinder)
     __block Cat *cat;

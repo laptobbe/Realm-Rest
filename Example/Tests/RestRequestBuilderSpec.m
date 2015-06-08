@@ -1,4 +1,4 @@
-#import <Realm-Rest/RestRequestBuilder.h>
+#import <Realm-Rest/Realm-Rest.h>
 
 SpecBegin(RestRequestBuilder)
 

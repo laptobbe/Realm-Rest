@@ -3,14 +3,15 @@
 // Copyright (c) 2015 Tobias Sundstrand. All rights reserved.
 //
 
+#import <Realm-Rest/Realm-Rest.h>
 
-typedef BOOL (^RestFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo);
+typedef BOOL (^TestRestFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *userInfo);
 
-typedef void (^RestSuccessBlock)(NSURLRequest *request, id responseObject, NSDictionary *userInfo);
+typedef void (^TestRestSuccessBlock)(NSURLRequest *request, id responseObject, NSDictionary *userInfo);
 
 @interface TestQueueDelegate : NSObject <RestRequestQueueDelegate>
 
-@property (nonatomic, copy) RestSuccessBlock successBlock;
-@property (nonatomic, copy) RestFailureBlock shouldAbandonFailedRequestBlock;
+@property (nonatomic, copy) TestRestSuccessBlock successBlock;
+@property (nonatomic, copy) TestRestFailureBlock shouldAbandonFailedRequestBlock;
 
 @end

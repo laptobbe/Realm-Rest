@@ -1,10 +1,9 @@
-#import <Realm-Rest/RestRequestQueue.h>
-#import <Realm-Rest/RestOrchestrator.h>
+#import <Realm-Rest/Realm-Rest.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
 #import <Realm/Realm.h>
 #import <Realm+JSON/RLMObject+JSON.h>
 #import "Cat.h"
-#import <Realm-Rest/RLMRealm+Rest.h>
+
 
 static NSString *const RealmIdentifier = @"test";
 
