@@ -37,7 +37,7 @@ PODS:
     - Realm/Headers (= 0.90.6)
   - Realm+JSON (0.2.5):
     - Realm (~> 0.90)
-  - Realm-Rest (2.0.5):
+  - Realm-Rest (2.0.6):
     - AFNetworking (~> 2.5.0)
     - Functional.m (~> 1.0.0)
     - KTBTaskQueue (~> 1.0.1)
@@ -79,7 +79,7 @@ SPEC CHECKSUMS:
   OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
   Realm: a4b2766a29006293693a0f26664ecb5a84a54455
   Realm+JSON: 93dc6d91a8cffdb09e8d872f74f8dc3d8676715d
-  Realm-Rest: d38909ea7b08066825fea8f9050b030050cd59ee
+  Realm-Rest: aebf5570b89ad8beefa5e04b409bb2600db130db
   Specta: d2158a483ad179e5f8d3a29f75ff4fc0ff6fab16
 
 COCOAPODS: 0.37.2
