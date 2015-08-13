@@ -53,7 +53,7 @@ SpecBegin(RLMObject)
                                  headers:nil
                                    realm:realm
                          realmIdentifier:realmIdentifier
-                                  action:nil];
+                                userInfo:nil];
 
                 expect(request.URL.absoluteString).will.equal(@"http://api.example.com/cat/misse");
                 expect(request.HTTPBody).will.equal(jsonData);
@@ -93,7 +93,7 @@ SpecBegin(RLMObject)
                                  headers:nil
                                    realm:realm
                          realmIdentifier:realmIdentifier
-                                  action:nil];
+                                userInfo:nil];
 
                 expect(request.URL.absoluteString).will.equal(@"http://api.example.com/cats");
                 expect(request.HTTPBody).will.beFalsy();
@@ -128,7 +128,7 @@ SpecBegin(RLMObject)
                                                         headers:nil
                                                           realm:realm
                                                 realmIdentifier:realmIdentifier
-                                                         action:nil];
+                                                       userInfo:nil];
 
                 expect(identifier).to.beTruthy();
                 expect(actualIdentifier).will.equal(identifier);
@@ -155,7 +155,7 @@ SpecBegin(RLMObject)
                                  headers:nil
                                    realm:realm
                          realmIdentifier:realmIdentifier
-                                  action:nil
+                                userInfo:nil
                                  success:^(id primaryKey) {
                                      primaryKeys = primaryKey;
                                  }
@@ -183,7 +183,7 @@ SpecBegin(RLMObject)
                                  headers:nil
                                    realm:realm
                          realmIdentifier:realmIdentifier
-                                  action:nil
+                                userInfo:nil
                                  success:nil
                                  failure:^(NSError *error, NSDictionary *userInfo) {
                                      actual = error;

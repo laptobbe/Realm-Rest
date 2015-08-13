@@ -31,7 +31,7 @@ it, simply add the following line to your Podfile:
 			”password”:”bar”
 		}}
 	headers:nil
-	action:@"login"
+	userInfo:@{@"action":@"login"}
 	success:^(id primaryKey) {
     	User *user = [User objectForPrimaryKey:primaryKey];
     	//Use object

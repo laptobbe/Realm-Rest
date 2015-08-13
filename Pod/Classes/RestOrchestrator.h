@@ -26,7 +26,7 @@
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
           realmIdentifier:(NSString *)realmIdentifier
-                   action:(NSString *)action;
+                 userInfo:(NSDictionary *)userInfo;
 
 - (void)restForObject:(RLMObject <RestModelObjectProtocol> *)object
           requestType:(RestRequestType)requestType
@@ -35,6 +35,6 @@
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
       realmIdentifier:(NSString *)realmIdentifier
-               action:(NSString *)action;
+             userInfo:(NSDictionary *)userInfo;
 
 @end

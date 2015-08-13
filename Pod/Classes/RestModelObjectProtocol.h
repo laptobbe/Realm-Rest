@@ -13,8 +13,8 @@
 
 @optional
 
-+ (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action;
-- (NSString *)restPathForRequestType:(RestRequestType)requestType action:(NSString *)action;
++ (NSString *)restPathForRequestType:(RestRequestType)requestType userInfo:(NSDictionary *)userInfo;
+- (NSString *)restPathForRequestType:(RestRequestType)requestType userInfo:(NSDictionary *)userInfo;
 
 + (NSString *)baseURL;
 

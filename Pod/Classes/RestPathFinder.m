@@ -13,15 +13,15 @@
 
 @implementation RestPathFinder
 
-+ (NSString *)findPathForObject:(RLMObject <RestModelObjectProtocol> *)object forType:(RestRequestType)type action:(NSString *)action {
++ (NSString *)findPathForObject:(RLMObject <RestModelObjectProtocol> *)object forType:(RestRequestType)type userInfo:(NSDictionary *)userInfo {
 
     if(![[object class] respondsToSelector:@selector(primaryKey)] || ![[object class] primaryKey] || ![object valueForKey:[[object class] primaryKey]]){
         [NSException raise:NSInternalInconsistencyException format:@"Class %@ does not have a primary key", [[object class] className]];
     }
 
 
-    if([object respondsToSelector:@selector(restPathForRequestType:action:)]){
-        return [[object restPathForRequestType:type action:action] lowercaseString] ?: [self defaultPathForObject:object];
+    if([object respondsToSelector:@selector(restPathForRequestType:userInfo:)]){
+        return [[object restPathForRequestType:type userInfo:userInfo] lowercaseString] ?: [self defaultPathForObject:object];
     }else {
         return [self defaultPathForObject:object];
     }
@@ -33,9 +33,9 @@
     return [NSString stringWithFormat:@"%@/%@", className, primaryKey];
 }
 
-+ (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type action:(NSString *)action {
-    if ([class respondsToSelector:@selector(restPathForRequestType:action:)]){
-        return [[(Class <RestModelObjectProtocol>) class restPathForRequestType:type action:action] lowercaseString] ?: [self defaultPathForClass:class];
++ (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type userInfo:(NSDictionary *)userInfo {
+    if ([class respondsToSelector:@selector(restPathForRequestType:userInfo:)]){
+        return [[(Class <RestModelObjectProtocol>) class restPathForRequestType:type userInfo:userInfo] lowercaseString] ?: [self defaultPathForClass:class];
     } else {
         return [self defaultPathForClass:class];
     }

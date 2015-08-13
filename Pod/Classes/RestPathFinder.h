@@ -14,9 +14,9 @@
 
 @interface RestPathFinder : NSObject
 
-+ (NSString *)findPathForObject:(RLMObject <RestModelObjectProtocol> *)object forType:(RestRequestType)type action:(NSString *)action;
++ (NSString *)findPathForObject:(RLMObject <RestModelObjectProtocol> *)object forType:(RestRequestType)type userInfo:(NSDictionary *)userInfo;
 
-+ (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type action:(NSString *)action;
++ (NSString *)findPathForClass:(Class)class forType:(RestRequestType)type userInfo:(NSDictionary *)userInfo;
 
 + (NSString *)findBaseURLForModelClass:(Class)pClass realm:(RLMRealm *)realm;
 

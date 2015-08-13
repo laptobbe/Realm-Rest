@@ -38,10 +38,10 @@
                   headers:(NSDictionary *)headers
                     realm:(RLMRealm *)realm
           realmIdentifier:(NSString *)realmIdentifier
-                   action:(NSString *)action {
+                 userInfo:(NSDictionary *)userInfo {
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:modelClass realm:realm];
-    NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType action:action];
+    NSString *path = [RestPathFinder findPathForClass:modelClass forType:requestType userInfo:userInfo];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
     NSMutableDictionary *newHeaders = [[NSMutableDictionary alloc] initWithDictionary:headers];
 
@@ -54,7 +54,7 @@
             ClassKey : NSStringFromClass(modelClass),
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
             RealmKey : realmIdentifier ?: realm.path.lastPathComponent,
-            ActionKey : action ?: @"<none>"
+            UserInfoKey : userInfo ?: @{}
     }];
 }
 
@@ -65,10 +65,10 @@
               headers:(NSDictionary *)headers
                 realm:(RLMRealm *)realm
       realmIdentifier:(NSString *)realmIdentifier
-               action:(NSString *)action {
+             userInfo:(NSDictionary *)userInfo {
 
     NSString *baseURL = [RestPathFinder findBaseURLForModelClass:object.class realm:realm];
-    NSString *path = [RestPathFinder findPathForObject:object forType:requestType action:action];
+    NSString *path = [RestPathFinder findPathForObject:object forType:requestType userInfo:userInfo];
     NSString *method = [RestPathFinder httpMethodFromRequestType:requestType];
     NSMutableDictionary *newHeaders = [[NSMutableDictionary alloc] initWithDictionary:headers];
 
@@ -84,7 +84,7 @@
             MethodKey : method,
             RealmTypeKey : realmIdentifier ? @(RestRequestQueuePeristanceInMemory) : @(RestRequestQueuePeristanceDatabase),
             RealmKey : realmIdentifier ?: realm.path.lastPathComponent,
-            ActionKey : action ?: @"<none>"
+            UserInfoKey : userInfo ?: @{}
     }];
 }
 

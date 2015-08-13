@@ -8,7 +8,7 @@
 #import "Realm.h"
 #import "RLMObject.h"
 
-@interface Dog : RLMObject
+@interface Dog : RLMObject <RestModelObjectProtocol>
 
 @property NSString *name;
 

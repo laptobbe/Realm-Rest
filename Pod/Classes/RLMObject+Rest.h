@@ -21,31 +21,31 @@ typedef void (^RestFailureBlock)(NSError *error, NSDictionary *userInfo);
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action;
+                         userInfo:(NSDictionary *)userInfo;
 
 - (NSString *)restWithRequestType:(RestRequestType)requestType
                        parameters:(NSDictionary *)parameters
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action;
+                         userInfo:(NSDictionary *)userInfo;
 
 + (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action;
+                                       userInfo:(NSDictionary *)userInfo;
 
 - (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action;
+                                       userInfo:(NSDictionary *)userInfo;
 
 + (NSString *)restWithRequestType:(RestRequestType)requestType
                        parameters:(NSDictionary *)parameters
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action
+                         userInfo:(NSDictionary *)userInfo
                           success:(RestSuccessBlock)success
                           failure:(RestFailureBlock)failure;
 
@@ -54,21 +54,21 @@ typedef void (^RestFailureBlock)(NSError *error, NSDictionary *userInfo);
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action
+                         userInfo:(NSDictionary *)userInfo
                           success:(RestSuccessBlock)success
                           failure:(RestFailureBlock)failure;
 
 + (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action
+                                       userInfo:(NSDictionary *)userInfo
                                         success:(RestSuccessBlock)success
                                         failure:(RestFailureBlock)failure;
 
 - (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action
+                                       userInfo:(NSDictionary *)userInfo
                                         success:(RestSuccessBlock)success
                                         failure:(RestFailureBlock)failure;
 @end

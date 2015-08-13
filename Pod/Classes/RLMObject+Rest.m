@@ -27,7 +27,7 @@
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action
+                         userInfo:(NSDictionary *)userInfo
                           success:(RestSuccessBlock)success
                           failure:(RestFailureBlock)failure {
 
@@ -43,7 +43,7 @@
                                   headers:headers
                                     realm:realm
                           realmIdentifier:realmIdentifier
-                                   action:action];
+                                 userInfo:userInfo];
 
     return requestId;
 }
@@ -53,7 +53,7 @@
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action
+                         userInfo:(NSDictionary *)userInfo
                           success:(RestSuccessBlock)success
                           failure:(RestFailureBlock)failure {
 
@@ -72,7 +72,7 @@
                               headers:headers
                                 realm:realm
                       realmIdentifier:realmIdentifier
-                               action:action];
+                             userInfo:userInfo];
 
     return requestId;
 }
@@ -83,14 +83,14 @@
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action {
+                         userInfo:(NSDictionary *)userInfo {
 
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:realm
                      realmIdentifier:realmIdentifier
-                              action:action
+                            userInfo:userInfo
                              success:nil
                              failure:nil];
 }
@@ -98,13 +98,13 @@
 + (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action {
+                                       userInfo:(NSDictionary *)userInfo {
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:[RLMRealm defaultRealm]
                      realmIdentifier:nil
-                              action:action];
+                            userInfo:userInfo];
 }
 
 - (NSString *)restWithRequestType:(RestRequestType)requestType
@@ -112,14 +112,14 @@
                           headers:(NSDictionary *)headers
                             realm:(RLMRealm *)realm
                   realmIdentifier:(NSString *)realmIdentifier
-                           action:(NSString *)action {
+                         userInfo:(NSDictionary *)userInfo {
 
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:realm
                      realmIdentifier:realmIdentifier
-                              action:action
+                            userInfo:userInfo
                              success:nil
                              failure:nil];
 }
@@ -127,20 +127,20 @@
 - (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action {
+                                       userInfo:(NSDictionary *)userInfo {
     return [self restWithRequestType:requestType
                           parameters:parameters
                              headers:headers
                                realm:[RLMRealm defaultRealm]
                      realmIdentifier:nil
-                              action:action];
+                            userInfo:userInfo];
 }
 
 
 + (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action
+                                       userInfo:(NSDictionary *)userInfo
                                         success:(RestSuccessBlock)success
                                         failure:(RestFailureBlock)failure {
     return [self restWithRequestType:requestType
@@ -148,7 +148,7 @@
                              headers:headers
                                realm:[RLMRealm defaultRealm]
                      realmIdentifier:nil
-                              action:action
+                            userInfo:userInfo
                              success:success
                              failure:failure];
 }
@@ -156,7 +156,7 @@
 - (NSString *)restInDefaultRealmWithRequestType:(RestRequestType)requestType
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
-                                         action:(NSString *)action
+                                       userInfo:(NSDictionary *)userInfo
                                         success:(RestSuccessBlock)success
                                         failure:(RestFailureBlock)failure {
     return [self restWithRequestType:requestType
@@ -164,7 +164,7 @@
                              headers:headers
                                realm:[RLMRealm defaultRealm]
                      realmIdentifier:nil
-                              action:action
+                            userInfo:userInfo
                              success:success
                              failure:failure];
 }
